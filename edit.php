@@ -2,7 +2,7 @@
 
 require_once('./core/core.php');
 
-if (empty($_SESSION['auth'])) {
+if (!checkAuthorization()) {
     header("HTTP/1.0 404 Not Found");
     exit;
 }
@@ -14,144 +14,153 @@ if (isset($_REQUEST['id'])) {
     die;
 }
 
-$isSaved = false;
-$errorFields = [
-    'title' => [],
-    'description' => [],
-    'parent_id' => []
-];
+$dbq = $db->prepare('SELECT * FROM objects WHERE id = :id');
+$dbq->bindValue(':id', $id);
+$dbq->execute();
+$object = $dbq->fetch();
 
-$sth = $db->prepare('SELECT * FROM objects WHERE id = :id');
-$sth->bindValue(':id', $id);
-$sth->execute();
-$object = $sth->fetch();
+if (empty($object)) {
+    header("HTTP/1.0 404 Not Found");
+    die;
+}
+
+$errors['form']['fields']['title'] = [];
+$errors['form']['fields']['description'] = [];
+$errors['form']['fields']['parent_id'] = [];
+$values['form']['title'] = $object['title'];
+$values['form']['description'] = $object['description'];
+$values['form']['parent_id'] = $object['parent_id'];
+$values['form']['success'] = false;
 
 if (!empty($_POST['save'])) {
 
+    $values['form']['title'] = $_POST['title'];
+    $values['form']['description'] = $_POST['description'];
+    $values['form']['parent_id'] = $_POST['parent_id'];
+
     //validation
     if (!is_string($_POST['title']) || mb_strlen($_POST['title']) > 250) {
-        $errorFields['title'][] = 'Слишком длинное название объекта';
+        $errors['form']['fields']['title'][] = 'Слишком длинное название объекта';
     }
     if (!is_string($_POST['description'])) {
-        $errorFields['description'][] = 'Ошибка значения';
+        $errors['form']['fields']['description'][] = 'Ошибка значения';
     }
     if (!is_numeric($_POST['parent_id'])) {
-        $errorFields['parent_id'][] = 'Ошибка значения';
+        $errors['form']['fields']['parent_id'][] = 'Ошибка значения';
     }
     if ($id == (int)$_POST['parent_id']) {
-        $errorFields['parent_id'][] = 'Неверно выбран родительский объект';
+        $errors['form']['fields']['parent_id'][] = 'Неверно выбран родительский объект';
     }
     if (in_array((int)$_POST['parent_id'], getChildsRecursive($id, $db))) {
-        $errorFields['parent_id'][] = 'Выбранный объект находится ниже в структуре дерева объектов';
+        $errors['form']['fields']['parent_id'][] = 'Выбранный объект находится ниже в структуре дерева объектов';
     }
 
-    if (empty($errorFields['title']) && empty($errorFields['description']) && empty($errorFields['parent_id'])) {
-        $sth = $db->prepare('UPDATE objects SET title = :title, description = :description, parent_id = :parent_id WHERE id = :id');
-        $sth->bindValue(':id', $id);
-        $sth->bindValue(':title', $_POST['title']);
-        $sth->bindValue(':description', $_POST['description']);
-        $sth->bindValue(':parent_id', (int)$_POST['parent_id']);
-        if ($sth->execute()) {
+    if (empty($errors['form']['fields']['title']) && empty($errors['form']['fields']['description']) && empty($errors['form']['fields']['parent_id'])) {
+        $dbq = $db->prepare('UPDATE objects SET title = :title, description = :description, parent_id = :parent_id WHERE id = :id');
+        $dbq->bindValue(':id', $id);
+        $dbq->bindValue(':title', $_POST['title']);
+        $dbq->bindValue(':description', $_POST['description']);
+        $dbq->bindValue(':parent_id', (int)$_POST['parent_id']);
+        if ($dbq->execute()) {
             if (!empty($object['parent_id'])) {
                 updateChildsStatus($object['parent_id'], $db);
             }
             if (!empty((int)$_POST['parent_id'])) {
                 updateChildsStatus((int)$_POST['parent_id'], $db);
             }
-            $isSaved = true;
+            $values['form']['success'] = true;
         }
     }
-
-    $object['title'] = $_POST['title'];
-    $object['description'] = $_POST['description'];
-    $object['parent_id'] = $_POST['parent_id'];
 }
 
-$sth = $db->prepare('SELECT * FROM objects');
-$sth->execute();
-$objectsList = $sth->fetchAll();
+$dbq = $db->prepare('SELECT * FROM objects');
+$dbq->execute();
+$objectsList = $dbq->fetchAll();
 
 ?>
 <!DOCTYPE html>
 <html lang="ru">
-    <head>
-        <title><?=$appTitle?></title>
-        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-        <link rel="stylesheet" href="/public/main.css">
-        <script src="/public/main.js"></script>
-    </head>
-    <body>
-        <header class="align-center">
-            <?php if (!empty($_SESSION['auth'])) { ?>
-                <form method="POST">
-                    <button class="logout" title="Разлогиниться" id="unauthorize" name="unauthorize" type="submit" value="1"><img alt="logout" src="./public/logout.png"></button>
-                </form>
-            <?php } ?>
-            <h1><?=$appName?></h1>
-        </header>
-        <div class="main">
-            <div class="container">
-                <a class="btn" href="./admin.php">&lt;&lt; назад</a>
-            </div>
-            <br>
-            <div class="container">
-                <form method="POST">
-                    <table class="edit-table">
-                        <tr>
-                            <th colspan="2">Редактирование объекта</th>
-                        </tr>
-                        <tr>
-                            <td colspan="2"><br></td>
-                        </tr>
-                        <tr>
-                            <td><label for="title"><b>Название объекта</b></label></td>
-                            <td>
-                                <input id="title" class="<?= empty($errorFields['title']) ? '' : 'error' ?>" type="text" placeholder="" name="title" required value="<?= @$object['title'] ?>">
-                                <?php foreach ($errorFields['title'] as $message) { ?>
-                                    <div class="message error"><?php echo $message; ?></div>
-                                <?php } ?>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><label for="description"><b>Описание объекта</b></label></td>
-                            <td>
-                                <textarea id="description" name="description" class="<?= empty($errorFields['description']) ? '' : 'error' ?>" required><?= @$object['description'] ?></textarea>
-                                <?php foreach ($errorFields['description'] as $message) { ?>
-                                    <div class="message error"><?php echo $message; ?></div>
-                                <?php } ?>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><label for="parentId"><b>id родительского объекта</b></label></td>
-                            <td>
-                                <select id="parentId" name="parent_id" class="<?= empty($errorFields['parent_id']) ? '' : 'error' ?>">
-                                    <option value="0">Нет</option>
-                                    <?php foreach ($objectsList as $objectItem) { ?>
-                                        <option <?= ($object['parent_id'] == $objectItem['id']) ? 'selected' : '' ?> value="<?=$objectItem['id']?>"><?=$objectItem['title']?></option>
-                                    <?php } ?>
-                                </select>
-                                <?php foreach ($errorFields['parent_id'] as $message) { ?>
-                                    <div class="message error"><?php echo $message; ?></div>
-                                <?php } ?>
-                            </td>
-                        </tr>
-                    </table>
-                    <br>
-                    <button class="save" name="save" type="submit" value="1">Сохранить</button>
-                    <br>
-                    <?php if ($isSaved) { ?>
-                        <div class="message">Сохранено</div>
-                    <?php } ?>
-                </form>
-            </div>
+
+<head>
+    <title><?= $appTitle ?></title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="/public/main.css">
+    <script src="/public/main.js"></script>
+</head>
+
+<body>
+    <header class="align-center">
+        <?php if (!empty($_SESSION['auth'])) { ?>
+            <form method="POST">
+                <button class="logout" title="Разлогиниться" id="unauthorize" name="unauthorize" type="submit" value="1"><img alt="logout" src="./public/logout.png"></button>
+            </form>
+        <?php } ?>
+        <h1><?= $appName ?></h1>
+    </header>
+    <div class="main">
+        <div class="container">
+            <a class="btn" href="./admin.php">&lt;&lt; назад</a>
         </div>
-        <footer>
-            <?php foreach ($errors as $error) { ?>
-                <div class="message error"><?php echo $error; ?></div>
-            <?php } ?>
-            <?php foreach ($messages as $message) { ?>
-                <div class="message"><?php echo $message; ?></div>
-            <?php } ?>
-        </footer>
-    </body>
+        <br>
+        <div class="container">
+            <form method="POST">
+                <table class="edit-table">
+                    <tr>
+                        <th colspan="2">Редактирование объекта</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><br></td>
+                    </tr>
+                    <tr>
+                        <td><label for="title"><b>Название объекта</b></label></td>
+                        <td>
+                            <input id="title" class="<?= empty($errors['form']['fields']['title']) ? '' : 'error' ?>" type="text" placeholder="" name="title" required value="<?= $values['form']['title'] ?>">
+                            <?php foreach ($errors['form']['fields']['title'] as $message) { ?>
+                                <div class="message error"><?php echo $message; ?></div>
+                            <?php } ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="description"><b>Описание объекта</b></label></td>
+                        <td>
+                            <textarea id="description" name="description" class="<?= empty($errors['form']['fields']['description']) ? '' : 'error' ?>" required><?= $values['form']['description'] ?></textarea>
+                            <?php foreach ($errors['form']['fields']['description'] as $message) { ?>
+                                <div class="message error"><?php echo $message; ?></div>
+                            <?php } ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="parentId"><b>id родительского объекта</b></label></td>
+                        <td>
+                            <select id="parentId" name="parent_id" class="<?= empty($errors['form']['fields']['parent_id']) ? '' : 'error' ?>">
+                                <option value="0">Нет</option>
+                                <?php foreach ($objectsList as $objectItem) { ?>
+                                    <option <?= ($values['form']['parent_id'] == $objectItem['id']) ? 'selected' : '' ?> value="<?= $objectItem['id'] ?>"><?= $objectItem['title'] ?></option>
+                                <?php } ?>
+                            </select>
+                            <?php foreach ($errors['form']['fields']['parent_id'] as $message) { ?>
+                                <div class="message error"><?php echo $message; ?></div>
+                            <?php } ?>
+                        </td>
+                    </tr>
+                </table>
+                <br>
+                <button class="save" name="save" type="submit" value="1">Сохранить</button>
+                <br>
+                <?php if ($values['form']['success']) { ?>
+                    <div class="message">Сохранено</div>
+                <?php } ?>
+            </form>
+        </div>
+    </div>
+    <footer>
+        <?php foreach ($errors['system'] as $error) { ?>
+            <div class="message error"><?php echo $error; ?></div>
+        <?php } ?>
+        <?php foreach ($messages['sysinfo'] as $message) { ?>
+            <div class="message"><?php echo $message; ?></div>
+        <?php } ?>
+    </footer>
+</body>
+
 </html>

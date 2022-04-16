@@ -2,63 +2,63 @@
 
 require_once('./core/core.php');
 
-if (empty($_SESSION['auth'])) {
+if (!checkAuthorization()) {
     header("HTTP/1.0 404 Not Found");
     exit;
 }
 
-$isSaved = false;
-$errorFields = [
-    'title' => [],
-    'description' => [],
-    'parent_id' => []
-];
-$object = [];
+$errors['form']['fields']['title'] = [];
+$errors['form']['fields']['description'] = [];
+$errors['form']['fields']['parent_id'] = [];
+$values['form']['title'] = '';
+$values['form']['description'] = '';
+$values['form']['parent_id'] = 0;
+$values['form']['success'] = false;
 
 if (!empty($_POST['save'])) {
 
+    $values['form']['title'] = $_POST['title'];
+    $values['form']['description'] = $_POST['description'];
+    $values['form']['parent_id'] = $_POST['parent_id'];
+
     //validation
     if (!is_string($_POST['title']) || mb_strlen($_POST['title']) > 250) {
-        $errorFields['title'][] = 'Слишком длинное название объекта';
+        $errors['form']['fields']['title'][] = 'Слишком длинное название объекта';
     }
     if (!is_string($_POST['description'])) {
-        $errorFields['description'][] = 'Ошибка значения';
+        $errors['form']['fields']['description'][] = 'Ошибка значения';
     }
     if (!is_numeric($_POST['parent_id'])) {
-        $errorFields['parent_id'][] = 'Ошибка значения';
+        $errors['form']['fields']['parent_id'][] = 'Ошибка значения';
     }
 
     if ((int)$_POST['parent_id'] !== 0) {
-        $sth = $db->prepare('SELECT * FROM objects WHERE id = :parent_id LIMIT 1');
-        $sth->bindValue(':parent_id', (int)$_POST['parent_id']);
-        $sth->execute();
-        $checkObject = $sth->fetch();
+        $dbq = $db->prepare('SELECT * FROM objects WHERE id = :parent_id LIMIT 1');
+        $dbq->bindValue(':parent_id', (int)$_POST['parent_id']);
+        $dbq->execute();
+        $checkObject = $dbq->fetch();
         if (empty($checkObject)) {
-            $errorFields['parent_id'][] = 'Родительского объекта с таким id не существует, укажите в поле значение 0 если требуется добавить корневой элемент';
+            $errors['form']['fields']['parent_id'][] = 'Родительского объекта с таким id не существует, укажите в поле значение 0 если требуется добавить корневой элемент';
         }
     }
 
-    if (empty($errorFields['title']) && empty($errorFields['description']) && empty($errorFields['parent_id'])) {
-        $sth = $db->prepare('INSERT INTO objects SET title = :title, description = :description, parent_id = :parent_id');
-        $sth->bindValue(':title', $_POST['title']);
-        $sth->bindValue(':description', $_POST['description']);
-        $sth->bindValue(':parent_id', (int)$_POST['parent_id']);
-        if ($sth->execute()) {
+    if (empty($errors['form']['fields']['title']) && empty($errors['form']['fields']['description']) && empty($errors['form']['fields']['parent_id'])) {
+        $dbq = $db->prepare('INSERT INTO objects SET title = :title, description = :description, parent_id = :parent_id');
+        $dbq->bindValue(':title', $_POST['title']);
+        $dbq->bindValue(':description', $_POST['description']);
+        $dbq->bindValue(':parent_id', (int)$_POST['parent_id']);
+        if ($dbq->execute()) {
             if (!empty((int)$_POST['parent_id'])) {
                 updateChildsStatus((int)$_POST['parent_id'], $db);
             }
-            $isSaved = true;
+            $values['form']['success'] = true;
         }
     }
-
-    $object['title'] = $_POST['title'];
-    $object['description'] = $_POST['description'];
-    $object['parent_id'] = $_POST['parent_id'];
 }
 
-$sth = $db->prepare('SELECT * FROM objects');
-$sth->execute();
-$objectsList = $sth->fetchAll();
+$dbq = $db->prepare('SELECT * FROM objects');
+$dbq->execute();
+$objectsList = $dbq->fetchAll();
 
 ?>
 <!DOCTYPE html>
@@ -96,8 +96,8 @@ $objectsList = $sth->fetchAll();
                             <td>
                                 <label for="title"><b>Название объекта</b></label></td>
                             <td>
-                                <input id="title" class="<?= empty($errorFields['title']) ? '' : 'error' ?>" type="text" placeholder="" name="title" required value="<?= @$object['title'] ?>">
-                                <?php foreach ($errorFields['title'] as $message) { ?>
+                                <input id="title" class="<?= empty($errors['form']['fields']['title']) ? '' : 'error' ?>" type="text" placeholder="" name="title" required value="<?= @$values['form']['title'] ?>">
+                                <?php foreach ($errors['form']['fields']['title'] as $message) { ?>
                                     <div class="message error"><?php echo $message; ?></div>
                                 <?php } ?>
                             </td>
@@ -105,8 +105,8 @@ $objectsList = $sth->fetchAll();
                         <tr>
                             <td><label for="description"><b>Описание объекта</b></label></td>
                             <td>
-                                <textarea id="description" name="description" class="<?= empty($errorFields['description']) ? '' : 'error' ?>" required><?= @$object['description'] ?></textarea>
-                                <?php foreach ($errorFields['description'] as $message) { ?>
+                                <textarea id="description" name="description" class="<?= empty($errors['form']['fields']['description']) ? '' : 'error' ?>" required><?= @$values['form']['description'] ?></textarea>
+                                <?php foreach ($errors['form']['fields']['description'] as $message) { ?>
                                     <div class="message error"><?php echo $message; ?></div>
                                 <?php } ?>
                             </td>
@@ -114,13 +114,13 @@ $objectsList = $sth->fetchAll();
                         <tr>
                             <td><label for="parentId"><b>id родительского объекта</b></label></td>
                             <td>
-                                <select id="parentId" name="parent_id" class="<?= empty($errorFields['parent_id']) ? '' : 'error' ?>">
+                                <select id="parentId" name="parent_id" class="<?= empty($errors['form']['fields']['parent_id']) ? '' : 'error' ?>">
                                     <option value="0">Нет</option>
                                     <?php foreach ($objectsList as $objectItem) { ?>
                                         <option value="<?=$objectItem['id']?>"><?=$objectItem['title']?></option>
                                     <?php } ?>
                                 </select>
-                                <?php foreach ($errorFields['parent_id'] as $message) { ?>
+                                <?php foreach ($errors['form']['fields']['parent_id'] as $message) { ?>
                                     <div class="message error"><?php echo $message; ?></div>
                                 <?php } ?>
                             </td>
@@ -129,17 +129,17 @@ $objectsList = $sth->fetchAll();
                     <br>
                     <button class="save" name="save" type="submit" value="1">Сохранить</button>
                     <br>
-                    <?php if ($isSaved) { ?>
+                    <?php if ($values['form']['success']) { ?>
                         <div class="message">Сохранено</div>
                     <?php } ?>
                 </form>
             </div>
         </div>
         <footer>
-            <?php foreach ($errors as $error) { ?>
+            <?php foreach ($errors['system'] as $error) { ?>
                 <div class="message error"><?php echo $error; ?></div>
             <?php } ?>
-            <?php foreach ($messages as $message) { ?>
+            <?php foreach ($messages['sysinfo'] as $message) { ?>
                 <div class="message"><?php echo $message; ?></div>
             <?php } ?>
         </footer>

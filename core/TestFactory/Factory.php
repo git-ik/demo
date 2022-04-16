@@ -2,9 +2,20 @@
 
 namespace core\TestFactory;
 
+////////////////////////////
+// SIMPLE FACTORY EXAMPLE //
+////////////////////////////
+
 interface PhoneFactoryInterface
 {
     public function create($data = []);
+}
+
+interface PhoneModelInterface
+{
+    public function getTitle(): string;
+    public function getDescription(): string;
+    public function getFunctions(): array;
 }
 
 class PhoneFactory
@@ -23,14 +34,7 @@ class SmartphoneFactory
     }
 }
 
-interface PhoneInterface
-{
-    public function getTitle(): string;
-    public function getDescription(): string;
-    public function getFunctions(): array;
-}
-
-class Phone implements PhoneInterface
+class Phone implements PhoneModelInterface
 {
     public $title;
     public $description;
@@ -73,7 +77,7 @@ class Phone implements PhoneInterface
     }
 }
 
-class Smartphone implements PhoneInterface
+class Smartphone implements PhoneModelInterface
 {
     public $title;
     public $description;

@@ -2,20 +2,14 @@
 
 require_once('./core/core.php');
 
-if (empty($_SESSION['auth'])) {
+if (!checkAuthorization()) {
     header("HTTP/1.0 404 Not Found");
     exit;
 }
 
-if (isset($_REQUEST['parent_id'])) {
-    $parentId = (int)$_REQUEST['parent_id'];
-} else {
-    $parentId = 0;
-}
-
-$sth = $db->prepare('SELECT * FROM objects');
-$sth->execute();
-$objects = $sth->fetchAll();
+$dbq = $db->prepare('SELECT * FROM objects');
+$dbq->execute();
+$objects = $dbq->fetchAll();
 
 ?>
 <!DOCTYPE html>
@@ -75,19 +69,17 @@ $objects = $sth->fetchAll();
                         </tr>
                     <? } ?>
                     <tr>
-                        <td><br></td>
-                        <td><br></td>
-                        <td><br></td>
+                        <td colspan="4"><br></td>
                     </tr>
                 </table>
             </div>
             <br>
         </div>
         <footer>
-            <?php foreach ($errors as $error) { ?>
+            <?php foreach ($errors['system'] as $error) { ?>
                 <div class="message error"><?php echo $error; ?></div>
             <?php } ?>
-            <?php foreach ($messages as $message) { ?>
+            <?php foreach ($messages['sysinfo'] as $message) { ?>
                 <div class="message"><?php echo $message; ?></div>
             <?php } ?>
         </footer>

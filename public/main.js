@@ -28,15 +28,15 @@ function ajaxLoadDescription(id) {
 
     let formData = new FormData();
     formData.append('id', id);
-    formData.append('description', true);
 
     let request = new XMLHttpRequest();
-    request.open('POST', 'index.php');
+    request.open('POST', '/api/api.php');
     request.setRequestHeader('accept', 'application/json');
     request.addEventListener("readystatechange", () => {
         if (request.readyState === 4 && request.status === 200) {
+            let responseData = JSON.parse(request.responseText);
             setTimeout(function () {
-                container.innerHTML = request.responseText;
+                container.innerHTML = responseData.description;
                 container.style.opacity = '1';
             }, 500);
         }

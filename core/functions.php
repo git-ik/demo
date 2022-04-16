@@ -1,6 +1,62 @@
 <?php
 
 /**
+ * Authorization
+ * 
+ * @return bool
+ */
+function authorization($login, $password, $db): bool
+{
+    $dbq = $db->prepare('SELECT * FROM users WHERE login = :login');
+    $dbq->bindValue(':login', $login);
+    $dbq->execute();
+    $user = $dbq->fetch();
+
+    if (!empty($user) && password_verify($password, $user['password'])) {
+        $_SESSION['auth'] = true;
+        $_SESSION['api_token'] = md5(rand(0, 100));
+        return true;
+    } else {
+        return false;
+    }
+}
+
+/**
+ * Check user authorization
+ * 
+ * @return bool
+ */
+function checkAuthorization(): bool
+{
+    if (isset($_SESSION['auth'])) {
+        return true;
+    }
+    return false;
+}
+
+/**
+ * Check api authorization
+ */
+function checkApiAuthorization(): bool
+{
+    if (!empty($_SESSION['api_token'])) {
+        return true;
+    }
+    return false;
+}
+
+/**
+ * Logout
+ * 
+ * @return void
+ */
+function logout(): void
+{
+    unset($_SESSION['auth']);
+    unset($_SESSION['api_token']);
+}
+
+/**
  * Prepare objects tree data
  * 
  * @param array $objectsList - array of objects (sql list)
@@ -60,30 +116,17 @@ function renderTreeRecursive($array, $parentId = 0)
  */
 function deleteRecursive($id, $db)
 {
-    $result = [
-        'success' => false
-    ];
-
-    $sth = $db->prepare('SELECT * FROM objects WHERE id = :id');
-    $sth->bindValue(':id', $id);
-    $sth->execute();
-    $object = $sth->fetch();
-    if (empty($object)) {
-        return $result;
-    }
-
-    $sth = $db->prepare('DELETE FROM objects WHERE id = :id');
-    $sth->bindValue(':id', $id);
-    if ($sth->execute()) {
-        $result['success'] = true;
+    $dbq = $db->prepare('DELETE FROM objects WHERE id = :id');
+    $dbq->bindValue(':id', $id);
+    if ($dbq->execute()) {
+        $isDeleted = true;
     }
 
     if (!empty($object)) {
-        $sth = $db->prepare('SELECT * FROM objects WHERE parent_id = :id');
-        $sth->bindValue(':id', $id);
-        $sth->execute();
-        $objects = $sth->fetchAll();
-
+        $dbq = $db->prepare('SELECT * FROM objects WHERE parent_id = :id');
+        $dbq->bindValue(':id', $id);
+        $dbq->execute();
+        $objects = $dbq->fetchAll();
         if (!empty($objects)) {
             foreach ($objects as $obj) {
                 deleteRecursive($obj['id'], $db);
@@ -91,7 +134,7 @@ function deleteRecursive($id, $db)
         }
     }
 
-    return $result;
+    return $isDeleted;
 }
 
 /**
@@ -104,14 +147,14 @@ function deleteRecursive($id, $db)
  */
 function updateChildsStatus($id, $db)
 {
-    $sth = $db->prepare('SELECT * FROM objects WHERE parent_id = :id');
-    $sth->bindValue(':id', $id);
-    $sth->execute();
-    $result = $sth->fetch();
+    $dbq = $db->prepare('SELECT * FROM objects WHERE parent_id = :id');
+    $dbq->bindValue(':id', $id);
+    $dbq->execute();
+    $result = $dbq->fetch();
     if (!empty($result)) {
-        $sth = $db->prepare('UPDATE objects SET has_childs = true WHERE id = :id');
-        $sth->bindValue(':id', $id);
-        if ($sth->execute()) {
+        $dbq = $db->prepare('UPDATE objects SET has_childs = true WHERE id = :id');
+        $dbq->bindValue(':id', $id);
+        if ($dbq->execute()) {
             $result['success'] = true;
         } else {
             $result['success'] = false;
@@ -130,10 +173,10 @@ function updateChildsStatus($id, $db)
 function getChildsRecursive($id, $db)
 {
     $idList = [];
-    $sth = $db->prepare('SELECT * FROM objects WHERE parent_id = :id');
-    $sth->bindValue(':id', $id);
-    $sth->execute();
-    $objects = $sth->fetchAll();
+    $dbq = $db->prepare('SELECT * FROM objects WHERE parent_id = :id');
+    $dbq->bindValue(':id', $id);
+    $dbq->execute();
+    $objects = $dbq->fetchAll();
     if (!empty($objects)) {
         foreach ($objects as $object) {
             $idList = array_merge($idList, getChildsRecursive($object['id'], $db));
