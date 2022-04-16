@@ -1,5 +1,5 @@
-### DEMO APP ###
-# Простое приложение на PHP #
+# DEMO APP #
+### Простое приложение на PHP ###
 
 ![alt text](demo.jpg "preview")
 
