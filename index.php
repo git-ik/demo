@@ -69,7 +69,7 @@ if (empty($errors['system'])) {
                                 <label for="login"><b>Пользователь</b></label>
                             </td>
                             <td>
-                                <input type="text" placeholder="Введите логин" name="login" value="<?= $values['form']['login'] ?>" required>
+                                <input id="login" type="text" placeholder="Введите логин" name="login" value="<?= $values['form']['login'] ?>" required>
                                 <?php foreach ($errors['form']['fields']['login'] as $message) { ?>
                                     <div class="message error"><?php echo $message; ?></div>
                                 <?php } ?>
@@ -80,7 +80,7 @@ if (empty($errors['system'])) {
                                 <label for="password"><b>Пароль</b></label>
                             </td>
                             <td>
-                                <input type="password" placeholder="Введите пароль" name="password" value="" required>
+                                <input id="password" type="password" placeholder="Введите пароль" name="password" value="" required>
                                 <?php foreach ($errors['form']['fields']['password'] as $message) { ?>
                                     <div class="message error"><?php echo $message; ?></div>
                                 <?php } ?>
