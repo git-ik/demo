@@ -1,7 +1,7 @@
 # DEMO APP #
 ### Простое приложение на PHP ###
 
-![alt text](demo.jpg "preview")
+![alt text](/public/demo.jpg "Демо приложение")
 
 ## Для запуска тестового приложения на Linux:
  - установить LAMP (https://ru.wikipedia.org/wiki/LAMP),
