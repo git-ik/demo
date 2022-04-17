@@ -177,9 +177,16 @@ footer {
 #objects .objects-list {
     display: table-cell;
     width: 75%;
-    padding: 20px;
     overflow: auto;
     color: #171717;
+}
+
+#objects .objects-list div {
+    padding: 20px;
+}
+
+#objects .objects-list > div > div {
+    border-bottom: 1px solid #5c5c5c;
 }
 
 #objects .object-description {
@@ -206,11 +213,11 @@ footer {
 #objects .btn {
     margin-right: 5px;
     float: left;
-    padding: 0px 10px;
+    padding: 9px 10px;
 }
 
 #objects .btn:hover {
-    padding: 0px 10px;
+    padding: 9px 10px;
 }
 
 #objects span {
@@ -221,7 +228,7 @@ footer {
 
 #objects .object {
     padding: 10px 44px;
-    background-color: #fff;
+    background-color: rgb(0, 46, 73, 0.1);
 }
 
 .container {
@@ -288,16 +295,40 @@ table.list-table .btn {
     margin-top: 30px;
 }
 
+#authorization {
+    background-color: rgba(65, 65, 65, 0.8);
+    box-shadow: 0px 0px 10px 0px rgba(255, 255, 255, 0.5);
+}
+
+#authorization.error {
+    box-shadow: 0px 0px 10px 0px rgb(255, 0, 0);
+}
+
+#authorization th, #authorization td {
+    border-bottom: 1px solid #2b2b2b;
+}
+
 .auth-form-label {
     text-align: right;
     padding-right: 0px;
+    color: #FFFFFF;
+}
+
+.auth-form-input input {
+    border: 2px solid #2b2b2b;
+    background-color: #777;
+}
+
+.auth-form-input input:focus {
+    outline: none;
+    background-color: #FFFFFF;
 }
 
 .auth-form-header {
     padding: 10px;
     text-align: center;
     text-transform: uppercase;
-    background: linear-gradient(to bottom, #ffffff 0%, #9f9f9f 2%, #878787 55%, #6a6a6a 98%, #000000 100%);
+    background: linear-gradient(to bottom, #ffffff 0%, #8a8989 2%, #6f6f6f 55%, #202020 98%, #000000 100%);
 }
 
 .auth-form-header h3 {
@@ -307,12 +338,12 @@ table.list-table .btn {
 .auth-form-header div {
     background-color: rgba(200, 200, 200, 0.25);
     padding: 5px 150px;
-    border-top: 1px solid #bdbdbd;
     border-bottom: 1px solid #bdbdbd;
+    background: linear-gradient(to bottom, #958585 0%, #767676 2%, #7c7c7c 55%, #5e5e5e 98%, #212121 100%);
 }
 
-.auth-form-footer {
-    padding: 5px 0px 20px 0px;
+.auth-form-submit-area {
+    padding: 5px 20px 20px 20px;
     text-align: center;
 }
 

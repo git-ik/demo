@@ -55,8 +55,8 @@ if (empty($errors['system'])) {
         <? } ?>
         <?php if (empty($_SESSION['auth']) && empty($errors['system'])) { ?>
             <div class="container">
-                <form id="authorizationForm" method="POST">
-                    <table>
+                <form method="POST">
+                    <table id="authorization" class="<?= empty($messages['form']['auth']) ? '' : 'error' ?>">
                         <tr>
                             <td colspan="2" class="auth-form-header">
                                 <div>
@@ -68,7 +68,7 @@ if (empty($errors['system'])) {
                             <td class="auth-form-label">
                                 <label for="login"><b>Пользователь</b></label>
                             </td>
-                            <td>
+                            <td class="auth-form-input">
                                 <input id="login" type="text" placeholder="Введите логин" name="login" value="<?= $values['form']['login'] ?>" required>
                                 <?php foreach ($errors['form']['fields']['login'] as $message) { ?>
                                     <div class="message error"><?php echo $message; ?></div>
@@ -79,7 +79,7 @@ if (empty($errors['system'])) {
                             <td class="auth-form-label">
                                 <label for="password"><b>Пароль</b></label>
                             </td>
-                            <td>
+                            <td class="auth-form-input">
                                 <input id="password" type="password" placeholder="Введите пароль" name="password" value="" required>
                                 <?php foreach ($errors['form']['fields']['password'] as $message) { ?>
                                     <div class="message error"><?php echo $message; ?></div>
@@ -87,14 +87,11 @@ if (empty($errors['system'])) {
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="2">
+                            <td class="auth-form-submit-area" colspan="2">
                                 <?php foreach ($messages['form']['auth'] as $message) { ?>
                                     <div class="message error"><?php echo $message; ?></div>
                                 <?php } ?>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="auth-form-footer" colspan="2">
+                                <br>
                                 <button name="authorize" value="1" type="submit">Авторизоваться</button>
                             </td>
                         </tr>
@@ -173,11 +170,13 @@ if (empty($errors['system'])) {
         <?php if (empty($errors['system'])) { ?>
             <div id="dataObjectsExample" class="container">
                 <h2>СТРУКТУРА ДАННЫХ:</h2>
-                <p>Дерево объектов, при клике на название объекта - при помощи AJAX будет загружено описание объекта и выведено в поле справа</p>
+                <p>Дерево объектов, чтобы увидеть описание объекта необходимо кликнуть на название.</p>
                 <div id="objects">
                     <div class="row">
                         <div class="objects-list">
-                            <?php echo renderTreeRecursive(makeTreeArrayRecursive($objects)) ?>
+                            <div>
+                                <?php echo renderTreeRecursive(makeTreeArrayRecursive($objects)) ?>
+                            </div>
                         </div>
                         <div id="objectDescription" class="object-description">
 
