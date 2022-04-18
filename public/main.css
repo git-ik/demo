@@ -15,14 +15,18 @@ body {
     display: flex;
     flex-direction: column;
     font-family: "JuraVariable";
+    background-color: #171717;
+}
+
+body > div {
+    min-width: 800px;
     background: url('./bg.jpg');
     background-size: 100%;
-    background-color: #171717;
     background-repeat: no-repeat;
 }
 
 @media (min-width: 1400px) {
-    body {
+    body > div {
         background: url('./bg_4k.jpg');
         background-size: 100%;
     }
@@ -173,23 +177,16 @@ footer {
 }
 
 #objects {
-    display: table;
     width: 100%;
     background-color: rgba(75, 75, 75, 0.25);
 }
 
-#objects .row {
-    display: table-row;
-}
-
 #objects .objects-list {
-    display: table-cell;
-    width: 75%;
     overflow: auto;
     color: #171717;
 }
 
-#objects .objects-list > div {
+#objects .objects-list>div {
     padding: 20px;
 }
 
@@ -198,14 +195,32 @@ footer {
 }
 
 #objects .object-description {
-    display: table-cell;
-    width: 25%;
     padding: 25px 20px;
     overflow: auto;
     color: #ababab;
     border-left: 2px solid #000000;
     background-color: rgba(200, 200, 200, 0.85);
     background: url('./bg_c.jpg');
+}
+
+@media (min-width: 1000px) {
+    #objects {
+        display: table;
+    }
+
+    #objects .row {
+        display: table-row;
+    }
+
+    #objects .objects-list {
+        display: table-cell;
+        width: 75%;
+    }
+
+    #objects .object-description {
+        display: table-cell;
+        width: 25%;
+    }
 }
 
 #objects .title {

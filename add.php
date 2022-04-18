@@ -70,79 +70,81 @@ $objectsList = $dbq->fetchAll();
         <script src="/public/main.js"></script>
     </head>
     <body>
-        <canvas id="canvas"></canvas>
-        <header class="align-center">
-            <?php if (!empty($_SESSION['auth'])) { ?>
-                <form method="POST">
-                    <button class="logout" title="Разлогиниться" id="unauthorize" name="unauthorize" type="submit" value="1"><img alt="logout" src="./public/logout.png"></button>
-                </form>
-            <?php } ?>
-            <h1><?=$appName?></h1>
-        </header>
-        <div class="main">
-            <div class="container">
-                <a class="btn" href="./admin.php">&lt;&lt; назад</a>
-            </div>
-            <br>
-            <div class="container">
-                <form method="POST">
-                    <table class="edit-table">
-                        <tr>
-                            <th colspan="2">Добавление объекта</th>
-                        </tr>
-                        <tr>
-                            <td colspan="2"><br></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label for="title"><b>Название объекта</b></label></td>
-                            <td>
-                                <input id="title" class="<?= empty($errors['form']['fields']['title']) ? '' : 'error' ?>" type="text" placeholder="" name="title" required value="<?= @$values['form']['title'] ?>">
-                                <?php foreach ($errors['form']['fields']['title'] as $message) { ?>
-                                    <div class="message error"><?php echo $message; ?></div>
-                                <?php } ?>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><label for="description"><b>Описание объекта</b></label></td>
-                            <td>
-                                <textarea id="description" name="description" class="<?= empty($errors['form']['fields']['description']) ? '' : 'error' ?>" required><?= @$values['form']['description'] ?></textarea>
-                                <?php foreach ($errors['form']['fields']['description'] as $message) { ?>
-                                    <div class="message error"><?php echo $message; ?></div>
-                                <?php } ?>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><label for="parentId"><b>id родительского объекта</b></label></td>
-                            <td>
-                                <select id="parentId" name="parent_id" class="<?= empty($errors['form']['fields']['parent_id']) ? '' : 'error' ?>">
-                                    <option value="0">Нет</option>
-                                    <?php foreach ($objectsList as $objectItem) { ?>
-                                        <option value="<?=$objectItem['id']?>"><?=$objectItem['title']?></option>
+        <div>
+            <canvas id="canvas"></canvas>
+            <header class="align-center">
+                <?php if (!empty($_SESSION['auth'])) { ?>
+                    <form method="POST">
+                        <button class="logout" title="Разлогиниться" id="unauthorize" name="unauthorize" type="submit" value="1"><img alt="logout" src="./public/logout.png"></button>
+                    </form>
+                <?php } ?>
+                <h1><?=$appName?></h1>
+            </header>
+            <div class="main">
+                <div class="container">
+                    <a class="btn" href="./admin.php">&lt;&lt; назад</a>
+                </div>
+                <br>
+                <div class="container">
+                    <form method="POST">
+                        <table class="edit-table">
+                            <tr>
+                                <th colspan="2">Добавление объекта</th>
+                            </tr>
+                            <tr>
+                                <td colspan="2"><br></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="title"><b>Название объекта</b></label></td>
+                                <td>
+                                    <input id="title" class="<?= empty($errors['form']['fields']['title']) ? '' : 'error' ?>" type="text" placeholder="" name="title" required value="<?= @$values['form']['title'] ?>">
+                                    <?php foreach ($errors['form']['fields']['title'] as $message) { ?>
+                                        <div class="message error"><?php echo $message; ?></div>
                                     <?php } ?>
-                                </select>
-                                <?php foreach ($errors['form']['fields']['parent_id'] as $message) { ?>
-                                    <div class="message error"><?php echo $message; ?></div>
-                                <?php } ?>
-                            </td>
-                        </tr>
-                    </table>
-                    <br>
-                    <button class="save" name="save" type="submit" value="1">Сохранить</button>
-                    <br>
-                    <?php if ($values['form']['success']) { ?>
-                        <div class="message">Сохранено</div>
-                    <?php } ?>
-                </form>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label for="description"><b>Описание объекта</b></label></td>
+                                <td>
+                                    <textarea id="description" name="description" class="<?= empty($errors['form']['fields']['description']) ? '' : 'error' ?>" required><?= @$values['form']['description'] ?></textarea>
+                                    <?php foreach ($errors['form']['fields']['description'] as $message) { ?>
+                                        <div class="message error"><?php echo $message; ?></div>
+                                    <?php } ?>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label for="parentId"><b>id родительского объекта</b></label></td>
+                                <td>
+                                    <select id="parentId" name="parent_id" class="<?= empty($errors['form']['fields']['parent_id']) ? '' : 'error' ?>">
+                                        <option value="0">Нет</option>
+                                        <?php foreach ($objectsList as $objectItem) { ?>
+                                            <option value="<?=$objectItem['id']?>"><?=$objectItem['title']?></option>
+                                        <?php } ?>
+                                    </select>
+                                    <?php foreach ($errors['form']['fields']['parent_id'] as $message) { ?>
+                                        <div class="message error"><?php echo $message; ?></div>
+                                    <?php } ?>
+                                </td>
+                            </tr>
+                        </table>
+                        <br>
+                        <button class="save" name="save" type="submit" value="1">Сохранить</button>
+                        <br>
+                        <?php if ($values['form']['success']) { ?>
+                            <div class="message">Сохранено</div>
+                        <?php } ?>
+                    </form>
+                </div>
             </div>
+            <footer>
+                <?php foreach ($errors['system'] as $error) { ?>
+                    <div class="message error"><?php echo $error; ?></div>
+                <?php } ?>
+                <?php foreach ($messages['sysinfo'] as $message) { ?>
+                    <div class="message"><?php echo $message; ?></div>
+                <?php } ?>
+            </footer>
         </div>
-        <footer>
-            <?php foreach ($errors['system'] as $error) { ?>
-                <div class="message error"><?php echo $error; ?></div>
-            <?php } ?>
-            <?php foreach ($messages['sysinfo'] as $message) { ?>
-                <div class="message"><?php echo $message; ?></div>
-            <?php } ?>
-        </footer>
     </body>
 </html>
