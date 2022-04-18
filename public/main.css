@@ -11,25 +11,18 @@
 body {
     margin: 0;
     padding: 0;
-    min-height: 100vh;
     display: flex;
     flex-direction: column;
     font-family: "JuraVariable";
-    background-color: #171717;
+    background-color: #000000;
 }
 
-body > div {
+body>div {
     min-width: 800px;
+    min-height: 100vh;
     background: url('./bg.jpg');
     background-size: 100%;
     background-repeat: no-repeat;
-}
-
-@media (min-width: 1400px) {
-    body > div {
-        background: url('./bg_4k.jpg');
-        background-size: 100%;
-    }
 }
 
 h1 {
@@ -44,6 +37,7 @@ h1 {
 h2 {
     margin: 0 0 20px 0;
     font-size: 20px;
+    text-transform: uppercase;
     color: #ffffff;
     letter-spacing: 2px;
 }
@@ -399,4 +393,64 @@ table.list-table .btn {
 
 canvas {
     position: absolute;
+}
+
+@media (min-width: 1400px) {
+    body>div {
+        background: url('./bg_4k.jpg');
+        background-size: 100%;
+    }
+}
+
+@media only screen and (min-width: 320px) and (max-width: 1024px) {
+    .container {
+        font-size: 7px;
+    }
+
+    h1 {
+        font-size: 20px;
+    }
+
+    h2 {
+        font-size: 11px;
+    }
+
+    h3 {
+        font-size: 9px;
+    }
+
+    .auth-form-header h3 {
+        font-size: 14px;
+        color: white;
+    }
+
+    .auth-form-label label {
+        font-size: 14px;
+    }
+
+    .edit-table label {
+        font-size: 20px;
+    }
+
+    .edit-table input {
+        width: 98%;
+    }
+
+    .edit-table input, .edit-table select {
+        height: 30px;
+        font-size: 20px;
+    }
+
+    .edit-table textarea {
+        font-size: 20px;
+    }
+
+    .edit-table select {
+        width: 100%;
+        height: 50px;
+    }
+
+    .list-table {
+        font-size: 20px;
+    }
 }
