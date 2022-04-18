@@ -21,6 +21,7 @@ $objects = $dbq->fetchAll();
         <script src="/public/main.js"></script>
     </head>
     <body>
+        <canvas id="canvas"></canvas>
         <header class="align-center">
             <?php if (!empty($_SESSION['auth'])) { ?>
                 <form method="POST">
@@ -84,5 +85,4 @@ $objects = $dbq->fetchAll();
             <?php } ?>
         </footer>
     </body>
-
 </html>

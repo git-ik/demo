@@ -95,7 +95,7 @@ function renderTreeRecursive($array, $parentId = 0)
         if (!empty($item['childs'])) {
             $str .= ' <button title="Развернуть\свернуть дерево элементов" class="btn" onclick="toggleTreeElement(' . $item['id'] . ', this);">[+]</button>';
         }
-        $str .= '<span><span class="title" onclick="ajaxLoadDescription(' . $item['id'] . ');">' . $item['title'] . '</span> <span id="descr' . $item['id'] . '" class="invisible">' . $item['description'] . '</span></span><br><br>';
+        $str .= '<div><span class="title" onclick="ajaxLoadDescription(' . $item['id'] . ');">' . $item['title'] . '</span></div>';
         if ($item['parent_id'] != $parentId) {
             continue;
         }
