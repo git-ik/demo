@@ -399,6 +399,7 @@ canvas {
     body>div {
         background: url('./bg_4k.jpg');
         background-size: 100%;
+        background-repeat: no-repeat;
     }
 }
 
