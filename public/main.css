@@ -14,7 +14,7 @@ body {
     display: flex;
     flex-direction: column;
     font-family: "JuraVariable";
-    background-color: #000000;
+    background-color: #171717;
 }
 
 body>div {
@@ -144,15 +144,14 @@ button.save {
 }
 
 header {
-    height: 60px;
-    opacity: 0.95;
+    padding: 0px 20px;
 }
 
 header button.logout {
     border: 0;
     border-radius: 0px;
     float: right;
-    padding: 16px 7px;
+    padding: 13px 7px;
     transition: 300ms;
     opacity: 0.4;
     background: linear-gradient(to bottom, #ffc226 0%, #cf8b14 10%, #ffc226 50%, #ffc226 90%, #cf8b14 100%);
@@ -161,13 +160,17 @@ header button.logout {
 header button.logout:hover {
     border: 0;
     opacity: 0.75;
-    padding: 16px 7px;
+    padding: 13px 7px;
+}
+
+header > .box {
+    text-align: center;
+    background-color: #000000;
 }
 
 footer {
-    margin-top: -20px;
-    background-color: #f2f2f2;
     width: 100%;
+    min-height: 20px;
 }
 
 #objects {
@@ -250,12 +253,17 @@ footer {
 }
 
 .container {
+    margin-top: 20px;
     padding: 20px;
     background-color: rgba(0, 0, 0, 0.5);
     color: white;
     border-left: 5px solid #000;
     border-right: 5px solid #000;
     line-height: 20px;
+}
+
+.canvas-container {
+    padding: 20px 20px 15px 20px;
 }
 
 .code {
@@ -391,10 +399,6 @@ table.list-table .btn {
     display: none;
 }
 
-canvas {
-    position: absolute;
-}
-
 @media (min-width: 1400px) {
     body>div {
         background: url('./bg_4k.jpg');
@@ -404,12 +408,33 @@ canvas {
 }
 
 @media only screen and (min-width: 320px) and (max-width: 1024px) {
+    header {
+        padding: 0px;
+    }
+
+    header button.logout {
+        border: 0;
+        border-radius: 0px;
+        float: right;
+        padding: 22px 16px 17px 16px;
+        transition: 300ms;
+        opacity: 0.6;
+        background: linear-gradient(to bottom, #ffc226 0%, #cf8b14 10%, #ffc226 50%, #ffc226 90%, #cf8b14 100%);
+    }
+    
+    header button.logout:hover {
+        border: 0;
+        opacity: 0.75;
+        padding: 22px 16px 17px 16px;
+    }
+
     .container {
         font-size: 7px;
     }
 
     h1 {
         font-size: 20px;
+        margin: 20px;
     }
 
     h2 {

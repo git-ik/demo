@@ -15,6 +15,7 @@ function toggleTreeElement(id, element) {
         childTreeContainer.classList.add('invisible');
     }
 }
+
 /**
  * Load object description
  * [/index page]
@@ -44,54 +45,106 @@ function ajaxLoadDescription(id) {
     request.send(formData);
 }
 
-var canvas;
-var ctx;
-var xOffsetLeft = 0;
-var xOffsetRight = 0;
-var xOffset = 0;
-var yOffset = 45;
-var toggleMovingDirection = 'right';
 
-function drawExample() {
+/**
+ * Render canvas
+ */
+var canvas;
+var cWidth;
+var cHeight;
+var ctx;
+var xOffsetLeft;
+var xOffsetRight;
+var xOffset;
+var rCount;
+var movingDirection;
+var isStarted;
+var timeLapse;
+function draw() {
     setTimeout(function () {
-        if (xOffset > xOffsetRight) {
-            toggleMovingDirection = 'left';
+        if (xOffset >= xOffsetRight) {
+            movingDirection = 'left';
         }
-        if (xOffset < xOffsetLeft) {
-            toggleMovingDirection = 'right';
+        if (xOffset <= xOffsetLeft) {
+            movingDirection = 'right';
         }
-        if (toggleMovingDirection == 'right') {
+        if (movingDirection == 'right') {
             xOffset = xOffset + 15;
         } else {
             xOffset = xOffset - 15;
         }
 
-        ctx.clearRect(0, 0, window.innerWidth - 60, 60);
-        ctx.fillRect(xOffset, yOffset, 10, 10);
-        ctx.fillRect(xOffset + 15, yOffset, 10, 10);
-        ctx.fillRect(xOffset + 30, yOffset, 10, 10);
+        ctx.clearRect(0, 0, cWidth, cHeight);
 
-        drawExample();
+        ctx.fillStyle = '#000000';
+        for (i = 0; i <= rCount; i++) {
+            ctx.fillRect(i * 15, 0, 10, 10);
+            ctx.fillRect(i * 15, 15, 10, 10);
+            ctx.fillRect(i * 15, 30, 10, 10);
+            ctx.fillRect(i * 15, 45, 10, 10);
+            ctx.fillRect(i * 15, 60, 10, 10);
+            ctx.fillRect(i * 15, 75, 10, 10);
+        }
+
+        ctx.fillStyle = '#64ff4b';
+        let randY = Math.round(Math.random() * (6 - 0) + 0);
+        if (randY > 4) {
+            ctx.fillRect(xOffset, 0, 10, 10);
+        }
+        if (randY == 5) {
+            ctx.fillRect(xOffset, 15, 10, 10);
+        }
+        if (randY < 2) {
+            ctx.fillRect(xOffset, 30, 10, 10);
+        }
+        if (randY == 3) {
+            ctx.fillRect(xOffset, 45, 10, 10);
+        }
+        if (randY == 0) {
+            ctx.fillRect(xOffset, 60, 10, 10);
+        }
+        if (randY == 6) {
+            ctx.fillRect(xOffset, 75, 10, 10);
+        }
+
+        draw();
     }, 50);
 }
 
-function defineDrawParams() {
-    canvas = document.getElementById('canvas');
-    canvas.width = window.innerWidth - 60;
-    canvas.height = 60;
-    ctx = canvas.getContext('2d');
-    let hElements = document.getElementsByTagName('h1');
-    let pos = hElements[0].getBoundingClientRect();
-    xOffset = pos.x - 60;
-    xOffsetLeft = pos.x - 60;
-    xOffsetRight = pos.x + hElements[0].offsetWidth;
+function start(cEl, isStarted) {
+    if (!isStarted) {
+        canvas = document.getElementById(cEl);
+    }
+
+    if (!isStarted && canvas == null) {
+        return;
+    }
+
+    cWidth = window.innerWidth - 110;
+    cHeight = 85;
+    canvas.width = cWidth;
+    canvas.height = cHeight;
+    xOffset = 0;
+    xOffsetLeft = 0;
+    rCount = Math.floor(cWidth / 15);
+    xOffsetRight = rCount * 15;
+
+    if (canvas !== undefined) {
+        if (!isStarted) {
+            movingDirection = 'right';
+            ctx = canvas.getContext('2d');
+            draw();
+            isStarted = true;
+        }
+        window.addEventListener('resize', function () {
+            clearTimeout(timeLapse);
+            timeLapse = setTimeout(function () {
+                start('canvas', true)
+            }, 50);
+        });
+    }
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-    defineDrawParams();
-    drawExample();
-
-    window.addEventListener('resize', () => {
-        defineDrawParams();
-    });
+    start('canvas', false);
 });

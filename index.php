@@ -34,14 +34,15 @@ if (empty($errors['system'])) {
 
     <body>
         <div>
-            <canvas id="canvas"></canvas>
-            <header class="align-center">
-                <?php if (!empty($_SESSION['auth'])) { ?>
-                    <form method="POST">
-                        <button class="logout" title="Разлогиниться" id="unauthorize" name="unauthorize" type="submit" value="1"><img alt="logout" src="./public/logout.png"></button>
-                    </form>
-                <?php } ?>
-                <h1><?= $appName ?></h1>
+            <header>
+                <div class="box">
+                    <?php if (!empty($_SESSION['auth'])) { ?>
+                        <form method="POST">
+                            <button class="logout" title="Разлогиниться" id="unauthorize" name="unauthorize" type="submit" value="1"><img alt="logout" src="./public/logout.png"></button>
+                        </form>
+                    <?php } ?>
+                    <h1><?= $appName ?></h1>
+                </div>
             </header>
             <div class="main">
                 <?php if (!empty($_SESSION['auth']) && empty($errors['system'])) { ?>
@@ -53,6 +54,9 @@ if (empty($errors['system'])) {
                         </form>
                     </div>
                 <? } ?>
+                <div class="container canvas-container">
+                    <canvas id="canvas"></canvas>
+                </div>
                 <?php if (empty($_SESSION['auth']) && empty($errors['system'])) { ?>
                     <div class="container">
                         <form method="POST">
@@ -99,7 +103,6 @@ if (empty($errors['system'])) {
                         </form>
                     </div>
                 <? } ?>
-                <br>
                 <div class="container">
                     <div class="align-center">
                         <?php if (!empty($errors['configuration'])) { ?>
@@ -122,9 +125,7 @@ if (empty($errors['system'])) {
                             <? } ?>
                         <?php } ?>
                     </div>
-                    <br>
                 </div>
-                <br>
                 <div id="projectDescription" class="container">
                     <h2>Задача проекта:</h2>
                     &nbsp;&nbsp;&nbsp;&nbsp;Привести пример кода с использованием PHP8, MYSQL, JS, HTML, CSS
@@ -166,7 +167,6 @@ if (empty($errors['system'])) {
                     <br>
                     <br>
                 </div>
-                <br>
                 <?php if (empty($errors['system'])) { ?>
                     <div id="dataObjectsExample" class="container">
                         <h2>СТРУКТУРА ДАННЫХ:</h2>
@@ -184,7 +184,6 @@ if (empty($errors['system'])) {
                             </div>
                         </div>
                     </div>
-                    <br>
                     <div id="codeExample" class="container factory-check">
                         <h2>Пример реализации ООП:</h2>
                         <p>Примером служит реализация нескольких классов для описания телефонов как объектов манипулирования средствами языка программирования PHP реализуя паттерн фабричный метод.</p>
@@ -272,7 +271,6 @@ if (empty($errors['system'])) {
                         ?>
                     </div>
                 <?php } ?>
-                <br>
             </div>
             <footer>
                 <?php foreach ($errors['system'] as $error) { ?>

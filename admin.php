@@ -22,14 +22,15 @@ $objects = $dbq->fetchAll();
     </head>
     <body>
         <div>
-            <canvas id="canvas"></canvas>
-            <header class="align-center">
-                <?php if (!empty($_SESSION['auth'])) { ?>
-                    <form method="POST">
-                        <button class="logout" title="Разлогиниться" id="unauthorize" name="unauthorize" type="submit" value="1"><img alt="logout" src="./public/logout.png"></button>
-                    </form>
-                <?php } ?>
-                <h1><?=$appName?></h1>
+            <header>
+                <div class="box">
+                    <?php if (!empty($_SESSION['auth'])) { ?>
+                        <form method="POST">
+                            <button class="logout" title="Разлогиниться" id="unauthorize" name="unauthorize" type="submit" value="1"><img alt="logout" src="./public/logout.png"></button>
+                        </form>
+                    <?php } ?>
+                    <h1><?=$appName?></h1>
+                </div>
             </header>
             <div class="main">
                 <div class="container">
@@ -75,7 +76,6 @@ $objects = $dbq->fetchAll();
                         </tr>
                     </table>
                 </div>
-                <br>
             </div>
             <footer>
                 <?php foreach ($errors['system'] as $error) { ?>
