@@ -200,26 +200,6 @@ footer {
     background: url('./bg_c.jpg');
 }
 
-@media (min-width: 1000px) {
-    #objects {
-        display: table;
-    }
-
-    #objects .row {
-        display: table-row;
-    }
-
-    #objects .objects-list {
-        display: table-cell;
-        width: 75%;
-    }
-
-    #objects .object-description {
-        display: table-cell;
-        width: 25%;
-    }
-}
-
 #objects .title {
     cursor: pointer;
     font-size: 13px;
@@ -445,6 +425,10 @@ table.list-table .btn {
         font-size: 9px;
     }
 
+    i {
+        font-size: 5px;
+    }
+
     .auth-form-header h3 {
         font-size: 14px;
         color: white;
@@ -478,5 +462,25 @@ table.list-table .btn {
 
     .list-table {
         font-size: 20px;
+    }
+}
+
+@media (min-width: 1000px) {
+    #objects {
+        display: table;
+    }
+
+    #objects .row {
+        display: table-row;
+    }
+
+    #objects .objects-list {
+        display: table-cell;
+        width: 75%;
+    }
+
+    #objects .object-description {
+        display: table-cell;
+        width: 25%;
     }
 }
