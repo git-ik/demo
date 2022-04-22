@@ -54,9 +54,6 @@ if (empty($errors['system'])) {
                         </form>
                     </div>
                 <? } ?>
-                <div class="container canvas-container">
-                    <canvas id="canvas"></canvas>
-                </div>
                 <?php if (empty($_SESSION['auth']) && empty($errors['system'])) { ?>
                     <div class="container">
                         <form method="POST">
@@ -167,6 +164,9 @@ if (empty($errors['system'])) {
                     <br>
                     <br>
                 </div>
+                <div class="container canvas-container">
+                    <canvas id="canvas1"></canvas>
+                </div>
                 <?php if (empty($errors['system'])) { ?>
                     <div id="dataObjectsExample" class="container">
                         <h2>СТРУКТУРА ДАННЫХ:</h2>
@@ -183,6 +183,9 @@ if (empty($errors['system'])) {
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="container canvas-container">
+                        <canvas id="canvas2"></canvas>
                     </div>
                     <div id="codeExample" class="container factory-check">
                         <h2>Пример реализации ООП:</h2>
@@ -271,6 +274,9 @@ if (empty($errors['system'])) {
                         ?>
                     </div>
                 <?php } ?>
+                    <div class="container canvas-container">
+                        <canvas id="canvas3"></canvas>
+                    </div>
             </div>
             <footer>
                 <?php foreach ($errors['system'] as $error) { ?>

@@ -60,7 +60,7 @@ var rCount;
 var movingDirection;
 var isStarted;
 var timeLapse;
-function draw() {
+function draw(ctx) {
     setTimeout(function () {
         if (xOffset >= xOffsetRight) {
             movingDirection = 'left';
@@ -86,7 +86,7 @@ function draw() {
             ctx.fillRect(i * 15, 75, 10, 10);
         }
 
-        ctx.fillStyle = '#64ff4b';
+        ctx.fillStyle = '#64FF4B';
         let randY = Math.round(Math.random() * (6 - 0) + 0);
         if (randY > 4) {
             ctx.fillRect(xOffset, 0, 10, 10);
@@ -107,7 +107,7 @@ function draw() {
             ctx.fillRect(xOffset, 75, 10, 10);
         }
 
-        draw();
+        draw(ctx);
     }, 50);
 }
 
@@ -133,18 +133,22 @@ function start(cEl, isStarted) {
         if (!isStarted) {
             movingDirection = 'right';
             ctx = canvas.getContext('2d');
-            draw();
+            draw(ctx);
             isStarted = true;
         }
         window.addEventListener('resize', function () {
             clearTimeout(timeLapse);
             timeLapse = setTimeout(function () {
-                start('canvas', true)
+                start('canvas1', true);
+                start('canvas2', true);
+                start('canvas3', true);
             }, 50);
         });
     }
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-    start('canvas', false);
+    start('canvas1', false);
+    start('canvas2', false);
+    start('canvas3', false);
 });
