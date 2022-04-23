@@ -17,7 +17,7 @@ body {
     background-color: #171717;
 }
 
-body>div {
+body > div {
     min-width: 800px;
     min-height: 100vh;
     background: url('./bg.jpg');
@@ -183,11 +183,15 @@ footer {
     color: #171717;
 }
 
-#objects .objects-list>div {
+#objects .objects-list > div {
     padding: 20px;
 }
 
-#objects .objects-list>div>div {
+#objects .objects-list > div > .object {
+    padding-left: 10px;
+}
+
+#objects .objects-list > div > div {
     border-bottom: 1px solid #5c5c5c;
 }
 
@@ -380,7 +384,7 @@ table.list-table .btn {
 }
 
 @media (min-width: 1400px) {
-    body>div {
+    body > div {
         background: url('./bg_4k.jpg');
         background-size: 100%;
         background-repeat: no-repeat;
