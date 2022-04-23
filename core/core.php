@@ -58,6 +58,12 @@ if (!isset($db)) { //without db connection
     }
 }
 
+//Logout
+if (!empty($_REQUEST['unauthorize'])) {
+    logout();
+    header('Location: /', true, 303);
+}
+
 $pathsList = [
     '/' => './pages/index.php',
     '/admin' => './pages/admin.php',
@@ -72,9 +78,4 @@ if (in_array($path, array_keys($pathsList))) {
     header("HTTP/1.0 404 Not Found");
     header('Location: /');
     exit;
-}
-
-//Logout
-if (!empty($_REQUEST['unauthorize'])) {
-    logout();
 }
