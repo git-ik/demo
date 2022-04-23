@@ -1,7 +1,5 @@
 <?php
 
-require_once('./core/core.php');
-
 if (!checkAuthorization()) {
     header("HTTP/1.0 404 Not Found");
     exit;
@@ -40,7 +38,7 @@ $objects = $dbq->fetchAll();
                 <br>
                 <div class="container">
                     <h2>Структура данных:</h2>
-                    <a title="Добавить объект в дерево" class="btn btn-green" href="./add.php">Добавить</a>
+                    <a title="Добавить объект в дерево" class="btn btn-green" href="./add">Добавить</a>
                     <br>
                     <br>
                     <table class="list-table">
@@ -56,7 +54,7 @@ $objects = $dbq->fetchAll();
                                     <?=$item['id']?>
                                 </td>
                                 <td>
-                                    <a href="./edit.php?id=<?=$item['id']?>"><?=$item['title']?></a>
+                                    <a href="./edit?id=<?=$item['id']?>"><?=$item['title']?></a>
                                 </td>
                                 <td>
                                     <? if (empty($item['parent_id'])) { ?>
@@ -66,8 +64,8 @@ $objects = $dbq->fetchAll();
                                     <? } ?>
                                 </td>
                                 <td>
-                                    <a title="Удалить объект" href="./delete.php?id=<?=$item['id']?>" class="btn">удалить</a>
-                                    <a class="btn" href="./edit.php?id=<?=$item['id']?>">редактировать</a>
+                                    <a title="Удалить объект" href="./delete?id=<?=$item['id']?>" class="btn">удалить</a>
+                                    <a class="btn" href="./edit?id=<?=$item['id']?>">редактировать</a>
                                 </td>
                             </tr>
                         <? } ?>

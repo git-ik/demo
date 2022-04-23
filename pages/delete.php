@@ -1,7 +1,5 @@
 <?php
 
-require_once('./core/core.php');
-
 if (!checkAuthorization()) {
     header("HTTP/1.0 404 Not Found");
     exit;
@@ -53,7 +51,7 @@ if (deleteRecursive($id, $db)) {
             </header>
             <div class="main">
                 <div class="container">
-                    <a class="btn" href="./admin.php">&lt;&lt; назад</a>
+                    <a class="btn" href="./admin">&lt;&lt; назад</a>
                 </div>
                 <div class="container align-center">
                     <h2>Удаление объекта [#<?= $_REQUEST['id'] ?>]</h2>

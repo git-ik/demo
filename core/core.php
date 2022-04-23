@@ -37,20 +37,42 @@ try {
     $errors['system'][] = 'Ошибка соединения с БД';
 }
 
-//define access parameters without connection
-if (!isset($db)) {
+/////////////////////////////
+///// DEFAULT FUNCTIONS /////
+/////////////////////////////
+
+//PATH MANAGEMENT
+$pd = strpos($_SERVER['REQUEST_URI'], '?');
+if ($pd) {
+    $path = substr($_SERVER['REQUEST_URI'], 0, strpos($_SERVER['REQUEST_URI'], '?'));
+} else {
+    $path = $_SERVER['REQUEST_URI'];
+}
+
+if (!isset($db)) { //without db connection
     logout();
-    //without connection to database user can open only index page
-    if (!in_array($_SERVER['REQUEST_URI'], ['/', '/index.php'])) {
+    if (!in_array($path, ['/'])) {
         header("HTTP/1.0 404 Not Found");
         header('Location: /');
         exit;
     }
 }
 
-/////////////////////////////
-///// DEFAULT FUNCTIONS /////
-/////////////////////////////
+$pathsList = [
+    '/' => './pages/index.php',
+    '/admin' => './pages/admin.php',
+    '/add' => './pages/add.php',
+    '/edit' => './pages/edit.php',
+    '/delete' => './pages/delete.php'
+];
+
+if (in_array($path, array_keys($pathsList))) {
+    require_once($pathsList[$path]);
+} else {
+    header("HTTP/1.0 404 Not Found");
+    header('Location: /');
+    exit;
+}
 
 //Logout
 if (!empty($_REQUEST['unauthorize'])) {
