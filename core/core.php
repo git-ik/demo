@@ -61,7 +61,8 @@ if (!isset($db)) { //without db connection
 //Logout
 if (!empty($_REQUEST['unauthorize'])) {
     logout();
-    header('Location: /', true, 303);
+    header('Location: /index.php');
+    exit;
 }
 
 $pathsList = [
