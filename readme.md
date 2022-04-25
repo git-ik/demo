@@ -1,5 +1,4 @@
 # DEMO APP #
-### Простое приложение на PHP ###
 
 ![alt text](/public/demo.jpg "Демо приложение")
 
