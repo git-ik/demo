@@ -24,5 +24,7 @@ $pagesList = [
     '/delete' => './pages/delete.php',
 
     '/404' => './pages/service/404.php',
-    '/403' => './pages/service/403.php'
+    '/403' => './pages/service/403.php',
+
+    '/api/get-data' => './api/api.php'
 ];

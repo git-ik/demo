@@ -23,7 +23,7 @@ header('HTTP/1.0 403 Forbidden', true, 403);
             </header>
             <div class="main">
                 <div class="container">
-                    <a title="На главную страницу" class="btn" href="./">&lt;&lt; на главную</a>
+                    <a title="На главную страницу" class="btn" href="/">&lt;&lt; на главную</a>
                 </div>
                 <div class="container">
                     <p>Отсутствует доступ к странице</p>

@@ -56,18 +56,18 @@ $objects = $dbq->fetchAll();
                                     <a href="./edit?id=<?=$item['id']?>"><?=$item['title']?></a>
                                 </td>
                                 <td>
-                                    <? if (empty($item['parent_id'])) { ?>
+                                    <?php if (empty($item['parent_id'])) { ?>
                                         -
-                                    <? } else { ?>
+                                    <?php } else { ?>
                                         ID <?=$item['parent_id']?>
-                                    <? } ?>
+                                    <?php } ?>
                                 </td>
                                 <td>
                                     <a title="Удалить объект" href="./delete?id=<?=$item['id']?>" class="btn">удалить</a>
                                     <a class="btn" href="./edit?id=<?=$item['id']?>">редактировать</a>
                                 </td>
                             </tr>
-                        <? } ?>
+                        <?php } ?>
                         <tr>
                             <td colspan="4"><br></td>
                         </tr>

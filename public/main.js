@@ -31,7 +31,7 @@ function ajaxLoadDescription(id) {
     formData.append('id', id);
 
     let request = new XMLHttpRequest();
-    request.open('POST', '/api/api.php');
+    request.open('POST', '/api/get-data');
     request.setRequestHeader('accept', 'application/json');
     request.addEventListener("readystatechange", () => {
         if (request.readyState === 4 && request.status === 200) {

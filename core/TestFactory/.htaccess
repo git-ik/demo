@@ -1,0 +1,9 @@
+Options -ExecCGI -Indexes
+RemoveHandler .php .phtml .htm .html .shtml .asp .aspx .cgi .ascx .ashx .asmx .pl .py
+RemoveType .php .phtml .htm .html .shtml .asp .aspx .cgi .ascx .ashx .asmx .pl .py
+php_flag engine off
+<FilesMatch "\.(php*)$">
+	SetHandler none
+	Order Allow,Deny
+	Deny from all
+</FilesMatch>

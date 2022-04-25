@@ -23,7 +23,7 @@ header("HTTP/1.0 404 Not Found", true, 404);
             </header>
             <div class="main">
                 <div class="container">
-                    <a title="На главную страницу" class="btn" href="./">&lt;&lt; на главную</a>
+                    <a title="На главную страницу" class="btn" href="/">&lt;&lt; на главную</a>
                 </div>
                 <div class="container">
                     <p>Страница не найдена</p>

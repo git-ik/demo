@@ -52,7 +52,7 @@ if (empty($errors['system'])) {
                             </div>
                         </form>
                     </div>
-                <? } ?>
+                <?php } ?>
                 <?php if (empty($_SESSION['auth']) && empty($errors['system'])) { ?>
                     <div class="container">
                         <form method="POST">
@@ -98,7 +98,7 @@ if (empty($errors['system'])) {
                             </table>
                         </form>
                     </div>
-                <? } ?>
+                <?php } ?>
                 <div class="container">
                     <div class="align-center">
                         <?php if (!empty($errors['configuration'])) { ?>
@@ -109,16 +109,16 @@ if (empty($errors['system'])) {
                         <?php if (empty($errors['system'])) { ?>
                             <?php if (!empty($_SESSION['auth'])) { ?>
                                 <h3>Пользователь авторизован</h3>
-                            <? } else { ?>
+                            <?php } else { ?>
                                 <p>Используйте следующие реквизиты для авторизации:</p>
                                 <p>Пользователь: admin</p>
                                 <p>Пароль: 12345678</p>
-                            <? } ?>
+                            <?php } ?>
                             <?php if (!empty($_SESSION['auth'])) { ?>
                                 <form method="POST">
                                     <button class="btn" title="Разлогиниться" name="unauthorize" type="submit" value="1">Выйти</button>
                                 </form>
-                            <? } ?>
+                            <?php } ?>
                         <?php } ?>
                     </div>
                 </div>
