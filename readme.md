@@ -1,4 +1,4 @@
-# DEMO APP #
+# DEMO #
 
 ![alt text](/public/demo.jpg "Демо приложение")
 
