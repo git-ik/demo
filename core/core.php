@@ -54,7 +54,7 @@ if (!isset($db)) { //without db connection
     if (!in_array($path, ['/'])) {
         header("HTTP/1.0 404 Not Found");
         header('Location: /');
-        exit;
+        die;
     }
 }
 
@@ -62,21 +62,12 @@ if (!isset($db)) { //without db connection
 if (!empty($_REQUEST['unauthorize'])) {
     logout();
     header('Location: /index.php');
-    exit;
+    die;
 }
 
-$pathsList = [
-    '/' => './pages/index.php',
-    '/admin' => './pages/admin.php',
-    '/add' => './pages/add.php',
-    '/edit' => './pages/edit.php',
-    '/delete' => './pages/delete.php'
-];
-
-if (in_array($path, array_keys($pathsList))) {
-    require_once($pathsList[$path]);
+if (in_array($path, array_keys($pagesList))) {
+    require_once($pagesList[$path]);
 } else {
     header("HTTP/1.0 404 Not Found");
-    header('Location: /');
-    exit;
+    require_once($pagesList['/404']);
 }

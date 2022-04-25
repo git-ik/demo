@@ -1,8 +1,7 @@
 <?php
 
 if (!checkAuthorization()) {
-    header("HTTP/1.0 404 Not Found");
-    exit;
+    error403();
 }
 
 $dbq = $db->prepare('SELECT * FROM objects');
@@ -32,7 +31,7 @@ $objects = $dbq->fetchAll();
             </header>
             <div class="main">
                 <div class="container">
-                    <a title="Вернуться на главную страницу" class="btn" href="./">&lt;&lt; на главную</a>
+                    <a title="На главную страницу" class="btn" href="./">&lt;&lt; На главную</a>
                     <br>
                 </div>
                 <br>

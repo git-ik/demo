@@ -1,8 +1,7 @@
 <?php
 
 if (!checkAuthorization()) {
-    header("HTTP/1.0 404 Not Found");
-    exit;
+    error403();
 }
 
 if (isset($_REQUEST['id'])) {
@@ -98,7 +97,7 @@ $objectsList = $dbq->fetchAll();
             </header>
             <div class="main">
                 <div class="container">
-                    <a class="btn" href="./admin">&lt;&lt; назад</a>
+                    <a class="btn" href="./admin">&lt;&lt; Назад</a>
                 </div>
                 <div class="container">
                     <form method="POST">
@@ -143,7 +142,7 @@ $objectsList = $dbq->fetchAll();
                             </tr>
                         </table>
                         <br>
-                        <button class="save" name="save" type="submit" value="1">Сохранить</button>
+                        <button title="Сохранить" class="save" name="save" type="submit" value="1">Сохранить</button>
                         <br>
                         <?php if ($values['form']['success']) { ?>
                             <div class="message">Сохранено</div>

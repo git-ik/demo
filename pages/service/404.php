@@ -1,32 +1,5 @@
 <?php
-
-if (!checkAuthorization()) {
-    error403();
-}
-
-if (isset($_REQUEST['id'])) {
-    $id = (int)$_REQUEST['id'];
-} else {
-    header("HTTP/1.0 404 Not Found");
-    die;
-}
-
-$dbq = $db->prepare('SELECT * FROM objects WHERE id = :id');
-$dbq->bindValue(':id', $id);
-$dbq->execute();
-$object = $dbq->fetch();
-
-if (empty($object)) {
-    header("HTTP/1.0 404 Not Found");
-    die;
-}
-
-if (deleteRecursive($id, $db)) {
-    $messages['success'][] = 'Обект удален';
-} else {
-    $messages['fails'][] = 'Объект не найден';
-}
-
+header("HTTP/1.0 404 Not Found", true, 404);
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -50,16 +23,10 @@ if (deleteRecursive($id, $db)) {
             </header>
             <div class="main">
                 <div class="container">
-                    <a title="Назад" class="btn" href="./admin">&lt;&lt; Назад</a>
+                    <a title="На главную страницу" class="btn" href="./">&lt;&lt; на главную</a>
                 </div>
-                <div class="container align-center">
-                    <h2>Удаление объекта [#<?= $_REQUEST['id'] ?>]</h2>
-                    <?php foreach ($messages['success'] as $message) { ?>
-                        <span class="message"><?php echo $message; ?></span>
-                    <?php } ?>
-                    <?php foreach ($messages['fails'] as $error) { ?>
-                        <span class="message error"><?php echo $error; ?></span>
-                    <?php } ?>
+                <div class="container">
+                    <p>Страница не найдена</p>
                 </div>
             </div>
             <footer>

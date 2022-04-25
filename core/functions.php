@@ -46,6 +46,14 @@ function checkApiAuthorization(): bool
 }
 
 /**
+ * Handle 403 error
+ */
+function error403()
+{
+    header('Location: /403');
+}
+
+/**
  * Logout
  * 
  * @return void

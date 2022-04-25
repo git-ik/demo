@@ -13,4 +13,16 @@ $dbcharset  = "utf8mb4";        // кодировка БД по умолчани
 //////// Общие настройки /////////
 //////////////////////////////////
 $appName = '他看了使用说明 DEMO 他看了使用说明'; // Название приложения
-$appTitle = 'DEMO';                          // Заголовок приложения
+$appTitle = 'DEMO';                            // Заголовок приложения
+
+//pages and paths
+$pagesList = [
+    '/' => './pages/index.php',
+    '/admin' => './pages/admin.php',
+    '/add' => './pages/add.php',
+    '/edit' => './pages/edit.php',
+    '/delete' => './pages/delete.php',
+
+    '/404' => './pages/service/404.php',
+    '/403' => './pages/service/403.php'
+];
