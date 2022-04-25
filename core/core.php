@@ -61,7 +61,7 @@ if (!isset($db)) { //without db connection
 //Logout
 if (!empty($_REQUEST['unauthorize'])) {
     logout();
-    header('Location: /index.php');
+    header('Location: /');
     die;
 }
 

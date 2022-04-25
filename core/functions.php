@@ -51,6 +51,7 @@ function checkApiAuthorization(): bool
 function error403()
 {
     header('Location: /403');
+    die;
 }
 
 /**
