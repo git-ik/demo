@@ -138,7 +138,7 @@ $objectsList = $dbq->fetchAll();
                 <div>
                     <img alt="demo" src="/public/demo-guy.png" />
                     <br>
-                    <span>© X1nGG "DEMO"</span>
+                    <span>© Kartoshkin "DEMO"</span>
                 </div>
                 <?php foreach ($errors['system'] as $error) { ?>
                     <div class="message error"><?php echo $error; ?></div>
