@@ -212,7 +212,7 @@ if (empty($errors['system'])) {
                                 &nbsp;&nbsp;&nbsp;&nbsp;echo '&#38;nbsp;&#38;nbsp;&#38;nbsp;&#38;nbsp;- ' . $phoneFunction . '&lt;br&gt;';<br>
                                 }<br>
                                 if (core\Factory\Test::testPhone($phone)) {<br>
-                                &nbsp;&nbsp;&nbsp;&nbsp;echo '&lt;span class="tested">✔ протестировано: &lt;i&gt;- Класс "Телефон" создан фабрикой&lt;/i&gt;&lt;/span&gt;';<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;echo '&lt;span class="tested">✔ протестировано: &lt;i&gt;- Класс телефона "Аппарат" создан фабрикой&lt;/i&gt;&lt;/span&gt;';<br>
                                 }<br>
                                 echo '&lt;br&gt;&lt;br&gt;';<br>
                                 $smartphoneFactory = new core\Factory\SmartphoneFactory();<br>
@@ -227,7 +227,7 @@ if (empty($errors['system'])) {
                                 &nbsp;&nbsp;&nbsp;&nbsp;echo '&#38;nbsp;&#38;nbsp;&#38;nbsp;&#38;nbsp;- ' . $phoneFunction . '&lt;br&gt;';<br>
                                 }<br>
                                 if (core\Factory\Test::testPhone($smartphone)) {<br>
-                                &nbsp;&nbsp;&nbsp;&nbsp;echo '&lt;span class="tested">✔ протестировано: &lt;i&gt;- Класс "Телефон" создан фабрикой&lt;/i&gt;&lt;/span&gt;';<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;echo '&lt;span class="tested">✔ протестировано: &lt;i&gt;- Класс телефона "Смарт Аппарат" создан фабрикой&lt;/i&gt;&lt;/span&gt;';<br>
                                 }<br>
                             </i>
                         </div>
@@ -245,7 +245,7 @@ if (empty($errors['system'])) {
                                 echo '&nbsp;&nbsp;&nbsp;&nbsp;- ' . $phoneFunction . '<br>';
                             }
                             if (core\Factory\Test::testPhone($phone)) {
-                                echo '<span class="tested">✔ протестировано: <i>- Класс "Телефон" создан фабрикой</i></span>';
+                                echo '<span class="tested">✔ протестировано: <i>- Класс телефона "Аппарат" создан фабрикой</i></span>';
                             }
                             echo '<br><br>';
                             $smartphoneFactory = new core\Factory\SmartphoneFactory();
@@ -260,7 +260,7 @@ if (empty($errors['system'])) {
                                 echo '&nbsp;&nbsp;&nbsp;&nbsp;- ' . $phoneFunction . '<br>';
                             }
                             if (core\Factory\Test::testPhone($smartphone)) {
-                                echo '<span class="tested">✔ протестировано: <i>- Класс "Телефон" создан фабрикой</i></span>';
+                                echo '<span class="tested">✔ протестировано: <i>- Класс телефона "Смарт Аппарат" создан фабрикой</i></span>';
                             }
                         ?>
                     </div>
