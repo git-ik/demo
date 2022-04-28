@@ -1,9 +1,9 @@
 <?php
 
-namespace core\TestFactory;
+namespace core\Factory;
 
 ////////////////////////////
-// SIMPLE FACTORY EXAMPLE //
+// FACTORY METHOD EXAMPLE //
 ////////////////////////////
 
 interface PhoneFactoryInterface
@@ -11,7 +11,7 @@ interface PhoneFactoryInterface
     public function create($data = []);
 }
 
-interface PhoneModelInterface
+interface Phone
 {
     public function getTitle(): string;
     public function getDescription(): string;
@@ -22,23 +22,27 @@ class PhoneFactory
 {
     public function create($data = []): Phone
     {
-        return new Phone($data);
+        return new SimplePhone($data);
     }
 }
 
 class SmartphoneFactory
 {
-    public function create($data = []): Smartphone
+    public function create($data = []): Phone
     {
         return new Smartphone($data);
     }
 }
 
-class Phone implements PhoneModelInterface
+class SimplePhone implements Phone
 {
     public $title;
     public $description;
-    public $functions;
+    public $functions = [
+        'Звонки',
+        'СМС',
+        'Интернет'
+    ];
 
     public function __construct($data = [])
     {
@@ -77,11 +81,17 @@ class Phone implements PhoneModelInterface
     }
 }
 
-class Smartphone implements PhoneModelInterface
+class Smartphone implements Phone
 {
     public $title;
     public $description;
-    public $functions;
+    public $functions = [
+        'Звонки',
+        'СМС',
+        'Интернет',
+        'GPS',
+        'Установка приложений'
+    ];
 
     public function __construct($data = [])
     {
@@ -117,5 +127,17 @@ class Smartphone implements PhoneModelInterface
         } else {
             return $this->functions;
         }
+    }
+}
+
+//Test phone identity
+class Test
+{
+    public static function testPhone($phone)
+    {
+        if ($phone instanceof Phone) {
+            return true;
+        }
+        return false;
     }
 }

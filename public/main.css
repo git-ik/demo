@@ -413,6 +413,14 @@ table.list-table .btn {
     text-align: center;
 }
 
+.tested {
+    border-left: 2px solid #fff;
+    margin-top: 5px;
+    padding: 5px 10px;
+    display: inline-block;
+    background-color: #121212;
+}
+
 .message {
     font-size: 11px;
     color: #ffffff;
