@@ -329,54 +329,86 @@ table.list-table .btn {
 }
 
 #authorization {
+    border-top: 1px solid #282828;
+    border-bottom: 1px solid #000000;
+    background: rgb(0,0,0);
+    background: linear-gradient(180deg, rgba(0,0,0,0.75) 0%, rgba(85,85,85,0.25) 25%, rgba(0,0,0,0.65) 100%);
+}
+
+#authorization table {
     background-color: rgba(65, 65, 65, 0.8);
     box-shadow: 0px 0px 10px 0px rgba(255, 255, 255, 0.5);
 }
 
-#authorization.error {
+#authorization table.error {
     box-shadow: 0px 0px 10px 0px rgb(255, 0, 0);
+}
+
+#authorization .light {
+    margin-top: -20px;
+    margin-left: -22px;
+    height: 70px;
+    width: 200px;
+    background: url('/public/auth-light.png');
+    position: absolute;
+    opacity: 0.3;
+    transition: all 1s;
+}
+
+#authorization:hover .light {
+    opacity: 1;
+}
+
+#authorization table.error .light {
+    background: url('/public/auth-light-red.png');
 }
 
 #authorization th, #authorization td {
     border-bottom: 1px solid #2b2b2b;
 }
 
-.auth-form-label {
+#authorization .auth-form-label {
     text-align: right;
     padding-right: 0px;
     color: #FFFFFF;
 }
 
-.auth-form-input input {
+#authorization .auth-form-input input {
     border: 2px solid #424242;
     border-top: 2px solid #303030;
     background-color: #777;
 }
 
-.auth-form-input input:focus {
+#authorization .auth-form-input input:focus {
     outline: none;
     background-color: #FFFFFF;
 }
 
-.auth-form-header {
+#authorization .auth-form-header {
     padding: 10px;
     text-align: center;
     text-transform: uppercase;
     background: linear-gradient(to bottom, #ffffff 0%, #8a8989 2%, #6f6f6f 55%, #202020 98%, #000000 100%);
 }
 
-.auth-form-header h3 {
-    margin: 0;
-}
-
-.auth-form-header div {
+#authorization .auth-form-header .form-title {
     background-color: rgba(200, 200, 200, 0.25);
     padding: 5px 150px;
     border-bottom: 1px solid #bdbdbd;
     background: linear-gradient(to bottom, #958585 0%, #767676 2%, #7c7c7c 55%, #5e5e5e 98%, #212121 100%);
 }
 
-.auth-form-submit-area {
+#authorization .auth-form-header .form-title h3 {
+    margin: 0;
+}
+
+#authorization.error .auth-form-header .form-title h3 {
+    margin: 0;
+    color: rgb(220, 220, 220);
+    font-weight: 100;
+}
+
+#authorization .auth-form-submit-area {
     padding: 5px 20px 20px 20px;
     text-align: center;
 }
@@ -392,7 +424,7 @@ table.list-table .btn {
 
 .message.error {
     padding: 3px 10px 5px 10px;
-    background-color: red;
+    background-color: rgba(0,0,0,0.2);
     margin-top: 1px;
     font-size: 11px;
     color: white;

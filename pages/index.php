@@ -54,12 +54,13 @@ if (empty($errors['system'])) {
                     </div>
                 <?php } ?>
                 <?php if (empty($_SESSION['auth']) && empty($errors['system'])) { ?>
-                    <div class="container">
+                    <div id="authorization" class="container">
                         <form method="POST">
-                            <table id="authorization" class="<?= empty($messages['form']['auth']) ? '' : 'error' ?>">
+                            <table class="<?= empty($messages['form']['auth']) ? '' : 'error' ?>">
                                 <tr>
                                     <td colspan="2" class="auth-form-header">
-                                        <div>
+                                        <div class="light"></div>
+                                        <div class="form-title">
                                             <h3>Авторизация</h3>
                                         </div>
                                     </td>
