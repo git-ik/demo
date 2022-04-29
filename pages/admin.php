@@ -29,6 +29,13 @@ $objects = $dbq->fetchAll();
                     <h1><?=$appName?></h1>
                 </div>
             </header>
+            <div id="technologies">
+                <span id="t1">PHP8</span>
+                <span id="t2">JS</span>
+                <span id="t3">MySQL</span>
+                <span id="t4">GIT</span>
+                <span id="t5">GIMP</span>
+            </div>
             <div class="main">
                 <div class="container">
                     <a title="На главную страницу" class="btn" href="./">&lt;&lt; На главную</a>

@@ -45,6 +45,13 @@ if (empty($errors['system'])) {
                     <h1><?= $appName ?></h1>
                 </div>
             </header>
+            <div id="technologies">
+                <span id="t1">PHP8</span>
+                <span id="t2">JS</span>
+                <span id="t3">MySQL</span>
+                <span id="t4">GIT</span>
+                <span id="t5">GIMP</span>
+            </div>
             <div class="main">
                 <?php if (!empty($_SESSION['auth']) && empty($errors['system'])) { ?>
                     <div class="container">

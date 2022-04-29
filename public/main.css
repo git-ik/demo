@@ -147,8 +147,10 @@ button.save {
 }
 
 .main {
+    position: relative;
     min-height: calc(100vh - 270px);
     padding: 0px 20px;
+    z-index: 20;
 }
 
 header {
@@ -268,6 +270,40 @@ footer span {
 #objects .object {
     padding: 10px 40px;
     background-color: rgba(50, 50, 50, 0.1);
+}
+
+#technologies {
+    margin-top: 50px;
+    width: 100%;
+    z-index: 10;
+    position: absolute;
+    font-size: 40px;
+    color: #FFFFFF;
+}
+
+#technologies span {
+    display: block;
+    opacity: 0.1;
+}
+
+#technologies #t1 {
+    margin-left: calc(52% + 180px);
+}
+
+#technologies #t2 {
+    margin-left: calc(52% + 227px);
+}
+
+#technologies #t3 {
+    margin-left: calc(52% + 275px);
+}
+
+#technologies #t4 {
+    margin-left: calc(52% + 322px);
+}
+
+#technologies #t5 {
+    margin-left: calc(52% + 370px);
 }
 
 .container {
@@ -551,6 +587,20 @@ table.list-table .btn {
 
     .list-table {
         font-size: 20px;
+    }
+
+    #technologies #t4 {
+        display: none;
+    }
+
+    #technologies #t5 {
+        display: none;
+    }
+}
+
+@media (max-width: 800px) {
+    #technologies {
+        display: none;
     }
 }
 

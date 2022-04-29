@@ -16,6 +16,23 @@ function toggleTreeElement(id, element) {
     }
 }
 
+var aopacity = [];
+var aopDirection = [];
+function animateOpacity(el, min, max) {
+    if (aopacity[el.id] >= max) {
+        aopDirection[el.id] = true;
+    }
+    if (aopacity[el.id] <= min) {
+        aopDirection[el.id] = false;
+    }
+    if (aopDirection[el.id] == true) {
+        aopacity[el.id] = aopacity[el.id] - 0.01;
+    } else {
+        aopacity[el.id] = aopacity[el.id] + 0.01;
+    }
+    el.style.opacity = aopacity[el.id];
+}
+
 /**
  * Load object description
  * [/index page]
@@ -152,4 +169,17 @@ document.addEventListener('DOMContentLoaded', function () {
     setTimeout(function () {
         start('canvas3', false);
     }, Math.round(Math.random() * (4000 - 2000) + 2000));
+
+    let t1 = document.getElementById('t1');
+    let t2 = document.getElementById('t2');
+    let t3 = document.getElementById('t3');
+    aopacity['t1'] = parseFloat(window.getComputedStyle(t1).getPropertyValue("opacity"));
+    aopacity['t2'] = parseFloat(window.getComputedStyle(t2).getPropertyValue("opacity"));
+    aopacity['t3'] = parseFloat(window.getComputedStyle(t3).getPropertyValue("opacity"));
+    setInterval(function () {
+        animateOpacity(t1, 0.2, 0.5);
+        animateOpacity(t2, 0.05, 0.4);
+        animateOpacity(t3, 0, 0.2);
+    }, 200);
+    
 });

@@ -48,6 +48,13 @@ if (deleteRecursive($id, $db)) {
                     <h1><?= $appName ?></h1>
                 </div>
             </header>
+            <div id="technologies">
+                <span id="t1">PHP8</span>
+                <span id="t2">JS</span>
+                <span id="t3">MySQL</span>
+                <span id="t4">GIT</span>
+                <span id="t5">GIMP</span>
+            </div>
             <div class="main">
                 <div class="container">
                     <a title="Назад" class="btn" href="./admin">&lt;&lt; Назад</a>
