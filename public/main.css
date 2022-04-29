@@ -111,16 +111,17 @@ button, .btn {
     color: #362000;
     background: #ffc123;
     background: linear-gradient(to bottom, #ffc226 0%, #8b5800 100%);
-    border-top: 2px solid rgb(221, 191, 110);
-    border-bottom: 2px solid #ce8300;
-    border-right: 2px solid #ce8300;
-    border-left: 2px solid #ce8300;
     border-radius: 4px;
     box-shadow: 0px 1px 2px 0px rgb(0 0 0 / 87%), inset 0px 1px 0px 0px rgb(255 255 255 / 30%);
     cursor: pointer;
 }
 
-button:hover, .btn:hover {
+.btn:hover {
+    padding: 2px 14px;
+    border: 2px solid #f2f2f2;
+}
+
+button:hover {
     border: 2px solid #f2f2f2;
 }
 
@@ -134,9 +135,15 @@ button.save {
     background: -moz-linear-gradient(top, #d1ff29 0%, #278903 100%);
     background: -webkit-linear-gradient(top, #d1ff29 0%, #278903 100%);
     background: linear-gradient(to bottom, #d1ff29 0%, #278903 100%);
-    border-bottom: 2px solid #5f5f5f;
-    border-right: 2px solid #5f5f5f;
-    border-left: 2px solid #5f5f5f;
+}
+
+.btn-border {
+    border: 2px solid #333;
+}
+
+.btn-border:hover {
+    padding: 4px 16px;
+    border: 2px solid #f2f2f2;
 }
 
 .main {
@@ -232,16 +239,20 @@ footer span {
     font-size: 13px;
     font-weight: 600;
     line-height: 33px;
-    padding: 3px 20px;
-    background: rgba(225, 225, 225, 0.85);
-    ;
+    padding: 1px 20px;
+    background: rgba(225, 225, 225, 0.6);
     border-radius: 3px;
+}
+
+#objects .title:hover {
+    background: rgba(225, 225, 225, 1);
 }
 
 #objects .btn {
     margin-right: 5px;
     float: left;
     padding: 9px 10px;
+    border: 0px;
 }
 
 #objects .btn:hover {
@@ -255,8 +266,8 @@ footer span {
 }
 
 #objects .object {
-    padding: 10px 44px;
-    background-color: rgb(0, 46, 73, 0.1);
+    padding: 10px 40px;
+    background-color: rgba(50, 50, 50, 0.1);
 }
 
 .container {
@@ -331,8 +342,8 @@ table.list-table .btn {
 #authorization {
     border-top: 1px solid #282828;
     border-bottom: 1px solid #000000;
-    background: rgb(0,0,0);
-    background: linear-gradient(180deg, rgba(0,0,0,0.75) 0%, rgba(85,85,85,0.25) 25%, rgba(0,0,0,0.65) 100%);
+    background: rgb(0, 0, 0);
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.75) 0%, rgba(85, 85, 85, 0.25) 25%, rgba(0, 0, 0, 0.65) 100%);
 }
 
 #authorization table {
@@ -413,12 +424,23 @@ table.list-table .btn {
     text-align: center;
 }
 
+.success-icon {
+    font-size: 11px;
+    color: #ffffff;
+    padding: 3px 20px 7px 20px;
+    border-radius: 5px;
+    background: rgb(0, 175, 0);
+    background: linear-gradient(180deg, rgba(0, 175, 0, 1) 15%, rgb(22 141 0 / 72%) 80%, rgba(0, 0, 0, 0.85) 100%);
+    border-top: 5px solid #323232;
+}
+
 .tested {
     border-left: 2px solid #fff;
     margin-top: 5px;
     padding: 5px 10px;
     display: inline-block;
     background-color: #121212;
+    background: linear-gradient(180deg, rgba(55, 55, 55, 0.25) 0%, rgba(134, 134, 134, 0.25) 65%, rgba(0, 0, 0, 0.25) 100%);
 }
 
 .message {
@@ -432,7 +454,7 @@ table.list-table .btn {
 
 .message.error {
     padding: 3px 10px 5px 10px;
-    background-color: rgba(0,0,0,0.2);
+    background-color: rgba(0, 0, 0, 0.2);
     margin-top: 1px;
     font-size: 11px;
     color: white;
@@ -468,7 +490,7 @@ table.list-table .btn {
         opacity: 0.6;
         background: linear-gradient(to bottom, #ffc226 0%, #cf8b14 10%, #ffc226 50%, #ffc226 90%, #cf8b14 100%);
     }
-    
+
     header button.logout:hover {
         border: 0;
         opacity: 0.75;

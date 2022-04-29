@@ -37,7 +37,7 @@ $objects = $dbq->fetchAll();
                 <br>
                 <div class="container">
                     <h2>Структура данных:</h2>
-                    <a title="Добавить объект в дерево" class="btn btn-green" href="./add">Добавить</a>
+                    <a title="Добавить объект в дерево" class="btn btn-green btn-border" href="./add">Добавить</a>
                     <br>
                     <br>
                     <table class="list-table">
