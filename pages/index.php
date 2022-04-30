@@ -225,7 +225,7 @@ if (empty($errors['system'])) {
                                 $smartphoneFactory = new SmartphoneFactory();<br>
                                 $smartphone = $smartphoneFactory->create([<br>
                                 &nbsp;&nbsp;&nbsp;&nbsp;'title' => 'Смарт Аппарат',<br>
-                                &nbsp;&nbsp;&nbsp;&nbsp;'description' => 'Смартфон с защитным экраном Gore2Glass',<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;'description' => 'Смартфон с защитным экраном GCore2Glass',<br>
                                 ]);<br>
                                 echo '&lt;span&gt;Название телефона&lt;/span&gt;: ' . $smartphone->getTitle() . '&lt;br&gt;';<br>
                                 echo '&lt;span&gt;Описание телефона&lt;/span&gt;: ' . $smartphone->getDescription() . '&lt;br&gt;';<br>
@@ -258,7 +258,7 @@ if (empty($errors['system'])) {
                             $smartphoneFactory = new SmartphoneFactory();
                             $smartphone = $smartphoneFactory->create([
                                 'title' => 'Смарт Аппарат',
-                                'description' => 'Смартфон с защитным экраном Gore2Glass',
+                                'description' => 'Смартфон с защитным экраном GCore2Glass',
                             ]);
                             echo '<span>Название телефона</span>: ' . $smartphone->getTitle() . '<br>';
                             echo '<span>Описание телефона</span>: ' . $smartphone->getDescription() . '<br>';
