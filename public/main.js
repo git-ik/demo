@@ -102,25 +102,38 @@ function draw(cid) {
             ctx[cid].fillRect(i * 15, 75, 10, 10);
         }
 
-        ctx[cid].fillStyle = '#64FF4B';
         let randY = Math.round(Math.random() * 6);
+        let randC = Math.round(Math.random() * 10);
+        if (randC == 1) {
+            ctx[cid].fillStyle = '#2A6D1D';
+        } else if (randC == 2) {
+            ctx[cid].fillStyle = '#A35400';
+        } else {
+            ctx[cid].fillStyle = '#64FF4B';
+        }
         if (randY > 4) {
             ctx[cid].fillRect(xOffset[cid], 0, 10, 10);
+            ctx[cid].fillStyle = '#64FF4B';
         }
         if (randY == 5) {
             ctx[cid].fillRect(xOffset[cid], 15, 10, 10);
+            ctx[cid].fillStyle = '#64FF4B';
         }
         if (randY < 2) {
             ctx[cid].fillRect(xOffset[cid], 30, 10, 10);
+            ctx[cid].fillStyle = '#64FF4B';
         }
         if (randY == 3) {
             ctx[cid].fillRect(xOffset[cid], 45, 10, 10);
+            ctx[cid].fillStyle = '#64FF4B';
         }
         if (randY == 0) {
             ctx[cid].fillRect(xOffset[cid], 60, 10, 10);
+            ctx[cid].fillStyle = '#64FF4B';
         }
         if (randY == 6) {
             ctx[cid].fillRect(xOffset[cid], 75, 10, 10);
+            ctx[cid].fillStyle = '#64FF4B';
         }
 
         draw(cid);
