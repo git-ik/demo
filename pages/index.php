@@ -1,8 +1,10 @@
 <?php
 
-use core\TestFactory\Test;
-
 require_once('././core/Factory/Factory.php');
+
+use core\Factory\Test;
+use core\Factory\PhoneFactory;
+use core\Factory\SmartphoneFactory;
 
 $errors['form']['fields']['login'] = [];
 $errors['form']['fields']['password'] = [];
@@ -70,7 +72,7 @@ if (empty($errors['system'])) {
                                     <td colspan="2" class="auth-form-header">
                                         <div class="light"></div>
                                         <div class="form-title">
-                                            <h3>Авторизация</h3>
+                                            <span>Авторизация</span>
                                         </div>
                                     </td>
                                 </tr>
@@ -119,10 +121,12 @@ if (empty($errors['system'])) {
                         <?php if (empty($errors['system'])) { ?>
                             <?php if (!empty($_SESSION['auth'])) { ?>
                                 <h3>Пользователь авторизован</h3>
+                                <br>
+                                <br>
                             <?php } else { ?>
                                 <p>Используйте следующие реквизиты для авторизации:</p>
-                                <p>Пользователь: admin</p>
-                                <p>Пароль: 12345678</p>
+                                <p>Пользователь: <?=$serviceUsers['admin']['login']?></p>
+                                <p>Пароль: <?=$serviceUsers['admin']['password']?></p>
                             <?php } ?>
                             <?php if (!empty($_SESSION['auth'])) { ?>
                                 <form method="POST">
@@ -134,7 +138,7 @@ if (empty($errors['system'])) {
                 </div>
                 <div id="projectDescription" class="container">
                     <h2>Задача проекта:</h2>
-                    &nbsp;&nbsp;&nbsp;&nbsp;Привести пример кода с использованием PHP8, MYSQL, JS, HTML, CSS
+                    <br>&nbsp;&nbsp;&nbsp;&nbsp;Привести пример кода с использованием PHP8, MYSQL, JS, HTML, CSS
                     <br>&nbsp;&nbsp;&nbsp;&nbsp;Реализовать демо приложение не являющееся коммерческим <a href="https://ru.wikipedia.org/wiki/%D0%9C%D0%B8%D0%BD%D0%B8%D0%BC%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE_%D0%B6%D0%B8%D0%B7%D0%BD%D0%B5%D1%81%D0%BF%D0%BE%D1%81%D0%BE%D0%B1%D0%BD%D1%8B%D0%B9_%D0%BF%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82">MVP</a>
                     <br>
                     <br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="success-icon">✔</span>
@@ -155,15 +159,13 @@ if (empty($errors['system'])) {
                     <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Страница добавления объекта древовидной структуры: <a href="./add">открыть</a>
                     <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Страница удаления объекта древовидной структуры: <a href="./delete?id=0">открыть</a>
                     <br>
-                    <br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="success-icon">✔</span>
-                    <br>
                     <br>
                     <h3>Дополнительная информация:</h3>
-                    &nbsp;&nbsp;&nbsp;&nbsp;- приложение осуществляет формирование и вывод данных при помощи языка PHP8
+                    <br>&nbsp;&nbsp;&nbsp;&nbsp;- приложение осуществляет формирование и вывод данных при помощи PHP8
                     <br>&nbsp;&nbsp;&nbsp;&nbsp;- представлен код в функциональном и ООП виде, присутствуют рекурсивные функции и др.
                     <br>&nbsp;&nbsp;&nbsp;&nbsp;- верстка страниц проверена по стандартам HTML5 (и в нескольких браузерах)
                     <br>&nbsp;&nbsp;&nbsp;&nbsp;- Применен JavaScript (JS) без использования каких либо фреймворков
-                    <br>&nbsp;&nbsp;&nbsp;&nbsp;- В БД MYSQL хранится таблица пользователей c зашифрованнами паролями и структура данных (всего 2 таблицы)
+                    <br>&nbsp;&nbsp;&nbsp;&nbsp;- В БД MYSQL хранится таблица пользователей и структура данных (2 таблицы)
                     <h4>&nbsp;&nbsp;&nbsp;&nbsp;Для запуска на локальной тестовой машине необходимо:</h4>
                     &nbsp;&nbsp;&nbsp;&nbsp;- загрузить в папку проектов локального web сервера (apache) файлы приложения
                     <br>&nbsp;&nbsp;&nbsp;&nbsp;- проверить настройки apache (должен быть включен mod rewrite и необходимо внести в конфиг апачи директиву AllowOverride All для проекта)
@@ -172,8 +174,6 @@ if (empty($errors['system'])) {
                     <br>
                     <br>&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn" href="./db.zip">Скачать дамп БД MYSQL</a>
                     <br>
-                    <br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="success-icon">✔</span>
-                    <br>
                     <br>
                 </div>
                 <div class="container canvas-container">
@@ -181,7 +181,7 @@ if (empty($errors['system'])) {
                 </div>
                 <?php if (empty($errors['system'])) { ?>
                     <div id="dataObjectsExample" class="container">
-                        <h2>СТРУКТУРА ДАННЫХ:</h2>
+                        <h3>СТРУКТУРА ДАННЫХ:</h3>
                         <p>Дерево объектов, чтобы увидеть описание объекта необходимо кликнуть на название.</p>
                         <div id="objects">
                             <div class="row">
@@ -200,14 +200,14 @@ if (empty($errors['system'])) {
                         <canvas id="canvas2"></canvas>
                     </div>
                     <div id="codeExample" class="container factory-check">
-                        <h2>Пример реализации ООП:</h2>
+                        <h3>Пример реализации ООП:</h3>
                         <p>Примером реализации ООП в PHP является представление нескольких классов для описания телефонов как объектов манипулирования средствами языка программирования реализуя паттерн "<a target="_blank" href="https://designpatternsphp.readthedocs.io/ru/latest/Creational/FactoryMethod/README.html">фабричный метод</a>".</p>
                         <p>[интерфейсы]: PhoneFactoryInterface, PhoneInterface</p>
                         <p>[классы]: PhoneFactory, SmartphoneFactory, Phone, Smartphone</p>
-                        <h3>Код PHP:</h3>
+                        <h4>Код PHP:</h4>
                         <div class="code">
                             <i>
-                                $phoneFactory = new core\Factory\PhoneFactory();<br>
+                                $phoneFactory = new PhoneFactory();<br>
                                 $phone = $phoneFactory->create([<br>
                                 &nbsp;&nbsp;&nbsp;&nbsp;'title' => 'Аппарат',<br>
                                 &nbsp;&nbsp;&nbsp;&nbsp;'description' => 'Телефон с антибликовым покрытием экрана, соответствующий стандарту защиты IP127001',<br>
@@ -218,11 +218,11 @@ if (empty($errors['system'])) {
                                 foreach ($phone->getFunctions() as $phoneFunction) {<br>
                                 &nbsp;&nbsp;&nbsp;&nbsp;echo '&#38;nbsp;&#38;nbsp;&#38;nbsp;&#38;nbsp;- ' . $phoneFunction . '&lt;br&gt;';<br>
                                 }<br>
-                                if (core\Factory\Test::testPhone($phone)) {<br>
+                                if (Test::testPhone($phone)) {<br>
                                 &nbsp;&nbsp;&nbsp;&nbsp;echo '&lt;span class="tested">✔ протестировано: &lt;i&gt;- Класс телефона "Аппарат" создан фабрикой&lt;/i&gt;&lt;/span&gt;';<br>
                                 }<br>
                                 echo '&lt;br&gt;&lt;br&gt;';<br>
-                                $smartphoneFactory = new core\Factory\SmartphoneFactory();<br>
+                                $smartphoneFactory = new SmartphoneFactory();<br>
                                 $smartphone = $smartphoneFactory->create([<br>
                                 &nbsp;&nbsp;&nbsp;&nbsp;'title' => 'Смарт Аппарат',<br>
                                 &nbsp;&nbsp;&nbsp;&nbsp;'description' => 'Смартфон с защитным экраном Gore2Glass',<br>
@@ -233,14 +233,14 @@ if (empty($errors['system'])) {
                                 foreach ($smartphone->getFunctions() as $phoneFunction) {<br>
                                 &nbsp;&nbsp;&nbsp;&nbsp;echo '&#38;nbsp;&#38;nbsp;&#38;nbsp;&#38;nbsp;- ' . $phoneFunction . '&lt;br&gt;';<br>
                                 }<br>
-                                if (core\Factory\Test::testPhone($smartphone)) {<br>
+                                if (Test::testPhone($smartphone)) {<br>
                                 &nbsp;&nbsp;&nbsp;&nbsp;echo '&lt;span class="tested">✔ протестировано: &lt;i&gt;- Класс телефона "Смарт Аппарат" создан фабрикой&lt;/i&gt;&lt;/span&gt;';<br>
                                 }<br>
                             </i>
                         </div>
-                        <h3>Результат выполнения кода PHP:</h3>
+                        <h4>Результат выполнения кода PHP:</h4>
                         <?php
-                            $phoneFactory = new core\Factory\PhoneFactory();
+                            $phoneFactory = new PhoneFactory();
                             $phone = $phoneFactory->create([
                                 'title' => 'Аппарат',
                                 'description' => 'Телефон с антибликовым покрытием экрана, соответствующий стандарту защиты IP127001',
@@ -251,11 +251,11 @@ if (empty($errors['system'])) {
                             foreach ($phone->getFunctions() as $phoneFunction) {
                                 echo '&nbsp;&nbsp;&nbsp;&nbsp;- ' . $phoneFunction . '<br>';
                             }
-                            if (core\Factory\Test::testPhone($phone)) {
+                            if (Test::testPhone($phone)) {
                                 echo '<span class="tested">✔ протестировано: <i>- Класс телефона "Аппарат" создан фабрикой</i></span>';
                             }
                             echo '<br><br>';
-                            $smartphoneFactory = new core\Factory\SmartphoneFactory();
+                            $smartphoneFactory = new SmartphoneFactory();
                             $smartphone = $smartphoneFactory->create([
                                 'title' => 'Смарт Аппарат',
                                 'description' => 'Смартфон с защитным экраном Gore2Glass',
@@ -266,7 +266,7 @@ if (empty($errors['system'])) {
                             foreach ($smartphone->getFunctions() as $phoneFunction) {
                                 echo '&nbsp;&nbsp;&nbsp;&nbsp;- ' . $phoneFunction . '<br>';
                             }
-                            if (core\Factory\Test::testPhone($smartphone)) {
+                            if (Test::testPhone($smartphone)) {
                                 echo '<span class="tested">✔ протестировано: <i>- Класс телефона "Смарт Аппарат" создан фабрикой</i></span>';
                             }
                         ?>

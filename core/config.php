@@ -15,7 +15,16 @@ $dbcharset  = "utf8mb4";        // кодировка БД по умолчани
 $appName = '他看了使用说明 DEMO 他看了使用说明'; // Название приложения
 $appTitle = 'DEMO';                            // Заголовок приложения
 
-//pages and paths
+//Пользователи
+$serviceUsers = [];
+$serviceUsers['admin']['id'] = 1;                 //id
+$serviceUsers['admin']['login'] = 'admin';        //Логин
+$serviceUsers['admin']['name'] = 'Администратор'; //Имя
+$serviceUsers['admin']['m_name'] = '';            //Отчество
+$serviceUsers['admin']['l_name'] = '';            //Фамилия
+$serviceUsers['admin']['password'] = '12345678';  //Пароль
+
+//Страницы
 $pagesList = [
     '/' => './pages/index.php',
     '/admin' => './pages/admin.php',

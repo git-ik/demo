@@ -35,21 +35,36 @@ h1 {
 }
 
 h2 {
+    display: inline-block;
+    padding: 5px 10px;
     margin: 0 0 20px 0;
     font-size: 20px;
     text-transform: uppercase;
     color: #ffffff;
     letter-spacing: 2px;
+    background: rgba(0, 0, 0, 0.3);
 }
 
 h3 {
+    display: inline-block;
+    padding: 5px 10px;
+    margin: 0;
     font-size: 16px;
     text-transform: uppercase;
     letter-spacing: 4px;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+h4 {
+    margin-bottom: 10px;
 }
 
 a {
     color: #777777;
+}
+
+a:hover {
+    color: #FFFFFF;
 }
 
 i {
@@ -108,7 +123,7 @@ button, .btn {
     text-decoration: none;
     text-shadow: 0px 1px 0px rgba(255, 255, 255, 0.25);
     letter-spacing: 1px;
-    color: #362000;
+    color: #171717;
     background: #ffc123;
     background: linear-gradient(to bottom, #ffc226 0%, #8b5800 100%);
     border-radius: 4px;
@@ -119,6 +134,7 @@ button, .btn {
 .btn:hover {
     padding: 2px 14px;
     border: 2px solid #f2f2f2;
+    color: #171717;
 }
 
 button:hover {
@@ -221,6 +237,7 @@ footer span {
 
 #objects .objects-list > div > .object {
     padding-left: 10px;
+    padding-bottom: 5px;
 }
 
 #objects .objects-list > div > div {
@@ -268,8 +285,13 @@ footer span {
 }
 
 #objects .object {
-    padding: 10px 40px;
+    margin-top: 5px;
+    padding: 0px 40px 0px 40px;
     background-color: rgba(50, 50, 50, 0.1);
+}
+
+#objects h4 {
+    margin: 0;
 }
 
 #technologies {
@@ -445,19 +467,23 @@ table.list-table .btn {
     background: linear-gradient(to bottom, #958585 0%, #767676 2%, #7c7c7c 55%, #5e5e5e 98%, #212121 100%);
 }
 
-#authorization .auth-form-header .form-title h3 {
-    margin: 0;
+#authorization .auth-form-header .form-title span {
+    color: rgb(200, 200, 200);
+    font-weight: 100;
+    transition: all 0.5s;
 }
 
-#authorization.error .auth-form-header .form-title h3 {
-    margin: 0;
+#authorization:hover .auth-form-header .form-title span {
     color: rgb(220, 220, 220);
-    font-weight: 100;
 }
 
 #authorization .auth-form-submit-area {
     padding: 5px 20px 20px 20px;
     text-align: center;
+}
+
+#authorization .message.error {
+    background-color: rgba(0, 0, 0, 0.2);
 }
 
 .success-icon {
@@ -490,7 +516,7 @@ table.list-table .btn {
 
 .message.error {
     padding: 3px 10px 5px 10px;
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: rgba(255, 0, 0, 0.7);
     margin-top: 1px;
     font-size: 11px;
     color: white;

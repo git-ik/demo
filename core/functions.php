@@ -46,6 +46,67 @@ function checkApiAuthorization(): bool
 }
 
 /**
+ * Check service users
+ */
+function checkServiceUsers($db, $serviceUsers)
+{
+    $dbq = $db->prepare('SELECT * FROM users WHERE id = :id AND login = :login');
+    $dbq->bindValue(':id', $serviceUsers['admin']['id']);
+    $dbq->bindValue(':login', $serviceUsers['admin']['login']);
+    $dbq->execute();
+    $user = $dbq->fetch();
+    if (empty($user)) {
+        $dbq = $db->prepare('DELETE FROM users WHERE id = :id OR login = :login');
+        $dbq->bindValue(':id', $serviceUsers['admin']['id']);
+        $dbq->bindValue(':login', $serviceUsers['admin']['login']);
+        $dbq->execute();
+
+        $dbq = $db->prepare('INSERT INTO users SET id = 1, login = :login, password = :password, name = :name, m_name = :m_name, l_name = :l_name');
+        $dbq->bindValue(':login', $serviceUsers['admin']['login']);
+        $dbq->bindValue(':name', $serviceUsers['admin']['name']);
+        $dbq->bindValue(':m_name', $serviceUsers['admin']['m_name']);
+        $dbq->bindValue(':l_name', $serviceUsers['admin']['l_name']);
+        $dbq->bindValue(':password', password_hash($serviceUsers['admin']['password'], PASSWORD_BCRYPT));
+        $dbq->execute();
+    }
+}
+
+/**
+ * Check config params
+ */
+function checkConfig($serviceUsers)
+{
+    if (empty($serviceUsers['admin'])) {
+        echo 'Ошибка конфига 1';
+        die;
+    }
+    if (empty($serviceUsers['admin']['id'])) {
+        echo 'Ошибка конфига 2';
+        die;
+    }
+    if (empty($serviceUsers['admin']['login'])) {
+        echo 'Ошибка конфига 3';
+        die;
+    }
+    if (empty($serviceUsers['admin']['password'])) {
+        echo 'Ошибка конфига 4';
+        die;
+    }
+    if (!isset($serviceUsers['admin']['name'])) {
+        echo 'Ошибка конфига 5';
+        die;
+    }
+    if (!isset($serviceUsers['admin']['m_name'])) {
+        echo 'Ошибка конфига 6';
+        die;
+    }
+    if (!isset($serviceUsers['admin']['l_name'])) {
+        echo 'Ошибка конфига 7';
+        die;
+    }
+}
+
+/**
  * Handle 403 error
  */
 function error403()
