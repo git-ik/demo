@@ -569,18 +569,18 @@ table.list-table .btn {
     }
 
     h2 {
-        font-size: 11px;
+        font-size: 18px;
     }
 
     h3 {
-        font-size: 9px;
+        font-size: 14px;
     }
 
     i {
         font-size: 5px;
     }
 
-    .auth-form-header h3 {
+    .auth-form-header span {
         font-size: 14px;
         color: white;
     }
@@ -615,12 +615,25 @@ table.list-table .btn {
         font-size: 20px;
     }
 
+    .tested {
+        font-size: 17px;
+    }
+
+    .tested i {
+        margin-left: 0px;
+        font-size: 15px;
+    }
+
     #technologies #t4 {
         display: none;
     }
 
     #technologies #t5 {
         display: none;
+    }
+
+    .success-icon {
+        font-size: 5px;
     }
 }
 
