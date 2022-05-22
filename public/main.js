@@ -43,7 +43,7 @@ function ajaxLoadDescription(id) {
     var switcher = document.getElementById('objectsAccess');
     var container = document.getElementById('objectDescription');
 
-    if (!switcher || !switcher.checked) {
+    if (switcher && !switcher.checked) {
         container.innerHTML = '<span class="error">[информация об объекте не загружена]:</span><br>Возможность получить информацию об объектах отключена пользователем. Необходимо разрешить получение информации об объектах.';
         return;
     }

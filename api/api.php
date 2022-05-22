@@ -11,7 +11,7 @@ $response = [
 ];
 
 if (!checkApiAuthorization()) {
-    $response['description'] = '<span class="error">[информация об объекте не загружена]:</span>Вы не авторизованы для получения данных об описании объектов';
+    $response['description'] = '<span class="error">[информация об объекте не загружена]:</span><br>Вы не авторизованы для получения данных об описании объектов';
     $response['errors'][] = 'access denied';
     echo json_encode($response);
     exit;
