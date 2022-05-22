@@ -198,6 +198,7 @@ header > .box {
     text-align: center;
     background-color: #000000;
     background: url('bg-bga.png');
+    border-top: 8px solid #000;
     border-left: 8px solid #000000;
     border-right: 8px solid #000000;
 }
