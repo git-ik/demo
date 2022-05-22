@@ -350,7 +350,7 @@ footer span {
 
 .canvas-container .rack-right {
     position: absolute;
-    right: -3px;
+    right: 5px;
     margin-top:-3px;
 }
 
