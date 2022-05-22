@@ -26,7 +26,9 @@ $objects = $dbq->fetchAll();
                             <button class="logout" title="Разлогиниться" id="unauthorize" name="unauthorize" type="submit" value="1"><img alt="logout" src="./public/logout.png"></button>
                         </form>
                     <?php } ?>
-                    <h1><?=$appName?></h1>
+                    <div>
+                        <h1><?= $appName ?></h1>
+                    </div>
                 </div>
             </header>
             <div id="technologies">

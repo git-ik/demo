@@ -104,34 +104,29 @@ if (empty($errors['system'])) {
                         </form>
                     </div>
                 <?php } ?>
-                <div class="container">
-                    <div class="align-center">
-                        <?php if (!empty($errors['configuration'])) { ?>
+                <?php if (!empty($errors['configuration'])) { ?>
+                    <div class="container">
+                        <div class="align-center">
                             <?php foreach ($errors['configuration'] as $error) { ?>
                                 <div class="message error"><?php echo $error; ?></div>
                             <?php } ?>
-                        <?php } ?>
-                        <?php if (empty($errors['system'])) { ?>
-                            <?php if (!empty($_SESSION['auth'])) { ?>
-                                <h3>Пользователь авторизован</h3>
-                                <br>
-                                <br>
-                            <?php } else { ?>
+                        </div>
+                    </div>
+                <?php } ?>
+                <?php if (empty($errors['system'])) { ?>
+                    <?php if (empty($_SESSION['auth'])) { ?>
+                        <div class="container">
+                            <div class="align-center">
                                 <p>Используйте следующие реквизиты для авторизации:</p>
                                 <p>Пользователь: <?=$serviceUsers['admin']['login']?></p>
                                 <p>Пароль: <?=$serviceUsers['admin']['password']?></p>
-                            <?php } ?>
-                            <?php if (!empty($_SESSION['auth'])) { ?>
-                                <form method="POST">
-                                    <button title="Разлогиниться" name="unauthorize" type="submit" value="1">Выйти</button>
-                                </form>
-                            <?php } ?>
-                        <?php } ?>
-                    </div>
-                </div>
+                            </div>
+                        </div>
+                    <?php } ?>
+                <?php } ?>
                 <?php if (!empty($_SESSION['auth']) && empty($errors['system'])) { ?>
                     <div class="container">
-                        <table>
+                        <table class="r-table">
                             <tr>
                                 <td>
                                     Административная панель
@@ -142,7 +137,7 @@ if (empty($errors['system'])) {
                             </tr>
                         </table>
                         <div class="switch-panel">
-                            <table>
+                            <table class="r-table">
                                 <tr>
                                     <td>
                                         Включить rack

@@ -182,14 +182,14 @@ header button.logout {
     float: right;
     padding: 13px 7px;
     transition: 300ms;
-    opacity: 0.6;
+    opacity: 0.95;
     background: linear-gradient(to bottom, #ffc226 0%, #cf8b14 10%, #ffc226 50%, #ffc226 90%, #cf8b14 100%);
 }
 
 header button.logout:hover {
     border: 0;
     border-left: 6px solid #000000;
-    opacity: 0.75;
+    opacity: 1;
     padding: 13px 7px;
 }
 
@@ -431,6 +431,16 @@ table.list-table .btn {
 
 .edit-table {
     margin-top: 30px;
+}
+
+.r-table {
+    background: rgba(0, 0, 0, 0.9);
+    margin-bottom: 20px;
+}
+
+.r-table td {
+    color: white;
+    border-bottom: 0;
 }
 
 #authorization {
@@ -679,7 +689,6 @@ table.list-table .btn {
         background: linear-gradient(to bottom, #ffc226 0%, #cf8b14 10%, #ffc226 50%, #ffc226 90%, #cf8b14 100%);
     }
 
-
     .container {
         font-size: 7px;
     }
@@ -733,6 +742,10 @@ table.list-table .btn {
     }
 
     .list-table {
+        font-size: 20px;
+    }
+
+    .r-table td {
         font-size: 20px;
     }
 
