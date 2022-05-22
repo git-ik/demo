@@ -11,7 +11,7 @@ $response = [
 ];
 
 if (!checkApiAuthorization()) {
-    $response['description'] = 'Вы не авторизованы для получения данных об описании объектов';
+    $response['description'] = '<span class="error">[информация об объекте не загружена]:</span>Вы не авторизованы для получения данных об описании объектов';
     $response['errors'][] = 'access denied';
     echo json_encode($response);
     exit;
@@ -32,7 +32,7 @@ $dbq->execute();
 $object = $dbq->fetch();
 if (!empty($object)) {
     $response['success'] = true;
-    $response['description'] = $object['description'];
+    $response['description'] = '<span class="success">[информация об объекте загружена]:</span>' . $object['description'];
     echo json_encode($response);
     exit;
 } else {

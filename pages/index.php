@@ -55,15 +55,6 @@ if (empty($errors['system'])) {
                 <span id="t5">GIMP</span>
             </div>
             <div class="main">
-                <?php if (!empty($_SESSION['auth']) && empty($errors['system'])) { ?>
-                    <div class="container">
-                        <form method="POST">
-                            <div class="align-center">
-                                <a class="btn" href="./admin">Перейти в административную панель</a>
-                            </div>
-                        </form>
-                    </div>
-                <?php } ?>
                 <?php if (empty($_SESSION['auth']) && empty($errors['system'])) { ?>
                     <div id="authorization" class="container">
                         <form method="POST">
@@ -136,6 +127,55 @@ if (empty($errors['system'])) {
                         <?php } ?>
                     </div>
                 </div>
+                <?php if (!empty($_SESSION['auth']) && empty($errors['system'])) { ?>
+                    <div class="container">
+                        <table>
+                            <tr>
+                                <td>
+                                    Административная панель
+                                </td>
+                                <td>
+                                <a class="btn" href="./admin">Открыть</a>
+                                </td>
+                            </tr>
+                        </table>
+                        <div class="switch-panel">
+                            <table>
+                                <tr>
+                                    <td>
+                                        Включить rack
+                                    </td>
+                                    <td>
+                                    <div class="switcher">
+                                        <input onchange="switchAnimation(this);" type="checkbox" id="lamps" />
+                                        <label for="lamps">
+                                            <div class="handle"></div>
+                                        </label>
+                                    </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Разрешить получение информации об объектах
+                                    </td>
+                                    <td>
+                                    <div class="switcher">
+                                        <input type="checkbox" id="objectsAccess" />
+                                        <label for="objectsAccess">
+                                            <div class="handle"></div>
+                                        </label>
+                                    </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="container canvas-container">
+                        <img class="rack-left" src="/public/rack-left.png">
+                        <img class="rack-right" src="/public/rack-right.png">
+                        <canvas id="canvas1"></canvas>
+                    </div>
+                <?php } ?>
                 <div id="projectDescription" class="container">
                     <h2>Задача проекта:</h2>
                     <br>&nbsp;&nbsp;&nbsp;&nbsp;Привести пример кода с использованием PHP8, MYSQL, JS, HTML, CSS
@@ -177,7 +217,9 @@ if (empty($errors['system'])) {
                     <br>
                 </div>
                 <div class="container canvas-container">
-                    <canvas id="canvas1"></canvas>
+                    <img class="rack-left" src="/public/rack-left.png">
+                    <img class="rack-right" src="/public/rack-right.png">
+                    <canvas id="canvas2"></canvas>
                 </div>
                 <?php if (empty($errors['system'])) { ?>
                     <div id="dataObjectsExample" class="container">
@@ -197,7 +239,9 @@ if (empty($errors['system'])) {
                         </div>
                     </div>
                     <div class="container canvas-container">
-                        <canvas id="canvas2"></canvas>
+                        <img class="rack-left" src="/public/rack-left.png">
+                        <img class="rack-right" src="/public/rack-right.png">
+                        <canvas id="canvas3"></canvas>
                     </div>
                     <div id="codeExample" class="container factory-check">
                         <h3>Пример реализации ООП:</h3>
@@ -273,7 +317,9 @@ if (empty($errors['system'])) {
                     </div>
                 <?php } ?>
                     <div class="container canvas-container">
-                        <canvas id="canvas3"></canvas>
+                        <img class="rack-left" src="/public/rack-left.png">
+                        <img class="rack-right" src="/public/rack-right.png">
+                        <canvas id="canvas4"></canvas>
                     </div>
             </div>
             <footer>

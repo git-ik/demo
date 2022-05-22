@@ -40,7 +40,14 @@ function animateOpacity(el, min, max) {
  * @param {int} id
  */
 function ajaxLoadDescription(id) {
+    var switcher = document.getElementById('objectsAccess');
     var container = document.getElementById('objectDescription');
+
+    if (!switcher || !switcher.checked) {
+        container.innerHTML = '<span class="error">[информация об объекте не загружена]:</span><br>Возможность получить информацию об объектах отключена пользователем. Необходимо разрешить получение информации об объектах.';
+        return;
+    }
+    
     container.innerHTML = '<center>... [LOADING INFO] ...</canter>';
     container.style.opacity = '0.5';
 
@@ -62,6 +69,7 @@ function ajaxLoadDescription(id) {
     request.send(formData);
 }
 
+var animate = 'off';
 
 /**
  * Render canvas
@@ -102,38 +110,40 @@ function draw(cid) {
             ctx[cid].fillRect(i * 15, 75, 10, 10);
         }
 
-        let randY = Math.round(Math.random() * 6);
-        let randC = Math.round(Math.random() * 10);
-        if (randC == 1) {
-            ctx[cid].fillStyle = '#2A6D1D';
-        } else if (randC == 2) {
-            ctx[cid].fillStyle = '#A35400';
-        } else {
-            ctx[cid].fillStyle = '#64FF4B';
-        }
-        if (randY > 4) {
-            ctx[cid].fillRect(xOffset[cid], 0, 10, 10);
-            ctx[cid].fillStyle = '#64FF4B';
-        }
-        if (randY == 5) {
-            ctx[cid].fillRect(xOffset[cid], 15, 10, 10);
-            ctx[cid].fillStyle = '#64FF4B';
-        }
-        if (randY < 2) {
-            ctx[cid].fillRect(xOffset[cid], 30, 10, 10);
-            ctx[cid].fillStyle = '#64FF4B';
-        }
-        if (randY == 3) {
-            ctx[cid].fillRect(xOffset[cid], 45, 10, 10);
-            ctx[cid].fillStyle = '#64FF4B';
-        }
-        if (randY == 0) {
-            ctx[cid].fillRect(xOffset[cid], 60, 10, 10);
-            ctx[cid].fillStyle = '#64FF4B';
-        }
-        if (randY == 6) {
-            ctx[cid].fillRect(xOffset[cid], 75, 10, 10);
-            ctx[cid].fillStyle = '#64FF4B';
+        if (animate == 'on') {
+            let randY = Math.round(Math.random() * 6);
+            let randC = Math.round(Math.random() * 10);
+            if (randC == 1) {
+                ctx[cid].fillStyle = '#2A6D1D';
+            } else if (randC == 2) {
+                ctx[cid].fillStyle = '#A35400';
+            } else {
+                ctx[cid].fillStyle = '#64FF4B';
+            }
+            if (randY > 4) {
+                ctx[cid].fillRect(xOffset[cid], 0, 10, 10);
+                ctx[cid].fillStyle = '#64FF4B';
+            }
+            if (randY == 5) {
+                ctx[cid].fillRect(xOffset[cid], 15, 10, 10);
+                ctx[cid].fillStyle = '#64FF4B';
+            }
+            if (randY < 2) {
+                ctx[cid].fillRect(xOffset[cid], 30, 10, 10);
+                ctx[cid].fillStyle = '#64FF4B';
+            }
+            if (randY == 3) {
+                ctx[cid].fillRect(xOffset[cid], 45, 10, 10);
+                ctx[cid].fillStyle = '#64FF4B';
+            }
+            if (randY == 0) {
+                ctx[cid].fillRect(xOffset[cid], 60, 10, 10);
+                ctx[cid].fillStyle = '#64FF4B';
+            }
+            if (randY == 6) {
+                ctx[cid].fillRect(xOffset[cid], 75, 10, 10);
+                ctx[cid].fillStyle = '#64FF4B';
+            }
         }
 
         draw(cid);
@@ -170,6 +180,7 @@ function start(cid, isStarted) {
             start('canvas1', true);
             start('canvas2', true);
             start('canvas3', true);
+            start('canvas4', true);
         }, 50);
     });
 }
@@ -182,6 +193,9 @@ document.addEventListener('DOMContentLoaded', function () {
     setTimeout(function () {
         start('canvas3', false);
     }, Math.round(Math.random() * (4000 - 2000) + 2000));
+    setTimeout(function () {
+        start('canvas4', false);
+    }, Math.round(Math.random() * (6000 - 3000) + 3000));
 
     let t1 = document.getElementById('t1');
     let t2 = document.getElementById('t2');
@@ -190,9 +204,20 @@ document.addEventListener('DOMContentLoaded', function () {
     aopacity['t2'] = parseFloat(window.getComputedStyle(t2).getPropertyValue("opacity"));
     aopacity['t3'] = parseFloat(window.getComputedStyle(t3).getPropertyValue("opacity"));
     setInterval(function () {
+        if (animate == 'off') {
+            return;
+        }
         animateOpacity(t1, 0.2, 0.5);
         animateOpacity(t2, 0.05, 0.4);
         animateOpacity(t3, 0, 0.2);
     }, 200);
     
 });
+
+function switchAnimation(el) {
+    if (el.checked) {
+        animate = 'on';
+    } else {
+        animate = 'off';
+    }
+}
