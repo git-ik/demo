@@ -26,18 +26,18 @@ class PhoneFactory
     }
 }
 
-class SmartphoneFactory
+class SmartPhoneFactory
 {
     public function create($data = []): Phone
     {
-        return new Smartphone($data);
+        return new SmartPhone($data);
     }
 }
 
 class SimplePhone implements Phone
 {
-    public $title;
-    public $description;
+    public $title = 'Телефон';
+    public $description = 'Описание телефона';
     public $functions = [
         'Звонки',
         'СМС',
@@ -81,10 +81,10 @@ class SimplePhone implements Phone
     }
 }
 
-class Smartphone implements Phone
+class SmartPhone implements Phone
 {
-    public $title;
-    public $description;
+    public $title = 'Смартфон';
+    public $description = 'Описание смартфона';
     public $functions = [
         'Звонки',
         'СМС',

@@ -244,38 +244,38 @@ if (empty($errors['system'])) {
                         <h3>Пример реализации ООП:</h3>
                         <p>Примером реализации ООП в PHP является представление нескольких классов для описания объектов манипулирования средствами языка программирования реализуя паттерн "<a target="_blank" href="https://designpatternsphp.readthedocs.io/ru/latest/Creational/FactoryMethod/README.html">фабричный метод</a>".</p>
                         <p>[интерфейсы]: PhoneFactoryInterface, Phone</p>
-                        <p>[классы]: PhoneFactory, SmartphoneFactory, SimplePhone, Smartphone</p>
+                        <p>[классы]: PhoneFactory, SmartPhoneFactory, SimplePhone, SmartPhone</p>
                         <p>[классы для тестирования]: Test</p>
                         <h4>Код PHP:</h4>
                         <div class="code">
                             <i>
                                 $phoneFactory = new PhoneFactory();<br>
-                                $phone = $phoneFactory->create([<br>
+                                $simplePhone = $phoneFactory->create([<br>
                                 &nbsp;&nbsp;&nbsp;&nbsp;'title' => 'Аппарат',<br>
                                 &nbsp;&nbsp;&nbsp;&nbsp;'description' => 'Телефон с антибликовым покрытием экрана, соответствующий стандарту защиты IP127001',<br>
                                 ]);<br>
-                                echo '&lt;span&gt;Название телефона&lt;/span&gt;: ' . $phone->getTitle() . '&lt;br&gt;';<br>
-                                echo '&lt;span&gt;Описание телефона&lt;/span&gt;: ' . $phone->getDescription() . '&lt;br&gt;';<br>
+                                echo '&lt;span&gt;Название телефона&lt;/span&gt;: ' . $simplePhone->getTitle() . '&lt;br&gt;';<br>
+                                echo '&lt;span&gt;Описание телефона&lt;/span&gt;: ' . $simplePhone->getDescription() . '&lt;br&gt;';<br>
                                 echo '&lt;span&gt;Функции телефона&lt;/span&gt;:&lt;br&gt;';<br>
-                                foreach ($phone->getFunctions() as $phoneFunction) {<br>
+                                foreach ($simplePhone->getFunctions() as $phoneFunction) {<br>
                                 &nbsp;&nbsp;&nbsp;&nbsp;echo '&#38;nbsp;&#38;nbsp;&#38;nbsp;&#38;nbsp;- ' . $phoneFunction . '&lt;br&gt;';<br>
                                 }<br>
-                                if (Test::testPhone($phone)) {<br>
+                                if (Test::testPhone($simplePhone)) {<br>
                                 &nbsp;&nbsp;&nbsp;&nbsp;echo '&lt;span class="tested">✔ протестировано: &lt;i&gt;- Класс телефона "Аппарат" создан фабрикой&lt;/i&gt;&lt;/span&gt;';<br>
                                 }<br>
                                 echo '&lt;br&gt;&lt;br&gt;';<br>
-                                $smartphoneFactory = new SmartphoneFactory();<br>
-                                $smartphone = $smartphoneFactory->create([<br>
+                                $phoneFactory = new SmartPhoneFactory();<br>
+                                $smartPhone = $phoneFactory->create([<br>
                                 &nbsp;&nbsp;&nbsp;&nbsp;'title' => 'Смарт Аппарат',<br>
                                 &nbsp;&nbsp;&nbsp;&nbsp;'description' => 'Смартфон с защитным экраном GCore2Glass',<br>
                                 ]);<br>
-                                echo '&lt;span&gt;Название телефона&lt;/span&gt;: ' . $smartphone->getTitle() . '&lt;br&gt;';<br>
-                                echo '&lt;span&gt;Описание телефона&lt;/span&gt;: ' . $smartphone->getDescription() . '&lt;br&gt;';<br>
+                                echo '&lt;span&gt;Название телефона&lt;/span&gt;: ' . $smartPhone->getTitle() . '&lt;br&gt;';<br>
+                                echo '&lt;span&gt;Описание телефона&lt;/span&gt;: ' . $smartPhone->getDescription() . '&lt;br&gt;';<br>
                                 echo '&lt;span&gt;Функции телефона&lt;/span&gt;:&lt;br&gt;';<br>
-                                foreach ($smartphone->getFunctions() as $phoneFunction) {<br>
+                                foreach ($smartPhone->getFunctions() as $phoneFunction) {<br>
                                 &nbsp;&nbsp;&nbsp;&nbsp;echo '&#38;nbsp;&#38;nbsp;&#38;nbsp;&#38;nbsp;- ' . $phoneFunction . '&lt;br&gt;';<br>
                                 }<br>
-                                if (Test::testPhone($smartphone)) {<br>
+                                if (Test::testPhone($smartPhone)) {<br>
                                 &nbsp;&nbsp;&nbsp;&nbsp;echo '&lt;span class="tested">✔ протестировано: &lt;i&gt;- Класс телефона "Смарт Аппарат" создан фабрикой&lt;/i&gt;&lt;/span&gt;';<br>
                                 }<br>
                             </i>
@@ -283,32 +283,32 @@ if (empty($errors['system'])) {
                         <h4>Результат выполнения кода PHP:</h4>
                         <?php
                             $phoneFactory = new PhoneFactory();
-                            $phone = $phoneFactory->create([
+                            $simplePhone = $phoneFactory->create([
                                 'title' => 'Аппарат',
                                 'description' => 'Телефон с антибликовым покрытием экрана, соответствующий стандарту защиты IP127001',
                             ]);
-                            echo '<span>Название телефона</span>: ' . $phone->getTitle() . '<br>';
-                            echo '<span>Описание телефона</span>: ' . $phone->getDescription() . '<br>';
+                            echo '<span>Название телефона</span>: ' . $simplePhone->getTitle() . '<br>';
+                            echo '<span>Описание телефона</span>: ' . $simplePhone->getDescription() . '<br>';
                             echo '<span>Функции телефона</span>:<br>';
-                            foreach ($phone->getFunctions() as $phoneFunction) {
+                            foreach ($simplePhone->getFunctions() as $phoneFunction) {
                                 echo '&nbsp;&nbsp;&nbsp;&nbsp;- ' . $phoneFunction . '<br>';
                             }
-                            if (Test::testPhone($phone)) {
+                            if (Test::testPhone($simplePhone)) {
                                 echo '<span class="tested">✔ протестировано: <i>- Класс телефона "Аппарат" создан фабрикой</i></span>';
                             }
                             echo '<br><br>';
-                            $smartphoneFactory = new SmartphoneFactory();
-                            $smartphone = $smartphoneFactory->create([
+                            $phoneFactory = new SmartPhoneFactory();
+                            $smartPhone = $phoneFactory->create([
                                 'title' => 'Смарт Аппарат',
                                 'description' => 'Смартфон с защитным экраном GCore2Glass',
                             ]);
-                            echo '<span>Название телефона</span>: ' . $smartphone->getTitle() . '<br>';
-                            echo '<span>Описание телефона</span>: ' . $smartphone->getDescription() . '<br>';
+                            echo '<span>Название телефона</span>: ' . $smartPhone->getTitle() . '<br>';
+                            echo '<span>Описание телефона</span>: ' . $smartPhone->getDescription() . '<br>';
                             echo '<span>Функции телефона</span>:<br>';
-                            foreach ($smartphone->getFunctions() as $phoneFunction) {
+                            foreach ($smartPhone->getFunctions() as $phoneFunction) {
                                 echo '&nbsp;&nbsp;&nbsp;&nbsp;- ' . $phoneFunction . '<br>';
                             }
-                            if (Test::testPhone($smartphone)) {
+                            if (Test::testPhone($smartPhone)) {
                                 echo '<span class="tested">✔ протестировано: <i>- Класс телефона "Смарт Аппарат" создан фабрикой</i></span>';
                             }
                         ?>
