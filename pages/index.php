@@ -153,7 +153,7 @@ if (empty($errors['system'])) {
                                 </tr>
                                 <tr>
                                     <td>
-                                        Разрешить получение информации об объектах
+                                        Разрешить получение информации <a href="#dataObjects">об объектах</a>
                                     </td>
                                     <td>
                                     <div class="switcher">
@@ -186,7 +186,7 @@ if (empty($errors['system'])) {
                     &nbsp;&nbsp;&nbsp;&nbsp;1) Главная страница:
                     <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - форма авторизации пользователей <a href="#authorizationForm">перейти</a>
                     <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - описание демо проекта <a href="#projectDescription">перейти</a>
-                    <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - представление структуры данных в древовидном исполнении с разграничением прав доступа: <a href="#dataObjectsExample">перейти</a>
+                    <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - представление структуры данных в древовидном исполнении с разграничением прав доступа: <a href="#dataObjects">перейти</a>
                     <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - представление реализации кода PHP на примере реализации паттерна ООП: <a href="#codeExample">перейти</a>
                     <br>&nbsp;&nbsp;&nbsp;&nbsp;2) Страница ошибки 403 <a href="/403">перейти</a>
                     <br>&nbsp;&nbsp;&nbsp;&nbsp;3) Страница ошибки 404 <a href="/404">перейти</a>
@@ -219,9 +219,9 @@ if (empty($errors['system'])) {
                     <canvas id="canvas2"></canvas>
                 </div>
                 <?php if (empty($errors['system'])) { ?>
-                    <div id="dataObjectsExample" class="container">
-                        <h3>СТРУКТУРА ДАННЫХ:</h3>
-                        <p>Дерево объектов, чтобы увидеть описание объекта необходимо кликнуть на название.</p>
+                    <div id="dataObjects" class="container">
+                        <h3>СТРУКТУРА ДАННЫХ (объекты):</h3>
+                        <p>Дерево объектов. Чтобы увидеть описание объекта необходимо кликнуть на его название.</p>
                         <div id="objects">
                             <div class="row">
                                 <div class="objects-list">
@@ -242,9 +242,10 @@ if (empty($errors['system'])) {
                     </div>
                     <div id="codeExample" class="container factory-check">
                         <h3>Пример реализации ООП:</h3>
-                        <p>Примером реализации ООП в PHP является представление нескольких классов для описания телефонов как объектов манипулирования средствами языка программирования реализуя паттерн "<a target="_blank" href="https://designpatternsphp.readthedocs.io/ru/latest/Creational/FactoryMethod/README.html">фабричный метод</a>".</p>
-                        <p>[интерфейсы]: PhoneFactoryInterface, PhoneInterface</p>
-                        <p>[классы]: PhoneFactory, SmartphoneFactory, Phone, Smartphone</p>
+                        <p>Примером реализации ООП в PHP является представление нескольких классов для описания объектов манипулирования средствами языка программирования реализуя паттерн "<a target="_blank" href="https://designpatternsphp.readthedocs.io/ru/latest/Creational/FactoryMethod/README.html">фабричный метод</a>".</p>
+                        <p>[интерфейсы]: PhoneFactoryInterface, Phone</p>
+                        <p>[классы]: PhoneFactory, SmartphoneFactory, SimplePhone, Smartphone</p>
+                        <p>[классы для тестирования]: Test</p>
                         <h4>Код PHP:</h4>
                         <div class="code">
                             <i>
