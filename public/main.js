@@ -47,7 +47,7 @@ function ajaxLoadDescription(id) {
         container.innerHTML = '<span class="error">[информация об объекте не загружена]:</span><br>Возможность получить информацию об объектах отключена пользователем. Необходимо разрешить получение информации об объектах.';
         return;
     }
-    
+
     container.innerHTML = '<center>... [LOADING INFO] ...</canter>';
     container.style.opacity = '0.5';
 
@@ -207,17 +207,32 @@ document.addEventListener('DOMContentLoaded', function () {
         if (animate == 'off') {
             return;
         }
-        animateOpacity(t1, 0.2, 0.5);
-        animateOpacity(t2, 0.05, 0.4);
-        animateOpacity(t3, 0, 0.2);
-    }, 200);
-    
+        animateOpacity(t1, 0.2, 0.7);
+        animateOpacity(t2, 0.05, 0.6);
+        animateOpacity(t3, 0, 0.4);
+    }, 100);
+
 });
 
+var timeLapseBG;
 function switchAnimation(el) {
+    let player = document.getElementById("player");
+    player.volume = 0.6;
     if (el.checked) {
-        animate = 'on';
+        let bg = document.getElementById('bg');
+        aopacity['bg'] = parseFloat(window.getComputedStyle(bg).getPropertyValue("opacity"));
+        timeLapseBG = setInterval(function () {
+            animateOpacity(bg, 0, 1);
+            if (window.getComputedStyle(bg).getPropertyValue("opacity") == 0.2) {
+                player.play();
+                animate = 'on';
+            }
+            if (window.getComputedStyle(bg).getPropertyValue("opacity") == 1) {
+                clearInterval(timeLapseBG);
+            }
+        }, 10);
     } else {
+        player.pause();
         animate = 'off';
     }
 }

@@ -36,7 +36,7 @@ if (empty($errors['system'])) {
     </head>
 
     <body>
-        <div>
+        <div id="bg">
             <header>
                 <div class="box">
                     <?php if (!empty($_SESSION['auth'])) { ?>
@@ -129,10 +129,7 @@ if (empty($errors['system'])) {
                         <table class="r-table">
                             <tr>
                                 <td>
-                                    Административная панель
-                                </td>
-                                <td>
-                                <a class="btn" href="./admin">Открыть</a>
+                                    <a class="btn" href="./admin">Открыть административную панель</a>
                                 </td>
                             </tr>
                         </table>
@@ -148,6 +145,9 @@ if (empty($errors['system'])) {
                                         <label for="lamps">
                                             <div class="handle"></div>
                                         </label>
+                                        <audio id="player" controls>
+                                            <source src="public/music.mp3" type="audio/mpeg">
+                                        </audio>
                                     </div>
                                     </td>
                                 </tr>

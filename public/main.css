@@ -163,6 +163,10 @@ button.save {
     border: 2px solid #f2f2f2;
 }
 
+#player {
+    display: none;
+}
+
 .main {
     position: relative;
     min-height: calc(100vh - 270px);
@@ -334,23 +338,23 @@ footer span {
 }
 
 #technologies #t1 {
-    margin-left: calc(52% + 180px);
+    margin-left: calc(53% + 180px);
 }
 
 #technologies #t2 {
-    margin-left: calc(52% + 227px);
+    margin-left: calc(53% + 227px);
 }
 
 #technologies #t3 {
-    margin-left: calc(52% + 275px);
+    margin-left: calc(53% + 275px);
 }
 
 #technologies #t4 {
-    margin-left: calc(52% + 322px);
+    margin-left: calc(53% + 322px);
 }
 
 #technologies #t5 {
-    margin-left: calc(52% + 370px);
+    margin-left: calc(53% + 370px);
 }
 
 .container {
