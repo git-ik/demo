@@ -251,7 +251,7 @@ footer span {
 }
 
 #objects {
-    width: 100%;
+    width: calc(100% - 40px);
     background-color: rgba(75, 75, 75, 0.25);
 }
 
@@ -265,8 +265,7 @@ footer span {
 }
 
 #objects .objects-list > div > .object {
-    padding-left: 10px;
-    padding-bottom: 5px;
+    padding: 5px 0px 5px 5px;
 }
 
 #objects .objects-list > div > div {
