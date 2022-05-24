@@ -227,7 +227,7 @@ document.addEventListener('DOMContentLoaded', function () {
         let player = document.getElementById("player");
         let source = document.getElementById("source");
         source.setAttribute('src', 'public/error.mp3');
-        player.volume = 0.1;
+        player.volume = 0.3;
         player.load();
         player.play();
     }
