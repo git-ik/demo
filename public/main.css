@@ -20,7 +20,7 @@ body {
 body > div {
     min-width: 800px;
     min-height: 100vh;
-    background: url('./bg.jpg');
+    background: url('./bg-main.jpg');
     background-size: 100%;
     background-repeat: no-repeat;
 }
@@ -279,7 +279,7 @@ footer span {
     color: #ababab;
     border-left: 2px solid #000000;
     background-color: rgba(200, 200, 200, 0.85);
-    background: url('./bg_c.jpg');
+    background: url('./bg-squares.png');
 }
 
 #objects .title {
@@ -367,8 +367,20 @@ footer span {
     line-height: 20px;
 }
 
+.container.dots {
+    background: url(/public/bg-dots.png);
+    border-top: 1px solid #282828;
+    border-bottom: 1px solid #000000;
+}
+
+.container.dots > div {
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
 .canvas-container {
     padding: 20px 20px 15px 20px;
+    background-color: rgba(0, 0, 0, 0.4);
 }
 
 .canvas-container .rack-left {
@@ -440,19 +452,11 @@ table.list-table .btn {
 
 .r-table {
     background: rgba(0, 0, 0, 0.9);
-    margin-bottom: 20px;
 }
 
 .r-table td {
     color: white;
-    border-bottom: 0;
-}
-
-#authorization {
-    border-top: 1px solid #282828;
-    border-bottom: 1px solid #000000;
-    background: rgb(0, 0, 0);
-    background: linear-gradient(180deg, rgba(0, 0, 0, 0.75) 0%, rgba(85, 85, 85, 0.25) 25%, rgba(0, 0, 0, 0.65) 100%);
+    border-bottom: 1px solid #000;
 }
 
 #authorization table {
@@ -522,6 +526,7 @@ table.list-table .btn {
     color: rgb(200, 200, 200);
     font-weight: 100;
     transition: all 0.5s;
+    letter-spacing: 2px;
 }
 
 #authorization:hover .auth-form-header .form-title span {
@@ -672,7 +677,7 @@ table.list-table .btn {
 
 @media (min-width: 1400px) {
     body > div {
-        background: url('./bg_4k.jpg');
+        background: url('./bg-main-4k.jpg');
         background-size: 100%;
         background-repeat: no-repeat;
     }

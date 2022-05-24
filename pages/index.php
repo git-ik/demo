@@ -58,50 +58,52 @@ if (empty($errors['system'])) {
             </div>
             <div class="main">
                 <?php if (empty($_SESSION['auth']) && empty($errors['system'])) { ?>
-                    <div id="authorization" class="container">
-                        <form method="POST">
-                            <table class="<?= empty($messages['form']['auth']) ? '' : 'error' ?>">
-                                <tr>
-                                    <td colspan="2" class="auth-form-header">
-                                        <div class="light"></div>
-                                        <div class="form-title">
-                                            <span>Авторизация</span>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="auth-form-label">
-                                        <label for="login"><b>Пользователь</b></label>
-                                    </td>
-                                    <td class="auth-form-input">
-                                        <input id="login" type="text" placeholder="Введите логин" name="login" value="<?= $values['form']['login'] ?>" required>
-                                        <?php foreach ($errors['form']['fields']['login'] as $message) { ?>
-                                            <div class="message error"><?php echo $message; ?></div>
-                                        <?php } ?>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="auth-form-label">
-                                        <label for="password"><b>Пароль</b></label>
-                                    </td>
-                                    <td class="auth-form-input">
-                                        <input id="password" type="password" placeholder="Введите пароль" name="password" value="" required>
-                                        <?php foreach ($errors['form']['fields']['password'] as $message) { ?>
-                                            <div class="message error"><?php echo $message; ?></div>
-                                        <?php } ?>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="auth-form-submit-area" colspan="2">
-                                        <?php foreach ($messages['form']['auth'] as $message) { ?>
-                                            <div class="message error"><?php echo $message; ?></div>
-                                        <?php } ?>
-                                        <br>
-                                        <button name="authorize" value="1" type="submit">Авторизоваться</button>
-                                    </td>
-                                </tr>
-                            </table>
-                        </form>
+                    <div id="authorization" class="container dots">
+                        <div>
+                            <form method="POST">
+                                <table class="<?= empty($messages['form']['auth']) ? '' : 'error' ?>">
+                                    <tr>
+                                        <td colspan="2" class="auth-form-header">
+                                            <div class="light"></div>
+                                            <div class="form-title">
+                                                <span>Авторизация</span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="auth-form-label">
+                                            <label for="login"><b>Пользователь</b></label>
+                                        </td>
+                                        <td class="auth-form-input">
+                                            <input id="login" type="text" placeholder="Введите логин" name="login" value="<?= $values['form']['login'] ?>" required>
+                                            <?php foreach ($errors['form']['fields']['login'] as $message) { ?>
+                                                <div class="message error"><?php echo $message; ?></div>
+                                            <?php } ?>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="auth-form-label">
+                                            <label for="password"><b>Пароль</b></label>
+                                        </td>
+                                        <td class="auth-form-input">
+                                            <input id="password" type="password" placeholder="Введите пароль" name="password" value="" required>
+                                            <?php foreach ($errors['form']['fields']['password'] as $message) { ?>
+                                                <div class="message error"><?php echo $message; ?></div>
+                                            <?php } ?>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="auth-form-submit-area" colspan="2">
+                                            <?php foreach ($messages['form']['auth'] as $message) { ?>
+                                                <div class="message error"><?php echo $message; ?></div>
+                                            <?php } ?>
+                                            <br>
+                                            <button name="authorize" value="1" type="submit">Авторизоваться</button>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </form>
+                        </div>
                     </div>
                 <?php } ?>
                 <?php if (!empty($errors['configuration'])) { ?>
@@ -125,7 +127,7 @@ if (empty($errors['system'])) {
                     <?php } ?>
                 <?php } ?>
                 <?php if (!empty($_SESSION['auth']) && empty($errors['system'])) { ?>
-                    <div class="container">
+                    <div class="container dots">
                         <table class="r-table">
                             <tr>
                                 <td>
@@ -133,6 +135,7 @@ if (empty($errors['system'])) {
                                 </td>
                             </tr>
                         </table>
+                        <br>
                         <div class="switch-panel">
                             <table class="r-table">
                                 <tr>
@@ -145,9 +148,6 @@ if (empty($errors['system'])) {
                                         <label for="lamps">
                                             <div class="handle"></div>
                                         </label>
-                                        <audio id="player" controls>
-                                            <source src="public/music.mp3" type="audio/mpeg">
-                                        </audio>
                                     </div>
                                     </td>
                                 </tr>
@@ -219,7 +219,7 @@ if (empty($errors['system'])) {
                     <canvas id="canvas2"></canvas>
                 </div>
                 <?php if (empty($errors['system'])) { ?>
-                    <div id="dataObjects" class="container">
+                    <div id="dataObjects" class="container dots">
                         <h3>СТРУКТУРА ДАННЫХ (объекты):</h3>
                         <p>Дерево объектов. Чтобы увидеть описание объекта необходимо кликнуть на его название.</p>
                         <div id="objects">
@@ -314,11 +314,14 @@ if (empty($errors['system'])) {
                         ?>
                     </div>
                 <?php } ?>
-                    <div class="container canvas-container">
-                        <img class="rack-left" src="/public/rack-left.png">
-                        <img class="rack-right" src="/public/rack-right.png">
-                        <canvas id="canvas4"></canvas>
-                    </div>
+                <div class="container canvas-container">
+                    <img class="rack-left" src="/public/rack-left.png">
+                    <img class="rack-right" src="/public/rack-right.png">
+                    <canvas id="canvas4"></canvas>
+                </div>
+                <audio id="player" controls>
+                    <source id="source" src="public/music.mp3" type="audio/mpeg">
+                </audio>
             </div>
             <footer>
                 <div>

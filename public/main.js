@@ -110,6 +110,25 @@ function draw(cid) {
             ctx[cid].fillRect(i * 15, 75, 10, 10);
         }
 
+        ctx[cid].fillStyle = '#444444';
+        for (i = 0; i <= rCount; i++) {
+            ctx[cid].fillRect(i * 15 + 10, 0, 1, 10);
+            ctx[cid].fillRect(i * 15 + 10, 15, 1, 10);
+            ctx[cid].fillRect(i * 15 + 10, 30, 1, 10);
+            ctx[cid].fillRect(i * 15 + 10, 45, 1, 10);
+            ctx[cid].fillRect(i * 15 + 10, 60, 1, 10);
+            ctx[cid].fillRect(i * 15 + 10, 75, 1, 10);
+        }
+
+        for (i = 0; i <= rCount; i++) {
+            ctx[cid].fillRect(i * 15, 10, 10, 1);
+            ctx[cid].fillRect(i * 15, 25, 10, 1);
+            ctx[cid].fillRect(i * 15, 40, 10, 1);
+            ctx[cid].fillRect(i * 15, 55, 10, 1);
+            ctx[cid].fillRect(i * 15, 70, 10, 1);
+            ctx[cid].fillRect(i * 15, 85, 10, 1);
+        }
+
         if (animate == 'on') {
             let randY = Math.round(Math.random() * 6);
             let randC = Math.round(Math.random() * 10);
@@ -121,27 +140,27 @@ function draw(cid) {
                 ctx[cid].fillStyle = '#64FF4B';
             }
             if (randY > 4) {
-                ctx[cid].fillRect(xOffset[cid], 0, 10, 10);
+                ctx[cid].fillRect(xOffset[cid], 0, 9, 9);
                 ctx[cid].fillStyle = '#64FF4B';
             }
             if (randY == 5) {
-                ctx[cid].fillRect(xOffset[cid], 15, 10, 10);
+                ctx[cid].fillRect(xOffset[cid], 15, 9, 9);
                 ctx[cid].fillStyle = '#64FF4B';
             }
             if (randY < 2) {
-                ctx[cid].fillRect(xOffset[cid], 30, 10, 10);
+                ctx[cid].fillRect(xOffset[cid], 30, 9, 9);
                 ctx[cid].fillStyle = '#64FF4B';
             }
             if (randY == 3) {
-                ctx[cid].fillRect(xOffset[cid], 45, 10, 10);
+                ctx[cid].fillRect(xOffset[cid], 45, 9, 9);
                 ctx[cid].fillStyle = '#64FF4B';
             }
             if (randY == 0) {
-                ctx[cid].fillRect(xOffset[cid], 60, 10, 10);
+                ctx[cid].fillRect(xOffset[cid], 60, 9, 9);
                 ctx[cid].fillStyle = '#64FF4B';
             }
             if (randY == 6) {
-                ctx[cid].fillRect(xOffset[cid], 75, 10, 10);
+                ctx[cid].fillRect(xOffset[cid], 75, 9, 9);
                 ctx[cid].fillStyle = '#64FF4B';
             }
         }
@@ -173,16 +192,6 @@ function start(cid, isStarted) {
         ctx[cid] = canvas[cid].getContext('2d');
         draw(cid);
     }
-
-    window.addEventListener('resize', function () {
-        clearTimeout(timeLapse);
-        timeLapse = setTimeout(function () {
-            start('canvas1', true);
-            start('canvas2', true);
-            start('canvas3', true);
-            start('canvas4', true);
-        }, 50);
-    });
 }
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -212,6 +221,27 @@ document.addEventListener('DOMContentLoaded', function () {
         animateOpacity(t3, 0, 0.4);
     }, 100);
 
+    //play error sound (when wrong authorization data)
+    let authForm = document.getElementById("authorization");
+    if (authForm && authForm.querySelector(".error")) {
+        let player = document.getElementById("player");
+        let source = document.getElementById("source");
+        source.setAttribute('src', 'public/error.mp3');
+        player.volume = 0.1;
+        player.load();
+        player.play();
+    }
+    
+});
+
+window.addEventListener('resize', function () {
+    clearTimeout(timeLapse);
+    timeLapse = setTimeout(function () {
+        start('canvas1', true);
+        start('canvas2', true);
+        start('canvas3', true);
+        start('canvas4', true);
+    }, 50);
 });
 
 var timeLapseBG;
