@@ -229,9 +229,9 @@ document.addEventListener('DOMContentLoaded', function () {
         source.setAttribute('src', 'public/error.mp3');
         player.volume = 0.3;
         player.load();
-        player.play();
+        player.play().catch(function() {});
     }
-    
+
 });
 
 window.addEventListener('resize', function () {
