@@ -145,9 +145,9 @@ if (empty($errors['system'])) {
                                     <td>
                                     <div class="switcher">
                                         <input onchange="switchAnimation(this);" type="checkbox" id="lamps" />
-                                        <label for="lamps">
+                                        <div class="handle-box">
                                             <div class="handle"></div>
-                                        </label>
+                                        </div>
                                     </div>
                                     </td>
                                 </tr>
@@ -158,9 +158,9 @@ if (empty($errors['system'])) {
                                     <td>
                                     <div class="switcher">
                                         <input type="checkbox" id="objectsAccess" />
-                                        <label for="objectsAccess">
+                                        <div class="handle-box">
                                             <div class="handle"></div>
-                                        </label>
+                                        </div>
                                     </div>
                                     </td>
                                 </tr>
@@ -168,8 +168,8 @@ if (empty($errors['system'])) {
                         </div>
                     </div>
                     <div class="container canvas-container">
-                        <img class="rack-left" src="/public/rack-left.png">
-                        <img class="rack-right" src="/public/rack-right.png">
+                        <img class="rack-left" alt="" src="/public/rack-left.png">
+                        <img class="rack-right" alt="" src="/public/rack-right.png">
                         <canvas id="canvas1"></canvas>
                     </div>
                 <?php } ?>
@@ -214,8 +214,8 @@ if (empty($errors['system'])) {
                     <br>
                 </div>
                 <div class="container canvas-container">
-                    <img class="rack-left" src="/public/rack-left.png">
-                    <img class="rack-right" src="/public/rack-right.png">
+                    <img class="rack-left" alt="" src="/public/rack-left.png">
+                    <img class="rack-right" alt="" src="/public/rack-right.png">
                     <canvas id="canvas2"></canvas>
                 </div>
                 <?php if (empty($errors['system'])) { ?>
@@ -236,8 +236,8 @@ if (empty($errors['system'])) {
                         </div>
                     </div>
                     <div class="container canvas-container">
-                        <img class="rack-left" src="/public/rack-left.png">
-                        <img class="rack-right" src="/public/rack-right.png">
+                        <img class="rack-left" alt="" src="/public/rack-left.png">
+                        <img class="rack-right" alt="" src="/public/rack-right.png">
                         <canvas id="canvas3"></canvas>
                     </div>
                     <div id="codeExample" class="container factory-check">
@@ -315,8 +315,8 @@ if (empty($errors['system'])) {
                     </div>
                 <?php } ?>
                 <div class="container canvas-container">
-                    <img class="rack-left" src="/public/rack-left.png">
-                    <img class="rack-right" src="/public/rack-right.png">
+                    <img class="rack-left" alt="" src="/public/rack-left.png">
+                    <img class="rack-right" alt="" src="/public/rack-right.png">
                     <canvas id="canvas4"></canvas>
                 </div>
                 <audio id="player" controls>

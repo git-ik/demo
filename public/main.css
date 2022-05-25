@@ -613,10 +613,17 @@ table.list-table .btn {
 }
 
 .switcher input[type="checkbox"] {
-    display: none;
+    margin-top: -5px;
+    margin-left: -10px;
+    position: absolute;
+    width: 97px;
+    height: 30px;
+    opacity: 0;
+    z-index: 1;
+    cursor: pointer;
 }
 
-.switcher label {
+.switcher .handle-box {
     display: inline-block;
     position: relative;
     width: 40px;
@@ -624,10 +631,9 @@ table.list-table .btn {
     background: #cf8b14;
     box-shadow: 2px 2px 2px 0px rgba(0, 0, 0, 0.2) inset;
     transition: background 1.8s;
-    cursor: pointer;
 }
 
-.switcher label:before {
+.switcher .handle-box:after {
     position: absolute;
     top: -2px;
     width: 20px;
@@ -639,12 +645,12 @@ table.list-table .btn {
     transition: background 1.8s;
 }
 
-.switcher label:before {
+.switcher .handle-box:after {
     left: 58px;
     background: #cec2c0;
 }
 
-.switcher input[type="checkbox"]:checked + label {
+.switcher input[type="checkbox"]:checked + .handle-box {
     background: linear-gradient(180deg, rgba(0, 175, 0, 1) 15%, rgba(19, 124, 0, 0.85) 60%, rgba(22, 141, 0, 0.72) 100%);
 }
 
@@ -662,15 +668,11 @@ table.list-table .btn {
     transition: left .3s;
 }
 
-.switcher input[type="checkbox"]:checked + label > .handle {
+.switcher input[type="checkbox"]:checked + .handle-box > .handle {
     left: calc(100% - 25px);
 }
 
-.switcher input[type="checkbox"]:checked + label:after {
-    background: #d1cac9;
-}
-
-.switcher input[type="checkbox"]:checked + label:before {
+.switcher input[type="checkbox"]:checked + .handle-box:after {
     background: linear-gradient(180deg, rgba(0, 175, 0, 1) 15%, rgba(18, 117, 0, 0.72) 80%, rgba(0, 175, 0, 1) 100%);
 }
 
