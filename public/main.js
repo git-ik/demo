@@ -348,7 +348,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     let sysIkeyDomElement = document.getElementById("sysIKey");
     if (!(sysIkeyDomElement == undefined)) {
-        sysIKey = document.getElementById("sysIKey").innerHTML;
+        sysIKey = document.getElementById("sysIKey").value;
     }
 });
 
