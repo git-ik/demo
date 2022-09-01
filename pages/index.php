@@ -146,7 +146,7 @@ if (empty($errors['system'])) {
                                 </div>
                                 <div class="m-box-line"></div>
                                 <div id="messageField" class="message-box-center">
-                                    <p>Внимание! Можно отправить только одно сообщение <br>не длиннее 200 символов.<br><a href="#dataObjects">[информация о применении]</a></p>
+                                    <p>Внимание! Можно отправить только одно сообщение <br>не длиннее 200 символов.<br><a href="#dataObjects">[информация об использовании]</a></p>
                                     <textarea id="messageText" placeholder="Введите сообщение" class="message-text" oninput="checkInputLength(this, 200);"></textarea>
                                     <div class="ajax-loader">
                                         <div id="lamp1"></div>
