@@ -1,6 +1,6 @@
 # DEMO #
 
-![alt text](/public/demo.jpg "Демо приложение")
+![alt text](/public/images/demo.jpg "Демо приложение")
 
 ## Для запуска тестового приложения на Linux:
  - установить LAMP (https://ru.wikipedia.org/wiki/LAMP),

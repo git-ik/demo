@@ -30,7 +30,7 @@ if (!empty($_POST['save'])) {
     }
 
     if ((int)$_POST['parent_id'] !== 0) {
-        $dbq = $db->prepare('SELECT * FROM objects WHERE id = :parent_id LIMIT 1');
+        $dbq = $db->prepare('SELECT * FROM demo_objects WHERE id = :parent_id LIMIT 1');
         $dbq->bindValue(':parent_id', (int)$_POST['parent_id']);
         $dbq->execute();
         $checkObject = $dbq->fetch();
@@ -40,7 +40,7 @@ if (!empty($_POST['save'])) {
     }
 
     if (empty($errors['form']['fields']['title']) && empty($errors['form']['fields']['description']) && empty($errors['form']['fields']['parent_id'])) {
-        $dbq = $db->prepare('INSERT INTO objects SET title = :title, description = :description, parent_id = :parent_id');
+        $dbq = $db->prepare('INSERT INTO demo_objects SET title = :title, description = :description, parent_id = :parent_id');
         $dbq->bindValue(':title', $_POST['title']);
         $dbq->bindValue(':description', $_POST['description']);
         $dbq->bindValue(':parent_id', (int)$_POST['parent_id']);
@@ -53,7 +53,7 @@ if (!empty($_POST['save'])) {
     }
 }
 
-$dbq = $db->prepare('SELECT * FROM objects');
+$dbq = $db->prepare('SELECT * FROM demo_objects');
 $dbq->execute();
 $objectsList = $dbq->fetchAll();
 
@@ -69,14 +69,19 @@ $objectsList = $dbq->fetchAll();
     <body>
         <div>
             <header>
-                <div class="box">
+                <div class="header-box">
                     <?php if (!empty($_SESSION['auth'])) { ?>
-                        <form method="POST">
-                            <button class="logout" title="Разлогиниться" id="unauthorize" name="unauthorize" type="submit" value="1"><img alt="logout" src="./public/logout.png"></button>
-                        </form>
+                        <div class="logout">
+                            <form method="POST">
+                                <button title="Разлогиниться" id="unauthorize" name="unauthorize" type="submit" value="1">
+                                    <img alt="logout" src="./public/images/logout.png">
+                                </button>
+                                <span></span>
+                            </form>
+                        </div>
                     <?php } ?>
-                    <div>
-                        <h1><?= $appName ?></h1>
+                    <div class="app-title">
+                        <h1 id="h1"><?= $appName ?></h1>
                     </div>
                 </div>
             </header>
@@ -145,9 +150,11 @@ $objectsList = $dbq->fetchAll();
             </div>
             <footer>
                 <div>
-                    <img alt="demo" src="/public/demo-guy.png" />
+                    <img alt="demo" src="/public/images/demo-guy.png" />
                     <br>
                     <span>© Kartoshkin "DEMO"</span>
+                    <br>
+                    <a href="mailto:iksoc@vk.com">iksoc@vk.com</a>
                 </div>
                 <?php foreach ($errors['system'] as $error) { ?>
                     <div class="message error"><?php echo $error; ?></div>

@@ -4,7 +4,7 @@ if (!checkAuthorization()) {
     error403();
 }
 
-$dbq = $db->prepare('SELECT * FROM objects');
+$dbq = $db->prepare('SELECT * FROM demo_objects');
 $dbq->execute();
 $objects = $dbq->fetchAll();
 
@@ -20,14 +20,19 @@ $objects = $dbq->fetchAll();
     <body>
         <div>
             <header>
-                <div class="box">
+                <div class="header-box">
                     <?php if (!empty($_SESSION['auth'])) { ?>
-                        <form method="POST">
-                            <button class="logout" title="Разлогиниться" id="unauthorize" name="unauthorize" type="submit" value="1"><img alt="logout" src="./public/logout.png"></button>
-                        </form>
+                        <div class="logout">
+                            <form method="POST">
+                                <button title="Разлогиниться" id="unauthorize" name="unauthorize" type="submit" value="1">
+                                    <img alt="logout" src="./public/images/logout.png">
+                                </button>
+                                <span></span>
+                            </form>
+                        </div>
                     <?php } ?>
-                    <div>
-                        <h1><?= $appName ?></h1>
+                    <div class="app-title">
+                        <h1 id="h1"><?= $appName ?></h1>
                     </div>
                 </div>
             </header>
@@ -86,9 +91,11 @@ $objects = $dbq->fetchAll();
             </div>
             <footer>
                 <div>
-                    <img alt="demo" src="/public/demo-guy.png" />
+                    <img alt="demo" src="/public/images/demo-guy.png" />
                     <br>
                     <span>© Kartoshkin "DEMO"</span>
+                    <br>
+                    <a href="mailto:iksoc@vk.com">iksoc@vk.com</a>
                 </div>
                 <?php foreach ($errors['system'] as $error) { ?>
                     <div class="message error"><?php echo $error; ?></div>

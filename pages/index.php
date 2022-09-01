@@ -12,17 +12,19 @@ $values['form']['login'] = '';
 $values['form']['password'] = '';
 $messages['form']['auth'] = [];
 
+$messagesCounter = 0;
+
 if (isset($_POST['login']) && isset($_POST['password'])) {
     $values['form']['login'] = $_POST['login'];
     if (!authorization($_POST['login'], $_POST['password'], $db)) {
-        $messages['form']['auth'][] = 'Неправильный логин и пароль';
+        $messages['form']['auth'][] = 'Access denied';
     }
 }
 
 if (empty($errors['system'])) {
-    $dbq = $db->prepare('SELECT * FROM objects');
-    $dbq->execute();
-    $objects = $dbq->fetchAll();
+    $objects = getObjects($db);
+    $messagesSendCounter = getMessagesSendCounter($db);
+    $messagesRecievedCounter = getMessagesRecievedCounter($db);
 }
 
 ?>
@@ -38,14 +40,19 @@ if (empty($errors['system'])) {
     <body>
         <div id="bg">
             <header>
-                <div class="box">
+                <div class="header-box">
                     <?php if (!empty($_SESSION['auth'])) { ?>
-                        <form method="POST">
-                            <button class="logout" title="Разлогиниться" id="unauthorize" name="unauthorize" type="submit" value="1"><img alt="logout" src="./public/logout.png"></button>
-                        </form>
+                        <div class="logout">
+                            <form method="POST">
+                                <button title="Разлогиниться" id="unauthorize" name="unauthorize" type="submit" value="1">
+                                    <img alt="logout" src="./public/images/logout.png">
+                                </button>
+                                <span></span>
+                            </form>
+                        </div>
                     <?php } ?>
-                    <div>
-                        <h1><?= $appName ?></h1>
+                    <div class="app-title">
+                        <h1 id="h1"><?= $appName ?></h1>
                     </div>
                 </div>
             </header>
@@ -94,15 +101,27 @@ if (empty($errors['system'])) {
                                     </tr>
                                     <tr>
                                         <td class="auth-form-submit-area" colspan="2">
-                                            <?php foreach ($messages['form']['auth'] as $message) { ?>
-                                                <div class="message error"><?php echo $message; ?></div>
-                                            <?php } ?>
                                             <br>
                                             <button name="authorize" value="1" type="submit">Авторизоваться</button>
                                         </td>
                                     </tr>
                                 </table>
                             </form>
+                            <?php if (empty($errors['system'])) { ?>
+                                <?php if (empty($_SESSION['auth'])) { ?>
+                                    <div class="auth-req">
+                                        <div class="align-center">
+                                            <?php foreach ($messages['form']['auth'] as $message) { ?>
+                                                <div class="auth-form-submit-area">
+                                                    <div class="message error"><?php echo $message; ?></div>
+                                                </div>
+                                            <?php } ?>
+                                            <p>Пользователь: <?=$users['admin']['login']?></p>
+                                            <p>Пароль: <?=$users['admin']['password']?></p>
+                                        </div>
+                                    </div>
+                                <?php } ?>
+                            <?php } ?>
                         </div>
                     </div>
                 <?php } ?>
@@ -115,62 +134,63 @@ if (empty($errors['system'])) {
                         </div>
                     </div>
                 <?php } ?>
-                <?php if (empty($errors['system'])) { ?>
-                    <?php if (empty($_SESSION['auth'])) { ?>
-                        <div class="container">
-                            <div class="align-center">
-                                <p>Используйте следующие реквизиты для авторизации:</p>
-                                <p>Пользователь: <?=$serviceUsers['admin']['login']?></p>
-                                <p>Пароль: <?=$serviceUsers['admin']['password']?></p>
-                            </div>
-                        </div>
-                    <?php } ?>
-                <?php } ?>
                 <?php if (!empty($_SESSION['auth']) && empty($errors['system'])) { ?>
                     <div class="container dots">
-                        <table class="r-table">
-                            <tr>
-                                <td>
-                                    <a class="btn" href="./admin">Открыть административную панель</a>
-                                </td>
-                            </tr>
-                        </table>
-                        <br>
                         <div class="switch-panel">
+                            <div id="messageBox">
+                                <input type="hidden" id="sysIKey" value="<?=getSystemKey($db)?>">
+                                <div class="message-box-top">
+                                    <img height="22" src="public/images/msg-l.svg" />&nbsp;&nbsp;&nbsp;
+                                    <button id="openMessageFieldButton" onclick="openMessageField(this);" class="dark-btn">Отправить сообщение</button>&nbsp;&nbsp;&nbsp;
+                                    <img height="22" src="public/images/msg-r.svg" />
+                                </div>
+                                <div class="m-box-line"></div>
+                                <div id="messageField" class="message-box-center">
+                                    <p>Внимание! Можно отправить только одно сообщение <br>не длиннее 200 символов.<br><a href="#dataObjects">[информация о применении]</a></p>
+                                    <textarea id="messageText" placeholder="Введите сообщение" class="message-text" oninput="checkInputLength(this, 200);"></textarea>
+                                    <div class="ajax-loader">
+                                        <div id="lamp1"></div>
+                                        <div id="lamp2"></div>
+                                        <div id="lamp3"></div>
+                                    </div>
+                                    <button id="messageCancelButton" onclick="cancelMessage(this);" class="dark-btn">Отмена</button>
+                                    <button id="messageSendButton" onclick="sendMessage(this);" runs-counter-val="0" url="<?=$serviceMsgUrl?>" class="dark-btn">Отправить</button>
+                                    <button id="messageGetButton" onclick="getMessage(this);" class="dark-btn">Получить сообщение</button>
+                                    <br>
+                                    <br>
+                                    <div class="counter-window">Отправлено <span id="sendMessagesCounter"><?=$messagesSendCounter?></span></div> <div class="counter-window">Получено <span><?=$messagesRecievedCounter?></span></div>
+                                </div>
+                                <div class="m-box-line"></div>
+                                <div class="message-box-bottom">
+                                    <div id="display" onclick="focusDisplay();" tabindex="1">
+                                        <div id="consoleText">
+                                            <p class="user-command">[user@system]:# <span id="consoleUIText"><span id="UICommand"></span><span id="consoleUICursor">█</span></span></p>
+                                        </div>
+                                    </div>
+                                    <span class="version">console version 0.01</span>
+                                </div>
+                            </div>
                             <table class="r-table">
                                 <tr>
                                     <td>
-                                        Включить rack
+                                        Включить\выключить анимацию
                                     </td>
-                                    <td>
-                                    <div class="switcher">
-                                        <input onchange="switchAnimation(this);" type="checkbox" id="lamps" />
-                                        <div class="handle-box">
-                                            <div class="handle"></div>
+                                    <td width="10">
+                                        <div class="switcher">
+                                            <input onchange="switchAnimation(this);" type="checkbox" id="lamps" />
+                                            <div class="handle-box">
+                                                <div class="handle"></div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        Разрешить получение информации <a href="#dataObjects">об объектах</a>
-                                    </td>
-                                    <td>
-                                    <div class="switcher">
-                                        <input type="checkbox" id="objectsAccess" />
-                                        <div class="handle-box">
-                                            <div class="handle"></div>
-                                        </div>
-                                    </div>
                                     </td>
                                 </tr>
                             </table>
                         </div>
                     </div>
                     <div class="container canvas-container">
-                        <img class="rack-left" alt="" src="/public/rack-left.png">
-                        <img class="rack-right" alt="" src="/public/rack-right.png">
-                        <canvas id="canvas1"></canvas>
+                        <img class="rack-left" alt="" src="/public/images/rack-left.png">
+                        <img class="rack-right" alt="" src="/public/images/rack-right.png">
+                        <canvas id="rack1"></canvas>
                     </div>
                 <?php } ?>
                 <div id="projectDescription" class="container">
@@ -214,14 +234,19 @@ if (empty($errors['system'])) {
                     <br>
                 </div>
                 <div class="container canvas-container">
-                    <img class="rack-left" alt="" src="/public/rack-left.png">
-                    <img class="rack-right" alt="" src="/public/rack-right.png">
-                    <canvas id="canvas2"></canvas>
+                    <img class="rack-left" alt="" src="/public/images/rack-left.png">
+                    <img class="rack-right" alt="" src="/public/images/rack-right.png">
+                    <canvas id="rack2"></canvas>
                 </div>
                 <?php if (empty($errors['system'])) { ?>
                     <div id="dataObjects" class="container dots">
                         <h3>СТРУКТУРА ДАННЫХ (объекты):</h3>
                         <p>Дерево объектов. Чтобы увидеть описание объекта необходимо кликнуть на его название.</p>
+                        <?php if (!empty($_SESSION['auth']) && empty($errors['system'])) { ?>
+                            <a class="btn" href="./admin">Редактировать</a>
+                            <br>
+                            <br>
+                        <?php } ?>
                         <div id="objects">
                             <div class="row">
                                 <div class="objects-list">
@@ -236,9 +261,9 @@ if (empty($errors['system'])) {
                         </div>
                     </div>
                     <div class="container canvas-container">
-                        <img class="rack-left" alt="" src="/public/rack-left.png">
-                        <img class="rack-right" alt="" src="/public/rack-right.png">
-                        <canvas id="canvas3"></canvas>
+                        <img class="rack-left" alt="" src="/public/images/rack-left.png">
+                        <img class="rack-right" alt="" src="/public/images/rack-right.png">
+                        <canvas id="rack3"></canvas>
                     </div>
                     <div id="codeExample" class="container factory-check">
                         <h3>Пример реализации ООП:</h3>
@@ -315,19 +340,22 @@ if (empty($errors['system'])) {
                     </div>
                 <?php } ?>
                 <div class="container canvas-container">
-                    <img class="rack-left" alt="" src="/public/rack-left.png">
-                    <img class="rack-right" alt="" src="/public/rack-right.png">
-                    <canvas id="canvas4"></canvas>
+                    <img class="rack-left" alt="" src="/public/images/rack-left.png">
+                    <img class="rack-right" alt="" src="/public/images/rack-right.png">
+                    <canvas id="rack4"></canvas>
                 </div>
                 <audio id="player" controls>
                     <source id="source" src="public/music.mp3" type="audio/mpeg">
                 </audio>
             </div>
+            <canvas id="fbg"></canvas>
             <footer>
                 <div>
-                    <img alt="demo" src="/public/demo-guy.png" />
+                    <img alt="demo" src="/public/images/demo-guy.png" />
                     <br>
                     <span>© Kartoshkin "DEMO"</span>
+                    <br>
+                    <a href="mailto:iksoc@vk.com">iksoc@vk.com</a>
                 </div>
                 <?php foreach ($errors['system'] as $error) { ?>
                     <div class="message error"><?php echo $error; ?></div>

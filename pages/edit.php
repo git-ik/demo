@@ -11,7 +11,7 @@ if (isset($_REQUEST['id'])) {
     die;
 }
 
-$dbq = $db->prepare('SELECT * FROM objects WHERE id = :id');
+$dbq = $db->prepare('SELECT * FROM demo_objects WHERE id = :id');
 $dbq->bindValue(':id', $id);
 $dbq->execute();
 $object = $dbq->fetch();
@@ -53,7 +53,7 @@ if (!empty($_POST['save'])) {
     }
 
     if (empty($errors['form']['fields']['title']) && empty($errors['form']['fields']['description']) && empty($errors['form']['fields']['parent_id'])) {
-        $dbq = $db->prepare('UPDATE objects SET title = :title, description = :description, parent_id = :parent_id WHERE id = :id');
+        $dbq = $db->prepare('UPDATE demo_objects SET title = :title, description = :description, parent_id = :parent_id WHERE id = :id');
         $dbq->bindValue(':id', $id);
         $dbq->bindValue(':title', $_POST['title']);
         $dbq->bindValue(':description', $_POST['description']);
@@ -70,7 +70,7 @@ if (!empty($_POST['save'])) {
     }
 }
 
-$dbq = $db->prepare('SELECT * FROM objects');
+$dbq = $db->prepare('SELECT * FROM demo_objects');
 $dbq->execute();
 $objectsList = $dbq->fetchAll();
 
@@ -86,14 +86,19 @@ $objectsList = $dbq->fetchAll();
     <body>
         <div>
             <header>
-                <div class="box">
+                <div class="header-box">
                     <?php if (!empty($_SESSION['auth'])) { ?>
-                        <form method="POST">
-                            <button class="logout" title="Разлогиниться" id="unauthorize" name="unauthorize" type="submit" value="1"><img alt="logout" src="./public/logout.png"></button>
-                        </form>
+                        <div class="logout">
+                            <form method="POST">
+                                <button title="Разлогиниться" id="unauthorize" name="unauthorize" type="submit" value="1">
+                                    <img alt="logout" src="./public/images/logout.png">
+                                </button>
+                                <span></span>
+                            </form>
+                        </div>
                     <?php } ?>
-                    <div>
-                        <h1><?= $appName ?></h1>
+                    <div class="app-title">
+                        <h1 id="h1"><?= $appName ?></h1>
                     </div>
                 </div>
             </header>
@@ -161,9 +166,11 @@ $objectsList = $dbq->fetchAll();
             </div>
             <footer>
                 <div>
-                    <img alt="demo" src="/public/demo-guy.png" />
+                    <img alt="demo" src="/public/images/demo-guy.png" />
                     <br>
                     <span>© Kartoshkin "DEMO"</span>
+                    <br>
+                    <a href="mailto:iksoc@vk.com">iksoc@vk.com</a>
                 </div>
                 <?php foreach ($errors['system'] as $error) { ?>
                     <div class="message error"><?php echo $error; ?></div>

@@ -3,8 +3,6 @@
 require_once('config.php');
 require_once('functions.php');
 
-checkConfig($serviceUsers);
-
 session_start();
 
 ///////////////////////////////
@@ -32,8 +30,9 @@ $values['form'] = [];
 try {
     $db = new PDO('mysql:host=' . $dbserver . ';dbname=' . $dbname, $dbuser, $dbpassword); // MYSQL
     $db->exec("SET NAMES " . $dbcharset);
-
-    checkServiceUsers($db, $serviceUsers);
+    
+    checkConfig($users);
+    install($db, $users);
 } catch (PDOException $e) {
     $errors['configuration'][] = 'Перед началом работы с приложением необходимо посмотреть и отредактировать переменные в файле /core/config.php для соединения с MYSQL';
     $errors['configuration'][] = 'Убедитесь в том что база данных и пользователь MYSQL созданы';

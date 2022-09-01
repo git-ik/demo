@@ -1,5 +1,6 @@
-/public/demo.xcf
-/public/bg.xcf
-/public/auth-light.xcf
-/public/rack.xcf
-/public/bg-bga.xcf
+/public/images/demo.xcf
+/public/images/bg.xcf
+/public/images/auth-light.xcf
+/public/images/rack.xcf
+/public/images/bg-bga.xcf
+handler.php

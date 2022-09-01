@@ -12,13 +12,20 @@ header("HTTP/1.0 404 Not Found", true, 404);
     <body>
         <div>
             <header>
-                <div class="box">
+                <div class="header-box">
                     <?php if (!empty($_SESSION['auth'])) { ?>
-                        <form method="POST">
-                            <button class="logout" title="Разлогиниться" id="unauthorize" name="unauthorize" type="submit" value="1"><img alt="logout" src="./public/logout.png"></button>
-                        </form>
+                        <div class="logout">
+                            <form method="POST">
+                                <button title="Разлогиниться" id="unauthorize" name="unauthorize" type="submit" value="1">
+                                    <img alt="logout" src="./public/images/logout.png">
+                                </button>
+                                <span></span>
+                            </form>
+                        </div>
                     <?php } ?>
-                    <h1><?= $appName ?></h1>
+                    <div class="app-title">
+                        <h1><?= $appName ?></h1>
+                    </div>
                 </div>
             </header>
             <div id="technologies">
@@ -38,7 +45,7 @@ header("HTTP/1.0 404 Not Found", true, 404);
             </div>
             <footer>
                 <div>
-                    <img alt="demo" src="/public/demo-guy.png" />
+                    <img alt="demo" src="/public/images/demo-guy.png" />
                     <br>
                     <span>© Kartoshkin "DEMO"</span>
                 </div>
