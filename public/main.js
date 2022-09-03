@@ -133,6 +133,90 @@ function animateColorRgb(el, minColor, maxColor, color, colorChangeSpeed) {
     }
 }
 
+//footer icon animation
+var animationCounter = 0;
+function animateFooterSquares() {
+    let square1 = document.getElementById('square1');
+    let square2 = document.getElementById('square2');
+    let square3 = document.getElementById('square3');
+    let demoGuyWater = document.getElementById('demoGuyWater');
+    let square1mt = parseInt(window.getComputedStyle(square1).getPropertyValue("margin-top"));
+    let square1ml = parseInt(window.getComputedStyle(square1).getPropertyValue("margin-left"));
+    let square2mt = parseInt(window.getComputedStyle(square2).getPropertyValue("margin-top"));
+    let square2ml = parseInt(window.getComputedStyle(square2).getPropertyValue("margin-left"));
+    let square3mt = parseInt(window.getComputedStyle(square3).getPropertyValue("margin-top"));
+    let square3ml = parseInt(window.getComputedStyle(square3).getPropertyValue("margin-left"));
+    let demoGuyWaterml = parseInt(window.getComputedStyle(demoGuyWater).getPropertyValue("margin-left"));
+
+    if (animationCounter == 5) {
+        if (demoGuyWaterml > -62) {
+            console.log('eqweq');
+            demoGuyWater.style.marginLeft = demoGuyWaterml - 1 + 'px';
+        } else {
+            console.log('eqweq2');
+            demoGuyWater.style.marginLeft = demoGuyWaterml + 1 + 'px';
+        }
+        animationCounter = 0;
+    }
+    animationCounter = animationCounter + 1;
+
+    if (square1mt < 0) {
+        square1.style.marginTop = '4px';
+        square1.style.marginLeft = '17px';
+        square1.style.width = '7px';
+        square1.style.height = '7px';
+    } else {
+        square1.style.marginTop = square1mt - 1 + 'px';
+        if (Math.random() >= 0.5) {
+            square1.style.marginLeft = square1ml - 1 + 'px';
+        } else {
+            square1.style.marginLeft = square1ml + 1 + 'px';
+        }
+        
+        if (square1mt < 2) {
+            square1.style.width = '8px';
+            square1.style.height = '8px';
+        }
+    }
+
+    if (square1mt < 1) {
+        square2.style.marginTop = '5px';
+        square2.style.marginLeft = '33px';
+        square2.style.width = '5px';
+        square2.style.height = '5px';
+    } else {
+        square2.style.marginTop = square2mt - 1 + 'px';
+        if (square2ml <= 32 || square2ml >= 34) {
+            square2.style.marginLeft = square2ml - 1 + 'px';
+        } else {
+            square2.style.marginLeft = square2ml + 1 + 'px';
+        }
+        
+        square2.style.width = '6px';
+        square2.style.height = '6px';
+    }
+
+    if (square3mt < 11) {
+        square3.style.marginTop = '15px';
+        square3.style.marginLeft = '26px';
+        square3.style.width = '5px';
+        square3.style.height = '5px';
+    } else {
+        square3.style.marginTop = square3mt - 1 + 'px';
+        if (square3ml <= 25 || square3ml >= 27) {
+            square3.style.marginLeft = square3ml - 1 + 'px';
+        } else {
+            square3.style.marginLeft = square3ml + 1 + 'px';
+        }
+    }
+
+    if (animate == 'on') {
+        setTimeout(function() {
+            animateFooterSquares();
+        }, 300);
+    }
+}
+
 /**
  * Render racks animation
  */
@@ -322,6 +406,7 @@ function switchAnimation(el) {
                 player.play();
                 animate = 'on';
                 loopTPDAnimation();
+                animateFooterSquares();
                 animateColorRgb(document.getElementById("h1"), 0, 200, 'red');
             }
             if (window.getComputedStyle(bg).getPropertyValue("opacity") == 1) {

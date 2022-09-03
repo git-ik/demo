@@ -375,7 +375,7 @@ header > .header-box > .app-title {
 }
 
 footer {
-    padding: 20px 0px;
+    padding: 30px 0px;
     width: 100%;
     min-height: 20px;
 }
@@ -399,6 +399,44 @@ footer img {
 
 footer span {
     color: white;
+}
+
+footer .footer-icon .squares {
+    margin-left: 50%;
+}
+
+footer .footer-icon #square1 {
+    position: absolute;
+    margin-top: 4px;
+    margin-left: 17px;
+    width: 8px;
+    height: 8px;
+    background-color: #4caf50;
+}
+
+footer .footer-icon #square2 {
+    position: absolute;
+    margin-top: 5px;
+    margin-left: 33px;
+    width: 6px;
+    height: 6px;
+    background-color: #fd9601;
+}
+
+footer .footer-icon #square3 {
+    position: absolute;
+    margin-top: 15px;
+    margin-left: 26px;
+    width: 6px;
+    height: 6px;
+    background-color: #a2a2a2;
+}
+
+footer .demo-guy-water {
+    position: absolute;
+    margin-left: -62px;
+    margin-top: -37px;
+    opacity: 0.5;
 }
 
 #player {

@@ -166,8 +166,16 @@ $objectsList = $dbq->fetchAll();
             </div>
             <footer>
                 <div>
-                    <img alt="demo" src="/public/images/demo-guy.png" />
-                    <br>
+                    <div class="footer-icon">
+                        <div class="squares">
+                            <div id="square1"></div>
+                            <div id="square2"></div>
+                            <div id="square3"></div>
+                        </div>
+                        <img class="demo-guy" alt="demo-guy" src="/public/images/demo-guy.png" />
+                        <br>
+                        <img id="demoGuyWater" class="demo-guy-water" alt="demo-guy-water" src="/public/images/demo-guy-water.png" />
+                    </div>
                     <span>© Kartoshkin "DEMO"</span>
                     <br>
                     <a href="mailto:iksoc@vk.com">iksoc@vk.com</a>
