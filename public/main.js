@@ -712,7 +712,7 @@ function commandLineInputListener(e) {
     if (e.key == 'Enter') {
         if (cursorElement.innerHTML == '-help') {
             commandLineMoveCarrett();
-            typeTextInElement(consoleText, '[system]: beta console v0.001');
+            typeTextInElement(consoleText, '[system]: beta console v0.01');
             typeTextInElement(consoleText, '[system]: no one command you can use right now! (i`m sorry man)');
             
             setTimeout(function() {
