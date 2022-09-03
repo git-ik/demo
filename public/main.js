@@ -125,7 +125,7 @@ function animateColorRgb(el, minColor, maxColor, color, colorChangeSpeed) {
     if (color == 'blue') {
         el.style.color = 'rgb(' + colorArray[1] + ' ' + colorArray[2] + ' ' + animateColorElements[el.id + color] + ')';
     }
-    
+
     if (animate == 'on') {
         setTimeout(function () {
             animateColorRgb(el, minColor, maxColor, color, colorChangeSpeed);
@@ -150,10 +150,8 @@ function animateFooterSquares() {
 
     if (animationCounter == 5) {
         if (demoGuyWaterml > -62) {
-            console.log('eqweq');
             demoGuyWater.style.marginLeft = demoGuyWaterml - 1 + 'px';
         } else {
-            console.log('eqweq2');
             demoGuyWater.style.marginLeft = demoGuyWaterml + 1 + 'px';
         }
         animationCounter = 0;
@@ -172,7 +170,7 @@ function animateFooterSquares() {
         } else {
             square1.style.marginLeft = square1ml + 1 + 'px';
         }
-        
+
         if (square1mt < 2) {
             square1.style.width = '8px';
             square1.style.height = '8px';
@@ -191,7 +189,7 @@ function animateFooterSquares() {
         } else {
             square2.style.marginLeft = square2ml + 1 + 'px';
         }
-        
+
         square2.style.width = '6px';
         square2.style.height = '6px';
     }
@@ -211,7 +209,7 @@ function animateFooterSquares() {
     }
 
     if (animate == 'on') {
-        setTimeout(function() {
+        setTimeout(function () {
             animateFooterSquares();
         }, 300);
     }
@@ -407,6 +405,7 @@ function switchAnimation(el) {
                 animate = 'on';
                 loopTPDAnimation();
                 animateFooterSquares();
+                letterChangeAnimation();
                 animateColorRgb(document.getElementById("h1"), 0, 200, 'red');
             }
             if (window.getComputedStyle(bg).getPropertyValue("opacity") == 1) {
@@ -415,6 +414,7 @@ function switchAnimation(el) {
         }, 10);
     } else {
         player.pause();
+        player.currentTime = 0;
         animate = 'off';
     }
 }
@@ -554,7 +554,7 @@ function sendMessage(el) {
     }, 300);
 
     let request = new XMLHttpRequest();
-    
+
     request.open('GET', el.getAttribute('url') + '?key=:demo-001:potato:' + sysIKey + '&message=' + messageText.value);
     request.setRequestHeader('accept', 'application/json');
     request.addEventListener("readystatechange", () => {
@@ -587,7 +587,7 @@ function sendMessage(el) {
                     let requestUC = new XMLHttpRequest();
                     requestUC.open('GET', '/api/data?message-send-update-counter=1');
                     requestUC.setRequestHeader('accept', 'application/json');
-                    requestUC.addEventListener("readystatechange", () => {});
+                    requestUC.addEventListener("readystatechange", () => { });
                     requestUC.send();
                 } else {
                     if (responseData.errorCode == 001) {
@@ -624,7 +624,7 @@ function getMessage(el) {
 
     let consoleText = document.getElementById("consoleText");
     typeTextInElement(consoleText, 'trying to recieve message.............................................');
-    setTimeout(function() {
+    setTimeout(function () {
         typeTextInElement(consoleText, '[system]: can`t recieve messages (service not working yet)...', 'error');
         commandLineEnableUI();
     }, 4000);
@@ -714,8 +714,8 @@ function commandLineInputListener(e) {
             commandLineMoveCarrett();
             typeTextInElement(consoleText, '[system]: beta console v0.01');
             typeTextInElement(consoleText, '[system]: no one command you can use right now! (i`m sorry man)');
-            
-            setTimeout(function() {
+
+            setTimeout(function () {
                 commandLineEnableUI();
             }, 3000);
             return;
@@ -725,13 +725,13 @@ function commandLineInputListener(e) {
 
         commandLineMoveCarrett();
         typeTextInElement(consoleText, '[system]: unknown command');
-        setTimeout(function() {
+        setTimeout(function () {
             typeTextInElement(consoleText, '[system]: type -help to check commands that you can use in this console');
-            setTimeout(function() {
+            setTimeout(function () {
                 commandLineEnableUI();
             }, 2000);
         }, 2000);
-        
+
         return;
     }
 
@@ -784,6 +784,32 @@ function typeTextInElement(el, text, messageClass, i, innerEl) {
         }
     }, 50);
 }
+
+//animate letter changes
+function letterChangeAnimation() {
+    let t3 = document.getElementById("t3");
+    if (animate == 'on') {
+        t3.innerHTML = 'is on';
+    } else {
+        t3.innerHTML = 'is off';
+    }
+
+    let t5 = document.getElementById("t5");
+    let t5str = t5.innerHTML;
+
+    let lettersArr = ['0', '1'];
+
+    let t5LetterNumber = Math.floor(Math.random() * t5str.length);
+    let letter = Math.floor(Math.random() * 2);
+    t5.innerHTML = t5str.substr(0, t5LetterNumber) + lettersArr[letter] + t5str.substr(t5LetterNumber + 1);
+
+    if (animate == 'on') {
+        setTimeout(function () {
+            letterChangeAnimation();
+        }, 200);
+    }
+}
+
 
 ////////////////////////////////////////////////
 /// Animate honeycomb (thx to ThreePixDroid) ///

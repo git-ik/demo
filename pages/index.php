@@ -57,11 +57,11 @@ if (empty($errors['system'])) {
                 </div>
             </header>
             <div id="technologies">
-                <span id="t1">PHP8</span>
-                <span id="t2">JS</span>
-                <span id="t3">MySQL</span>
-                <span id="t4">GIT</span>
-                <span id="t5">GIMP</span>
+                <span id="t1">the [system]</span>
+                <span id="t2">power</span>
+                <span id="t3">is off</span>
+                <span id="t4">now</span>
+                <span id="t5">--------</span>
             </div>
             <div class="main">
                 <?php if (empty($_SESSION['auth']) && empty($errors['system'])) { ?>
