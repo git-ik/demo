@@ -16,15 +16,19 @@ $dbq->bindValue(':id', $id);
 $dbq->execute();
 $object = $dbq->fetch();
 
-if (empty($object)) {
-    header("HTTP/1.0 404 Not Found");
-    die;
-}
-
-if (deleteRecursive($id, $db)) {
-    $messages['success'][] = 'Обект удален';
-} else {
+if ($id === 0) {
     $messages['fails'][] = 'Объект не найден';
+} else {
+    if (empty($object)) {
+        header("HTTP/1.0 404 Not Found");
+        die;
+    }
+
+    if (deleteRecursive($id, $db)) {
+        $messages['success'][] = 'Обект удален';
+    } else {
+        $messages['fails'][] = 'Объект не найден';
+    }
 }
 
 ?>

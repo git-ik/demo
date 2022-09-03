@@ -13,6 +13,7 @@ session_start();
 $errors = [];
 $errors['system'] = [];
 $errors['configuration'] = [];
+$errors['form']['common'] = [];
 $errors['form']['fields'] = [];
 
 //messages array

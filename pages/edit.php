@@ -16,9 +16,18 @@ $dbq->bindValue(':id', $id);
 $dbq->execute();
 $object = $dbq->fetch();
 
-if (empty($object)) {
-    header("HTTP/1.0 404 Not Found");
-    die;
+if ($_REQUEST['id'] == '0') {
+    $object['title'] = '';
+    $object['description'] = '';
+    $object['parent_id'] = 0;
+    if (!empty($_POST['save'])) {
+        $errors['form']['common'][] = 'Редактирование объекта невозможно. Вы можете <a href="/">вернуться на главную страницу</a>';
+    }
+} else {
+    if (empty($object)) {
+        header("HTTP/1.0 404 Not Found");
+        die;
+    }
 }
 
 $errors['form']['fields']['title'] = [];
@@ -29,7 +38,7 @@ $values['form']['description'] = $object['description'];
 $values['form']['parent_id'] = $object['parent_id'];
 $values['form']['success'] = false;
 
-if (!empty($_POST['save'])) {
+if (!empty($_POST['save']) && empty($errors['form']['common'])) {
 
     $values['form']['title'] = $_POST['title'];
     $values['form']['description'] = $_POST['description'];
@@ -156,6 +165,9 @@ $objectsList = $dbq->fetchAll();
                             </tr>
                         </table>
                         <br>
+                        <?php foreach ($errors['form']['common'] as $message) { ?>
+                            <div class="message error"><?php echo $message; ?></div><br>
+                        <?php } ?>
                         <button title="Сохранить" class="save" name="save" type="submit" value="1">Сохранить</button>
                         <br>
                         <?php if ($values['form']['success']) { ?>
