@@ -154,11 +154,11 @@ if (empty($errors['system'])) {
                                         <div id="lamp3"></div>
                                     </div>
                                     <button id="messageCancelButton" onclick="cancelMessage(this);" class="dark-btn">Отмена</button>
-                                    <button id="messageSendButton" onclick="sendMessage(this);" runs-counter-val="0" url="<?=$serviceMsgUrl?>" class="dark-btn">Отправить</button>
-                                    <button id="messageGetButton" onclick="getMessage(this);" class="dark-btn">Получить сообщение</button>
+                                    <button id="messageSendButton" onclick="sendMessage(this);" url="<?=$serviceMsgUrl?>" class="dark-btn">Отправить</button>
+                                    <button id="messageGetButton" onclick="getMessage(this);" url="<?=$serviceMsgUrl?>" class="dark-btn">Получить сообщение</button>
                                     <br>
                                     <br>
-                                    <div class="counter-window">Отправлено <span id="sendMessagesCounter"><?=$messagesSendCounter?></span></div> <div class="counter-window">Получено <span><?=$messagesRecievedCounter?></span></div>
+                                    <div class="counter-window">Отправлено <span id="sendMessagesCounter"><?=$messagesSendCounter?></span></div> <div class="counter-window">Получено <span id="recievedMessagesCounter"><?=$messagesRecievedCounter?></span></div>
                                 </div>
                                 <div class="m-box-line"></div>
                                 <div class="message-box-bottom">

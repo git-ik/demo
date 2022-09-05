@@ -424,6 +424,7 @@ function switchAnimation(el) {
 //////////////////////
 
 var sysIKey;
+var inputBlocked;
 
 document.addEventListener('DOMContentLoaded', function () {
     let messageSendButton = document.getElementById("messageSendButton");
@@ -524,6 +525,7 @@ function cancelMessage() {
 // Отправить сообщение
 var sendMessageLoopBugChecker;
 function sendMessage(el) {
+    inputBlocked = true;
     if (sendMessageLoopBugChecker) {
         return;
     }
@@ -540,6 +542,7 @@ function sendMessage(el) {
         commandLineMoveCarrett();
         typeTextInElement(document.getElementById("consoleText"), '[system]: Сообщение длиннее 200 символов не может быть отправлено.', 'error');
         commandLineEnableUI();
+        inputBlocked = undefined;
         return false;
     }
 
@@ -554,7 +557,6 @@ function sendMessage(el) {
     }, 300);
 
     let request = new XMLHttpRequest();
-
     request.open('GET', el.getAttribute('url') + '?key=:demo-001:potato:' + sysIKey + '&message=' + messageText.value);
     request.setRequestHeader('accept', 'application/json');
     request.addEventListener("readystatechange", () => {
@@ -590,7 +592,7 @@ function sendMessage(el) {
                     requestUC.addEventListener("readystatechange", () => { });
                     requestUC.send();
                 } else {
-                    if (responseData.errorCode == 001) {
+                    if (responseData.errorCode == '001') {
                         commandLineMoveCarrett();
                         typeTextInElement(document.getElementById("consoleText"), '[system]: ' + responseData.errorText, 'error');
                     } else {
@@ -605,6 +607,7 @@ function sendMessage(el) {
     request.send();
 
     setTimeout(function () {
+        inputBlocked = undefined;
         sendMessageLoopBugChecker = false;
     }, 5500);
 
@@ -617,19 +620,68 @@ function getMessage(el) {
     if (getMessageLoopBugChecker) {
         return;
     }
+    inputBlocked = true;
     getMessageLoopBugChecker = true;
     el.disabled = true;
 
     commandLineMoveCarrett();
 
     let consoleText = document.getElementById("consoleText");
-    typeTextInElement(consoleText, 'trying to recieve message.............................................');
-    setTimeout(function () {
-        typeTextInElement(consoleText, '[system]: can`t recieve messages (service not working yet)...', 'error');
-        commandLineEnableUI();
-    }, 4000);
+    typeTextInElement(consoleText, 'trying to recieve message..............................');
+    
+    let request = new XMLHttpRequest();
+    request.open('GET', el.getAttribute('url') + '?key=:demo-001:potato:' + sysIKey + '&command=rmessage');
+    request.setRequestHeader('accept', 'application/json');
+    request.addEventListener("readystatechange", () => {
+        if (request.readyState === 4 && request.status === 200) {
+            let responseData = JSON.parse(request.responseText);
+            setTimeout(function () {
+                lamp1.style.backgroundColor = "gray";
+                lamp2.style.backgroundColor = "gray";
+                lamp3.style.backgroundColor = "gray";
+                if (responseData.success == true) {
+                    typeTextInElement(document.getElementById("consoleText"), '[system]: Сообщение получено!', 'success');
+                    setTimeout(function() {
+                        typeTextInElement(document.getElementById("consoleText"), '[system]: Сообщение гласит: «' + responseData.message + '»');
+                        commandLineEnableUI();
+                    }, 1000);
+
+                    //update message counter
+                    let recievedMessagesCounter = document.getElementById("recievedMessagesCounter");
+                    let messagesCounter = parseInt(recievedMessagesCounter.innerHTML) + 1;
+                    if (messagesCounter > 999) {
+                        messagesCounter = '001';
+                    } else if (messagesCounter > 99) {
+                        messagesCounter = messagesCounter;
+                    } else if (messagesCounter > 9) {
+                        messagesCounter = '0' + messagesCounter;
+                    } else {
+                        messagesCounter = '00' + messagesCounter;
+                    }
+                    recievedMessagesCounter.innerHTML = messagesCounter;
+
+                    let requestUC = new XMLHttpRequest();
+                    requestUC.open('GET', '/api/data?message-recieved-update-counter=1');
+                    requestUC.setRequestHeader('accept', 'application/json');
+                    requestUC.addEventListener("readystatechange", () => { });
+                    requestUC.send();
+                } else {
+                    if (responseData.errorCode == '010') {
+                        commandLineMoveCarrett();
+                        typeTextInElement(document.getElementById("consoleText"), '[system]: ' + responseData.errorText, 'error');
+                    } else {
+                        commandLineMoveCarrett();
+                        typeTextInElement(document.getElementById("consoleText"), '[system]: Не удалось получить сообщение!', 'error');
+                    }
+                    commandLineEnableUI();
+                }
+            }, 3500);
+        }
+    });
+    request.send();
 
     setTimeout(function () {
+        inputBlocked = undefined;
         getMessageLoopBugChecker = false;
         el.disabled = false;
     }, 5500);
@@ -708,6 +760,9 @@ function commandLineUserInputCursorAnimate(counter) {
 }
 
 function commandLineInputListener(e) {
+    if (inputBlocked) {
+        return;
+    } 
     let cursorElement = document.getElementById("UICommand");
     if (e.key == 'Enter') {
         if (cursorElement.innerHTML == '-help') {

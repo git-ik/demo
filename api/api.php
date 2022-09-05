@@ -25,11 +25,23 @@ if (!checkApiAuthorization()) {
 }
 
 /////////////////////////////////
-///// SEND MESSAGE //////////////
+///// GET/MESSAGE ///////////////
 /////////////////////////////////
 
 if (isset($_REQUEST['message-send-update-counter'])) {
     $dbq = $db->prepare('UPDATE demo_settings SET value = value + 1 WHERE name = \'messages-send-counter\'');
+    if ($dbq->execute()) {
+        $response['success'] = true;
+    }
+
+    header('Content-Type: application/json; charset=utf-8');
+    echo json_encode($response);
+
+    exit;
+}
+
+if (isset($_REQUEST['message-recieved-update-counter'])) {
+    $dbq = $db->prepare('UPDATE demo_settings SET value = value + 1 WHERE name = \'messages-recieved-counter\'');
     if ($dbq->execute()) {
         $response['success'] = true;
     }
