@@ -557,7 +557,7 @@ function sendMessage(el) {
     }, 300);
 
     let request = new XMLHttpRequest();
-    request.open('GET', el.getAttribute('url') + '?key=:demo-001:potato:' + sysIKey + '&message=' + messageText.value);
+    request.open('GET', document.getElementById("messageServiceUrl").value + '?key=:demo-001:potato:' + sysIKey + '&message=' + messageText.value);
     request.setRequestHeader('accept', 'application/json');
     request.addEventListener("readystatechange", () => {
         if (request.readyState === 4 && request.status === 200) {
@@ -630,7 +630,7 @@ function getMessage(el) {
     typeTextInElement(consoleText, 'trying to recieve message..............................');
     
     let request = new XMLHttpRequest();
-    request.open('GET', el.getAttribute('url') + '?key=:demo-001:potato:' + sysIKey + '&command=rmessage');
+    request.open('GET', document.getElementById("messageServiceUrl").value + '?key=:demo-001:potato:' + sysIKey + '&command=rmessage');
     request.setRequestHeader('accept', 'application/json');
     request.addEventListener("readystatechange", () => {
         if (request.readyState === 4 && request.status === 200) {

@@ -139,10 +139,11 @@ if (empty($errors['system'])) {
                         <div class="switch-panel">
                             <div id="messageBox">
                                 <input type="hidden" id="sysIKey" value="<?=getSystemKey($db)?>">
+                                <input type="hidden" id="messageServiceUrl" value="<?=$serviceMsgUrl?>">
                                 <div class="message-box-top">
-                                    <img height="22" src="public/images/msg-l.svg" />&nbsp;&nbsp;&nbsp;
+                                    <img alt="msg" height="22" src="public/images/msg-l.svg" />&nbsp;&nbsp;&nbsp;
                                     <button id="openMessageFieldButton" onclick="openMessageField(this);" class="dark-btn">Отправить сообщение</button>&nbsp;&nbsp;&nbsp;
-                                    <img height="22" src="public/images/msg-r.svg" />
+                                    <img alt="msg" height="22" src="public/images/msg-r.svg" />
                                 </div>
                                 <div class="m-box-line"></div>
                                 <div id="messageField" class="message-box-center">
@@ -154,8 +155,8 @@ if (empty($errors['system'])) {
                                         <div id="lamp3"></div>
                                     </div>
                                     <button id="messageCancelButton" onclick="cancelMessage(this);" class="dark-btn">Отмена</button>
-                                    <button id="messageSendButton" onclick="sendMessage(this);" url="<?=$serviceMsgUrl?>" class="dark-btn">Отправить</button>
-                                    <button id="messageGetButton" onclick="getMessage(this);" url="<?=$serviceMsgUrl?>" class="dark-btn">Получить сообщение</button>
+                                    <button id="messageSendButton" onclick="sendMessage(this);" class="dark-btn">Отправить</button>
+                                    <button id="messageGetButton" onclick="getMessage(this);" class="dark-btn">Получить сообщение</button>
                                     <br>
                                     <br>
                                     <div class="counter-window">Отправлено <span id="sendMessagesCounter"><?=$messagesSendCounter?></span></div> <div class="counter-window">Получено <span id="recievedMessagesCounter"><?=$messagesRecievedCounter?></span></div>
@@ -175,7 +176,7 @@ if (empty($errors['system'])) {
                                     <td>
                                         Включить\выключить анимацию
                                     </td>
-                                    <td width="10">
+                                    <td>
                                         <div class="switcher">
                                             <input onchange="switchAnimation(this);" type="checkbox" id="lamps" />
                                             <div class="handle-box">
