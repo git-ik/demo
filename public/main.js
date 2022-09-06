@@ -523,28 +523,32 @@ function cancelMessage() {
 }
 
 // Отправить сообщение
-var sendMessageLoopBugChecker;
 function sendMessage(el) {
-    inputBlocked = true;
-    if (sendMessageLoopBugChecker) {
+    if (inputBlocked) {
         return;
     }
-    sendMessageLoopBugChecker = true;
+    
+    el.disabled = true;
 
     let lamp1 = document.getElementById("lamp1");
     let lamp2 = document.getElementById("lamp2");
     let lamp3 = document.getElementById("lamp3");
 
     let messageText = document.getElementById("messageText");
-    let messageSendButton = document.getElementById("messageSendButton");
+    let consoleText = document.getElementById("consoleText");
 
     if (messageText.value.length > 200) {
-        commandLineMoveCarrett();
-        typeTextInElement(document.getElementById("consoleText"), '[system]: Сообщение длиннее 200 символов не может быть отправлено.', 'error');
-        commandLineEnableUI();
-        inputBlocked = undefined;
+        typeTextInElement(document.getElementById("consoleText"), '[system]: Сообщение длиннее 200 символов не может быть отправлено.', 'error', 0);
+        setTimeout(function () {
+            inputBlocked = undefined;
+            el.disabled = false;
+            commandLineEnableUI();
+        }, 500);
         return false;
     }
+
+    commandLineMoveCarrett(2);
+    typeTextInElement(consoleText, 'trying to send message..............................');
 
     setTimeout(function () {
         lamp1.style.backgroundColor = "red";
@@ -560,151 +564,181 @@ function sendMessage(el) {
     request.open('GET', document.getElementById("messageServiceUrl").value + '?key=:demo-001:potato:' + sysIKey + '&message=' + encodeURIComponent(messageText.value));
     request.setRequestHeader('accept', 'application/json');
     request.addEventListener("readystatechange", () => {
-        if (request.readyState === 4 && request.status === 200) {
-            let responseData = JSON.parse(request.responseText);
-            setTimeout(function () {
-                lamp1.style.backgroundColor = "gray";
-                lamp2.style.backgroundColor = "gray";
-                lamp3.style.backgroundColor = "gray";
-                if (responseData.success == true) {
-                    typeTextInElement(document.getElementById("consoleText"), '[system]: Сообщение отправлено!', 'success');
-                    messageText.value = '';
-                    messageSendButton.disabled = true;
-                    commandLineEnableUI();
-
-                    //update message counter
-                    let sendMessagesCounter = document.getElementById("sendMessagesCounter");
-                    let messagesCounter = parseInt(sendMessagesCounter.innerHTML) + 1;
-                    if (messagesCounter > 999) {
-                        messagesCounter = '001';
-                    } else if (messagesCounter > 99) {
-                        messagesCounter = messagesCounter;
-                    } else if (messagesCounter > 9) {
-                        messagesCounter = '0' + messagesCounter;
+        if (request.readyState === 4) {
+            if (request.status === 200) {
+                let responseData = JSON.parse(request.responseText);
+                setTimeout(function () {
+                    lamp1.style.backgroundColor = "gray";
+                    lamp2.style.backgroundColor = "gray";
+                    lamp3.style.backgroundColor = "gray";
+                    if (responseData.success == true) {
+                        typeTextInElement(document.getElementById("consoleText"), '[system]: Сообщение отправлено!', 'success', 0);
+                        messageText.value = '';
+                        inputBlocked = undefined;
+                        el.disabled = true;
+                        commandLineEnableUI();
+    
+                        //update message counter
+                        let sendMessagesCounter = document.getElementById("sendMessagesCounter");
+                        let messagesCounter = parseInt(sendMessagesCounter.innerHTML) + 1;
+                        if (messagesCounter > 999) {
+                            messagesCounter = '001';
+                        } else if (messagesCounter > 99) {
+                            messagesCounter = messagesCounter;
+                        } else if (messagesCounter > 9) {
+                            messagesCounter = '0' + messagesCounter;
+                        } else {
+                            messagesCounter = '00' + messagesCounter;
+                        }
+                        sendMessagesCounter.innerHTML = messagesCounter;
+    
+                        let requestUC = new XMLHttpRequest();
+                        requestUC.open('GET', '/api/data?message-send-update-counter=1');
+                        requestUC.setRequestHeader('accept', 'application/json');
+                        requestUC.addEventListener("readystatechange", () => { });
+                        requestUC.send();
                     } else {
-                        messagesCounter = '00' + messagesCounter;
+                        if (responseData.errorCode == '001') {
+                            typeTextInElement(document.getElementById("consoleText"), '[system]: ' + responseData.errorText, 'error', 0);
+                        } else {
+                            typeTextInElement(document.getElementById("consoleText"), '[system]: Сообщение не отправлено!', 'error', 0);
+                        }
+                        inputBlocked = undefined;
+                        el.disabled = false;
+                        commandLineEnableUI();
                     }
-                    sendMessagesCounter.innerHTML = messagesCounter;
-
-                    let requestUC = new XMLHttpRequest();
-                    requestUC.open('GET', '/api/data?message-send-update-counter=1');
-                    requestUC.setRequestHeader('accept', 'application/json');
-                    requestUC.addEventListener("readystatechange", () => { });
-                    requestUC.send();
-                } else {
-                    if (responseData.errorCode == '001') {
-                        commandLineMoveCarrett();
-                        typeTextInElement(document.getElementById("consoleText"), '[system]: ' + responseData.errorText, 'error');
-                    } else {
-                        commandLineMoveCarrett();
-                        typeTextInElement(document.getElementById("consoleText"), '[system]: Сообщение не отправлено!', 'error');
-                    }
+                }, 3500);
+            } else {
+                setTimeout(function () {
+                    typeTextInElement(document.getElementById("consoleText"), '[system]: Сообщение не отправлено!', 'error', 0);
+                    inputBlocked = undefined;
+                    el.disabled = false;
                     commandLineEnableUI();
-                }
-            }, 1500);
+                }, 3500);
+            }
         }
     });
     request.send();
-
-    setTimeout(function () {
-        inputBlocked = undefined;
-        sendMessageLoopBugChecker = false;
-    }, 5500);
 
     return true;
 }
 
 // Получить сообщение
-var getMessageLoopBugChecker;
 function getMessage(el) {
-    if (getMessageLoopBugChecker) {
+    if (inputBlocked) {
         return;
     }
     inputBlocked = true;
-    getMessageLoopBugChecker = true;
     el.disabled = true;
 
-    commandLineMoveCarrett();
-
     let consoleText = document.getElementById("consoleText");
+    commandLineMoveCarrett(2);
     typeTextInElement(consoleText, 'trying to recieve message..............................');
-    
+
     let request = new XMLHttpRequest();
     request.open('GET', document.getElementById("messageServiceUrl").value + '?key=:demo-001:potato:' + sysIKey + '&command=rmessage');
     request.setRequestHeader('accept', 'application/json');
     request.addEventListener("readystatechange", () => {
         if (request.readyState === 4 && request.status === 200) {
-            let responseData = JSON.parse(request.responseText);
-            setTimeout(function () {
-                lamp1.style.backgroundColor = "gray";
-                lamp2.style.backgroundColor = "gray";
-                lamp3.style.backgroundColor = "gray";
-                if (responseData.success == true) {
-                    typeTextInElement(document.getElementById("consoleText"), '[system]: Сообщение получено!', 'success');
-                    setTimeout(function() {
-                        typeTextInElement(document.getElementById("consoleText"), '[system]: Сообщение гласит: «' + responseData.message + '»');
+            if (request.status === 200) {
+                let responseData = JSON.parse(request.responseText);
+                setTimeout(function () {
+                    lamp1.style.backgroundColor = "gray";
+                    lamp2.style.backgroundColor = "gray";
+                    lamp3.style.backgroundColor = "gray";
+                    if (responseData.success == true) {
+                        typeTextInElement(document.getElementById("consoleText"), '[system]: Сообщение получено!', 'success');
+                        setTimeout(function () {
+                            typeTextInElement(document.getElementById("consoleText"), '[system]: Сообщение гласит: «' + responseData.message + '»');
+                            inputBlocked = undefined;
+                            el.disabled = false;
+                            commandLineEnableUI();
+                        }, 1000);
+
+                        //update message counter
+                        let recievedMessagesCounter = document.getElementById("recievedMessagesCounter");
+                        let messagesCounter = parseInt(recievedMessagesCounter.innerHTML) + 1;
+                        if (messagesCounter > 999) {
+                            messagesCounter = '001';
+                        } else if (messagesCounter > 99) {
+                            messagesCounter = messagesCounter;
+                        } else if (messagesCounter > 9) {
+                            messagesCounter = '0' + messagesCounter;
+                        } else {
+                            messagesCounter = '00' + messagesCounter;
+                        }
+                        recievedMessagesCounter.innerHTML = messagesCounter;
+
+                        let requestUC = new XMLHttpRequest();
+                        requestUC.open('GET', '/api/data?message-recieved-update-counter=1');
+                        requestUC.setRequestHeader('accept', 'application/json');
+                        requestUC.addEventListener("readystatechange", () => { });
+                        requestUC.send();
+                    } else {
+                        if (responseData.errorCode == '010') {
+                            typeTextInElement(document.getElementById("consoleText"), '[system]: ' + responseData.errorText, 'error', 0);
+                        } else {
+                            typeTextInElement(document.getElementById("consoleText"), '[system]: Не удалось получить сообщение!', 'error', 0);
+                        }
+                        inputBlocked = undefined;
+                        el.disabled = false;
                         commandLineEnableUI();
-                    }, 1000);
-
-                    //update message counter
-                    let recievedMessagesCounter = document.getElementById("recievedMessagesCounter");
-                    let messagesCounter = parseInt(recievedMessagesCounter.innerHTML) + 1;
-                    if (messagesCounter > 999) {
-                        messagesCounter = '001';
-                    } else if (messagesCounter > 99) {
-                        messagesCounter = messagesCounter;
-                    } else if (messagesCounter > 9) {
-                        messagesCounter = '0' + messagesCounter;
-                    } else {
-                        messagesCounter = '00' + messagesCounter;
                     }
-                    recievedMessagesCounter.innerHTML = messagesCounter;
-
-                    let requestUC = new XMLHttpRequest();
-                    requestUC.open('GET', '/api/data?message-recieved-update-counter=1');
-                    requestUC.setRequestHeader('accept', 'application/json');
-                    requestUC.addEventListener("readystatechange", () => { });
-                    requestUC.send();
-                } else {
-                    if (responseData.errorCode == '010') {
-                        commandLineMoveCarrett();
-                        typeTextInElement(document.getElementById("consoleText"), '[system]: ' + responseData.errorText, 'error');
-                    } else {
-                        commandLineMoveCarrett();
-                        typeTextInElement(document.getElementById("consoleText"), '[system]: Не удалось получить сообщение!', 'error');
-                    }
+                }, 3500);
+            } else {
+                setTimeout(function () {
+                    typeTextInElement(document.getElementById("consoleText"), '[system]: Не удалось получить сообщение!', 'error', 0);
+                    inputBlocked = undefined;
+                    el.disabled = false;
                     commandLineEnableUI();
-                }
-            }, 3500);
+                }, 3500);
+            }
         }
     });
     request.send();
-
-    setTimeout(function () {
-        inputBlocked = undefined;
-        getMessageLoopBugChecker = false;
-        el.disabled = false;
-    }, 5500);
 }
 
 // Сдвинуть каретку консоли
-var consoleLineCounter = 0;
-function commandLineMoveCarrett(method) {
-    let consoleText = document.getElementById("consoleText");
-    if (method == undefined) {
-        consoleText.style.marginTop = parseInt(getComputedStyle(consoleText).marginTop) - consoleLineCounter * 20 + 'px';
-        consoleLineCounter = 0;
+var consoleLineCounter = 1;
+var consoleLoopEnabled;
+function commandLineMoveCarrett(lineCounter, method) {
+    if (consoleLoopEnabled) {
+        return;
     }
-    if (method == 'oneline') {
-        consoleText.style.marginTop = parseInt(getComputedStyle(consoleText).marginTop) - 20 + 'px';
-        consoleLineCounter = consoleLineCounter - 1;
+
+    if (lineCounter == undefined) {
+        lineCounter = 1;
+    }
+
+    if (lineCounter > consoleLineCounter) {
+        lineCounter = consoleLineCounter;
+    }
+
+    if (method == undefined) {
+        let consoleText = document.getElementById("consoleText");
+        consoleText.style.marginTop = parseInt(getComputedStyle(consoleText).marginTop) - 20 * lineCounter + 'px';
+        consoleLineCounter = consoleLineCounter - lineCounter;
+    }
+
+    if (method == 'move-many-lines') {
+        if (consoleLineCounter > 2) {
+            inputBlocked = true;
+            consoleLoopEnabled = true;
+            setTimeout(function () {
+                consoleLoopEnabled = false;
+                inputBlocked = false;
+            }, 400 * consoleLineCounter);
+            
+            let consoleText = document.getElementById("consoleText");
+            consoleText.style.marginTop = parseInt(getComputedStyle(consoleText).marginTop) - 20 * (consoleLineCounter - 2) + 'px';
+            consoleLineCounter = 2;
+        }
     }
 }
 
 // Активировать ввод в консоль
-var UIEnableLoopBugChecker;
 function commandLineEnableUI() {
-    if (UIEnableLoopBugChecker) {
+    if (inputBlocked) {
         return;
     }
 
@@ -715,16 +749,11 @@ function commandLineEnableUI() {
         cursorElement.remove();
     }
 
-    setTimeout(function () {
-        UIEnableLoopBugChecker = false;
-        commandLineMoveCarrett();
-        let consoleLastMessage = document.createElement("p");
-        consoleLastMessage.innerHTML = '[user@system]:# <span id="consoleUIText"><span id="UICommand"></span><span id="consoleUICursor">█</span></span>';
-        consoleText.appendChild(consoleLastMessage);
-        consoleLineCounter = consoleLineCounter + 1;
-    }, 2500);
-
-    UIEnableLoopBugChecker = true;
+    let consoleLastMessage = document.createElement("p");
+    consoleLastMessage.innerHTML = '[user@system]:# <span id="consoleUIText"><span id="UICommand"></span><span id="consoleUICursor">█</span></span>';
+    consoleText.appendChild(consoleLastMessage);
+    consoleLineCounter = consoleLineCounter + 1;
+    commandLineMoveCarrett(undefined, 'move-many-lines');
 }
 
 var commandLineCursorCounter = 0;
@@ -738,6 +767,11 @@ function commandLineUserInputCursorAnimate(counter) {
     }
 
     if (!(document.activeElement.id == 'display')) {
+        cursorElement.style.display = 'none';
+        return;
+    }
+
+    if (inputBlocked) {
         cursorElement.style.display = 'none';
         return;
     }
@@ -762,27 +796,25 @@ function commandLineUserInputCursorAnimate(counter) {
 function commandLineInputListener(e) {
     if (inputBlocked) {
         return;
-    } 
+    }
     let cursorElement = document.getElementById("UICommand");
     if (e.key == 'Enter') {
+        inputBlocked = true;
         if (cursorElement.innerHTML == '-help') {
-            commandLineMoveCarrett();
-            typeTextInElement(consoleText, '[system]: beta console v0.01');
+            typeTextInElement(consoleText, 'beta console version v0.01', '', 0);
             typeTextInElement(consoleText, '[system]: no one command you can use right now! (i`m sorry man)');
-
             setTimeout(function () {
+                inputBlocked = false;
                 commandLineEnableUI();
             }, 3000);
             return;
         }
-
         cursorElement.innerHTML = '';
-
-        commandLineMoveCarrett();
-        typeTextInElement(consoleText, '[system]: unknown command');
+        typeTextInElement(consoleText, 'unknown command', '', 0);
         setTimeout(function () {
             typeTextInElement(consoleText, '[system]: type -help to check commands that you can use in this console');
             setTimeout(function () {
+                inputBlocked = false;
                 commandLineEnableUI();
             }, 2000);
         }, 2000);
@@ -813,12 +845,16 @@ function commandLineInputFix(key) {
 }
 
 // Animate typing text in console
-function typeTextInElement(el, text, messageClass, i, innerEl) {
+function typeTextInElement(el, text, messageClass, animationSpeed, i, innerEl) {
     if (el == undefined) {
         return;
     }
     if (text == undefined) {
         return;
+    }
+
+    if (animationSpeed == undefined) {
+        animationSpeed = 50;
     }
 
     if (i == undefined) {
@@ -831,13 +867,18 @@ function typeTextInElement(el, text, messageClass, i, innerEl) {
         consoleLineCounter = consoleLineCounter + 1;
     }
 
-    setTimeout(function () {
-        innerEl.innerHTML = innerEl.innerHTML + text[i];
-        i = i + 1;
-        if (i < text.length) {
-            typeTextInElement(el, text, messageClass, i, innerEl);
-        }
-    }, 50);
+    if (animationSpeed == 0) {
+        innerEl.innerHTML = text;
+    } else {
+        setTimeout(function () {
+            innerEl.innerHTML = innerEl.innerHTML + text[i];
+            i = i + 1;
+            if (i < text.length) {
+                typeTextInElement(el, text, messageClass, animationSpeed, i, innerEl);
+            }
+        }, animationSpeed);
+    }
+
 }
 
 //animate letter changes

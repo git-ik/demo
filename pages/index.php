@@ -156,7 +156,7 @@ if (empty($errors['system'])) {
                                     </div>
                                     <button id="messageCancelButton" onclick="cancelMessage(this);" class="dark-btn">Отмена</button>
                                     <button id="messageSendButton" onclick="sendMessage(this);" class="dark-btn">Отправить</button>
-                                    <button id="messageGetButton" onclick="getMessage(this);" class="dark-btn">Получить сообщение</button>
+                                    <button id="messageRecieveButton" onclick="getMessage(this);" class="dark-btn">Получить сообщение</button>
                                     <br>
                                     <br>
                                     <div class="counter-window">Отправлено <span id="sendMessagesCounter"><?=$messagesSendCounter?></span></div> <div class="counter-window">Получено <span id="recievedMessagesCounter"><?=$messagesRecievedCounter?></span></div>
