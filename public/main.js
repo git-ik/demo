@@ -557,7 +557,7 @@ function sendMessage(el) {
     }, 300);
 
     let request = new XMLHttpRequest();
-    request.open('GET', document.getElementById("messageServiceUrl").value + '?key=:demo-001:potato:' + sysIKey + '&message=' + messageText.value);
+    request.open('GET', document.getElementById("messageServiceUrl").value + '?key=:demo-001:potato:' + sysIKey + '&message=' + encodeURIComponent(messageText.value));
     request.setRequestHeader('accept', 'application/json');
     request.addEventListener("readystatechange", () => {
         if (request.readyState === 4 && request.status === 200) {
