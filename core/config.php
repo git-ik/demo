@@ -18,12 +18,12 @@ $appTitle = 'DEMO';                             // заголовок прило
 
 //Пользователи
 $users = [];
-$users['admin']['id'] = 1;                      // id
-$users['admin']['login'] = 'admin';             // логин
-$users['admin']['name'] = 'Администратор';      // имя
-$users['admin']['m_name'] = '';                 // отчество
-$users['admin']['l_name'] = '';                 // фамилия
-$users['admin']['password'] = '12345678';       // пароль
+$users['admin']['id'] = 1;                        // id
+$users['admin']['login'] = 'system-user';         // логин
+$users['admin']['name'] = 'Пользователь системы'; // имя
+$users['admin']['m_name'] = '';                   // отчество
+$users['admin']['l_name'] = '';                   // фамилия
+$users['admin']['password'] = '12345678';         // пароль
 
 //Сервисы
 $serviceMsgUrl = "http://j92506e7.beget.tech/"; // сервис доставки сообщений
