@@ -700,7 +700,6 @@ table.list-table .btn {
 }
 
 #authorization .auth-form-input input {
-    border: 2px solid #424242;
     border-top: 2px solid #303030;
     background-color: #777;
 }
@@ -718,11 +717,16 @@ table.list-table .btn {
     opacity: 0.8;
 }
 
+#authorization .auth-form-header > div {
+    background: url(/public/images/bg-dots.png);
+}
+
 #authorization .auth-form-header .form-title {
     background-color: rgba(200, 200, 200, 0.25);
     padding: 5px 150px;
     border-bottom: 1px solid #bdbdbd;
     background: linear-gradient(to bottom, #958585 0%, #767676 2%, #7c7c7c 55%, #5e5e5e 98%, #212121 100%);
+    opacity: 0.6;
 }
 
 #authorization .auth-form-header .form-title span {
@@ -733,7 +737,11 @@ table.list-table .btn {
 }
 
 #authorization:hover .auth-form-header .form-title span {
-    color: rgb(220, 220, 220);
+    color: rgb(255, 255, 255);
+}
+
+#authorization:hover .auth-form-header .form-title {
+    opacity: 0.8;
 }
 
 #authorization .auth-form-submit-area {
@@ -743,6 +751,55 @@ table.list-table .btn {
 
 #authorization .message.error {
     background-color: rgba(165, 0, 0, 0.5)
+}
+
+#authButton {
+    width: 217px;
+    height: 25px;
+    margin: 0 auto;
+    box-shadow: 0px 1px 2px 0px rgb(0 0 0 / 87%), inset 0px 1px 0px 0px rgb(255 255 255 / 30%);
+    border: 2px solid rgba(0, 0, 0, 0.25);
+    transition: 0.3s;
+}
+
+#authButton:hover {
+    padding: 0px;
+    border: 2px solid rgba(255, 255, 255, 0.85);
+}
+
+#authButton .b-left {
+    float: left;
+    height: 21px;
+    padding: 2px 7px;
+    background: linear-gradient(to bottom, #b39854 0%, #724800 100%);
+    border-right: 1px solid #555;
+    
+}
+
+#authButton .b-right {
+    float: left;
+    height: 21px;
+    padding: 2px 7px;
+    background: linear-gradient(to bottom, #b39854 0%, #724800 100%);
+    border-left: 1px solid #555;
+}
+
+#authButton div img {
+    width: 11px;
+    height: 11px;
+}
+
+#authButton button {
+    width: 165px;
+    margin: 0;
+    float: left;
+    border: 0px;
+    border-radius: 0px;
+    box-shadow: none;
+}
+
+#authButton button:hover {
+    border: 0px;
 }
 
 .auth-req {

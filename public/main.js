@@ -906,6 +906,30 @@ function letterChangeAnimation() {
     }
 }
 
+//authorization
+function authorization() {
+    let login = '';
+    let password = '';
+
+    let formData = new FormData();
+    formData.append('login', login);
+    formData.append('password', password);
+
+    let request = new XMLHttpRequest();
+    request.open('POST', '/api/authorization');
+    request.setRequestHeader('accept', 'application/json');
+    request.addEventListener("readystatechange", () => {
+        if (request.readyState === 4 && request.status === 200) {
+            let responseData = JSON.parse(request.responseText);
+            setTimeout(function () {
+                //TODO: auth success
+            }, 500);
+        } else {
+            //TODO: auth failed or any
+        }
+    });
+    request.send(formData);
+}
 
 ////////////////////////////////////////////////
 /// Animate honeycomb (thx to ThreePixDroid) ///

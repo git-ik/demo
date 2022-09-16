@@ -71,9 +71,11 @@ if (empty($errors['system'])) {
                                 <table class="<?= empty($messages['form']['auth']) ? '' : 'error' ?>">
                                     <tr>
                                         <td colspan="2" class="auth-form-header">
-                                            <div class="light"></div>
-                                            <div class="form-title">
-                                                <span>Авторизация</span>
+                                            <div>
+                                                <div class="light"></div>
+                                                <div class="form-title">
+                                                    <span>Авторизация</span>
+                                                </div>
                                             </div>
                                         </td>
                                     </tr>
@@ -102,7 +104,11 @@ if (empty($errors['system'])) {
                                     <tr>
                                         <td class="auth-form-submit-area" colspan="2">
                                             <br>
-                                            <button name="authorize" value="1" type="submit">Авторизоваться</button>
+                                            <div id="authButton">
+                                                <div class="b-left"><img alt="lock" width="30" src="/public/images/lock.png" /></div>
+                                                <button name="authorize" value="1" type="submit">Авторизоваться</button>
+                                                <div class="b-right"><img alt="lock" width="30" src="/public/images/lock.png" /></div>
+                                            </div>
                                         </td>
                                     </tr>
                                 </table>
