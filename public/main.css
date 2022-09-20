@@ -547,6 +547,7 @@ footer .demo-guy-water {
     position: absolute;
     font-size: 40px;
     color: #FFFFFF;
+    overflow: hidden;
 }
 
 .text-animated-box span {
