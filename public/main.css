@@ -598,7 +598,7 @@ footer .demo-guy-water {
 
 .canvas-container {
     padding: 20px 20px 15px 20px;
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: rgba(0, 0, 0, 1);
 }
 
 .canvas-container .rack-left {
