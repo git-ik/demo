@@ -38,7 +38,12 @@ if (empty($errors['system'])) {
     </head>
 
     <body>
-        <div id="bg">
+        <div class="overlay">
+            <video autoplay="" muted="" loop="">
+                <source src="/public/video/demo.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="c-container" id="bg">
             <header>
                 <div class="header-box">
                     <?php if (!empty($_SESSION['auth'])) { ?>
@@ -56,7 +61,7 @@ if (empty($errors['system'])) {
                     </div>
                 </div>
             </header>
-            <div id="technologies">
+            <div class="text-animated-box">
                 <span id="t1">the [system]</span>
                 <span id="t2">power</span>
                 <span id="t3">is off</span>

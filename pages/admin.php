@@ -18,7 +18,12 @@ $objects = $dbq->fetchAll();
         <script src="/public/main.js"></script>
     </head>
     <body>
-        <div>
+        <div class="overlay">
+            <video autoplay="" muted="" loop="">
+                <source src="/public/video/demo.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="c-container">
             <header>
                 <div class="header-box">
                     <?php if (!empty($_SESSION['auth'])) { ?>
@@ -36,12 +41,12 @@ $objects = $dbq->fetchAll();
                     </div>
                 </div>
             </header>
-            <div id="technologies">
-                <span id="t1">PHP8</span>
-                <span id="t2">JS</span>
-                <span id="t3">MySQL</span>
-                <span id="t4">GIT</span>
-                <span id="t5">GIMP</span>
+            <div class="text-animated-box">
+                <span id="t1">the [system]</span>
+                <span id="t2">power</span>
+                <span id="t3">is off</span>
+                <span id="t4">now</span>
+                <span id="t5">--------</span>
             </div>
             <div class="main">
                 <div class="container">
