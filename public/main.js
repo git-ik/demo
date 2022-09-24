@@ -968,7 +968,7 @@ function initDotsAnimation() {
 }
 
 function resizeCanvas() {
-    cw = cnvbg.width = innerWidth - 130;
+    cw = cnvbg.width = innerWidth - 140;
     ch = cnvbg.height = innerHeight;
     cx = cw / 2;
     cy = ch / 2;
