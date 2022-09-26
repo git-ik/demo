@@ -959,8 +959,10 @@ const cfg = {
 
 function initDotsAnimation() {
     cnvbg = document.getElementById('fbg');
+    if (cnvbg == undefined) {
+        return;
+    }
     ctxbg = cnvbg.getContext('2d');
-
     resizeCanvas();
     window.addEventListener(`resize`, resizeCanvas);
     createDirs();
