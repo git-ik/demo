@@ -121,14 +121,27 @@ if (empty($errors['system'])) {
                             <?php if (empty($errors['system'])) { ?>
                                 <?php if (empty($_SESSION['auth'])) { ?>
                                     <div class="auth-req">
-                                        <div class="align-center">
+                                        <div>
                                             <?php foreach ($messages['form']['auth'] as $message) { ?>
                                                 <div class="auth-form-submit-area">
                                                     <div class="message error"><?php echo $message; ?></div>
                                                 </div>
                                             <?php } ?>
-                                            <p>Пользователь: <?=$users['admin']['login']?></p>
-                                            <p>Пароль: <?=$users['admin']['password']?></p>
+                                            <div class="user-data">
+                                                <div class="user-image">
+                                                    <div class="t-l-border"></div>
+                                                    <div class="t-r-border"></div>
+                                                    <div class="c-bg"><img alt="user icon" src="/public/images/user.png" /></div>
+                                                    <div class="b-l-border"></div>
+                                                    <div class="b-r-border"></div>
+                                                </div>
+                                                <div class="user-identity">
+                                                    <div>
+                                                        <p>Пользователь: <?=$users['admin']['login']?></p>
+                                                        <p>Пароль: <?=$users['admin']['password']?></p>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 <?php } ?>
@@ -383,6 +396,7 @@ if (empty($errors['system'])) {
                 <?php foreach ($messages['sysinfo'] as $message) { ?>
                     <div class="message"><?php echo $message; ?></div>
                 <?php } ?>
+                <img class="q-triangle" alt="quadrat-triangle" src="/public/images/q-triangle.png" />
             </footer>
         </div>
     </body>

@@ -107,6 +107,7 @@ if ($id === 0) {
                 <?php foreach ($messages['sysinfo'] as $message) { ?>
                     <div class="message"><?php echo $message; ?></div>
                 <?php } ?>
+                <img class="q-triangle" alt="quadrat-triangle" src="/public/images/q-triangle.png" />
             </footer>
         </div>
     </body>
