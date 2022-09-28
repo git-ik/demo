@@ -470,12 +470,44 @@ function openMessageField(el) {
     messageTextarea.focus();
 }
 
-// Показывает данные о длинне строки при вводе в тектовое поле
-var textFieldLengthDetector;
-function checkInputLength(el, maxLength) {
+// Валидатор имени пользователя
+function usernameValidation(el, maxLength) {
     if (el == undefined) {
         return;
     }
+    if (maxLength == undefined) {
+        maxLength = 100;
+    }
+
+    if (el.value.length > maxLength) {
+        el.classList.add('error');
+    } else {
+        el.classList.remove('error');
+    }
+
+    let value = el.value;
+    el.value = value.substring(0, maxLength);
+
+    const regex = new RegExp('^[0-9a-zA-Zа-яА-Я- ]+$');
+    let testResults = regex.test(value);
+    if (testResults) {
+        el.classList.remove('error');
+    } else {
+        el.classList.add('error');
+    }
+
+    return regex.test(value);
+}
+
+// Валидатор тектового поля
+var textFieldLengthDetector;
+function textValidation(el, maxLength) {
+    let testResults = false;
+
+    if (el == undefined) {
+        return testResults;
+    }
+
     if (maxLength == undefined) {
         maxLength = 100;
     }
@@ -488,19 +520,34 @@ function checkInputLength(el, maxLength) {
         textFieldLengthDetector.innerHTML = el.value.length + '/' + maxLength;
         el.after(textFieldLengthDetector);
     } else {
+
+        textFieldLengthDetector.innerHTML = el.value.length + '/' + maxLength;
+
         if (el.value.length > 0) {
             messageSendButton.disabled = false;
         } else {
             messageSendButton.disabled = true;
         }
+
+        const regex = new RegExp('^[0-9a-zA-Zа-яА-Я\-\_\^\%\$\#\№\@\*\=\/\~\`\!\?\&\.\,\+\:\;\\[\\]\{\}\(\)\n ]+$');
+        testResults = regex.test(el.value);
+        if (testResults) {
+            textFieldLengthDetector.classList.remove('error');
+        } else {
+            textFieldLengthDetector.classList.add('error');
+            return false;
+        }
+
         if (el.value.length > maxLength) {
             textFieldLengthDetector.classList.add('error');
+            return false;
         } else {
             textFieldLengthDetector.classList.remove('error');
         }
-        textFieldLengthDetector.innerHTML = el.value.length + '/' + maxLength;
+
     }
 
+    return testResults;
 }
 
 // Отмена ввода сообщения
@@ -527,7 +574,7 @@ function sendMessage(el) {
     if (inputBlocked) {
         return;
     }
-    
+
     el.disabled = true;
 
     let lamp1 = document.getElementById("lamp1");
@@ -535,10 +582,21 @@ function sendMessage(el) {
     let lamp3 = document.getElementById("lamp3");
 
     let messageText = document.getElementById("messageText");
+    let userNickname = document.getElementById("userNickname");
     let consoleText = document.getElementById("consoleText");
 
-    if (messageText.value.length > 200) {
-        typeTextInElement(document.getElementById("consoleText"), '[system]: Сообщение длиннее 200 символов не может быть отправлено.', 'error', 0);
+    //validate input data
+    if (!usernameValidation(userNickname, 40)) {
+        typeTextInElement(document.getElementById("consoleText"), '[system]: Имя пользователя введено неправильно.', 'error', 0);
+        setTimeout(function () {
+            inputBlocked = undefined;
+            el.disabled = false;
+            commandLineEnableUI();
+        }, 500);
+        return false;
+    }
+    if (!textValidation(messageText, 200)) {
+        typeTextInElement(document.getElementById("consoleText"), '[system]: Сообщение не может быть отправлено.', 'error', 0);
         setTimeout(function () {
             inputBlocked = undefined;
             el.disabled = false;
@@ -561,7 +619,7 @@ function sendMessage(el) {
     }, 300);
 
     let request = new XMLHttpRequest();
-    request.open('GET', document.getElementById("messageServiceUrl").value + '?key=:demo-001:potato:' + sysIKey + '&message=' + encodeURIComponent(messageText.value));
+    request.open('GET', document.getElementById("messageServiceUrl").value + '?key=:demo-001:potato:' + sysIKey + '&command=smessage&message=' + encodeURIComponent(messageText.value) + '&user=' + encodeURIComponent(userNickname.value));
     request.setRequestHeader('accept', 'application/json');
     request.addEventListener("readystatechange", () => {
         if (request.readyState === 4) {
@@ -577,7 +635,7 @@ function sendMessage(el) {
                         inputBlocked = undefined;
                         el.disabled = true;
                         commandLineEnableUI();
-    
+
                         //update message counter
                         let sendMessagesCounter = document.getElementById("sendMessagesCounter");
                         let messagesCounter = parseInt(sendMessagesCounter.innerHTML) + 1;
@@ -591,7 +649,7 @@ function sendMessage(el) {
                             messagesCounter = '00' + messagesCounter;
                         }
                         sendMessagesCounter.innerHTML = messagesCounter;
-    
+
                         let requestUC = new XMLHttpRequest();
                         requestUC.open('GET', '/api/data?message-send-update-counter=1');
                         requestUC.setRequestHeader('accept', 'application/json');
@@ -653,7 +711,7 @@ function getMessage(el) {
                             inputBlocked = undefined;
                             el.disabled = false;
                             commandLineEnableUI();
-                        }, 1000);
+                        }, 2000);
 
                         //update message counter
                         let recievedMessagesCounter = document.getElementById("recievedMessagesCounter");
@@ -728,7 +786,7 @@ function commandLineMoveCarrett(lineCounter, method) {
                 consoleLoopEnabled = false;
                 inputBlocked = false;
             }, 400 * consoleLineCounter);
-            
+
             let consoleText = document.getElementById("consoleText");
             consoleText.style.marginTop = parseInt(getComputedStyle(consoleText).marginTop) - 20 * (consoleLineCounter - 2) + 'px';
             consoleLineCounter = 2;

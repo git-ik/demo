@@ -32,7 +32,7 @@ if (empty($errors['system'])) {
 <html lang="ru">
     <head>
         <title><?= $appTitle ?></title>
-        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
         <link rel="stylesheet" href="/public/main.css">
         <script src="/public/main.js"></script>
     </head>
@@ -110,9 +110,9 @@ if (empty($errors['system'])) {
                                         <td class="auth-form-submit-area" colspan="2">
                                             <br>
                                             <div id="authButton">
-                                                <div class="b-left"><img alt="lock" width="30" src="/public/images/lock.png" /></div>
+                                                <div class="b-left"><img alt="lock" width="30" src="/public/images/lock.png"></div>
                                                 <button name="authorize" value="1" type="submit">Авторизоваться</button>
-                                                <div class="b-right"><img alt="lock" width="30" src="/public/images/lock.png" /></div>
+                                                <div class="b-right"><img alt="lock" width="30" src="/public/images/lock.png"></div>
                                             </div>
                                         </td>
                                     </tr>
@@ -131,7 +131,7 @@ if (empty($errors['system'])) {
                                                 <div class="user-image">
                                                     <div class="t-l-border"></div>
                                                     <div class="t-r-border"></div>
-                                                    <div class="c-bg"><img alt="user icon" src="/public/images/user.png" /></div>
+                                                    <div class="c-bg"><img alt="user icon" src="/public/images/user.png"></div>
                                                     <div class="b-l-border"></div>
                                                     <div class="b-r-border"></div>
                                                 </div>
@@ -165,14 +165,19 @@ if (empty($errors['system'])) {
                                 <input type="hidden" id="sysIKey" value="<?=getSystemKey($db)?>">
                                 <input type="hidden" id="messageServiceUrl" value="<?=$serviceMsgUrl?>">
                                 <div class="message-box-top">
-                                    <img alt="msg" height="22" src="public/images/msg-l.svg" />&nbsp;&nbsp;&nbsp;
+                                    <img alt="msg" height="22" src="public/images/msg-l.svg">&nbsp;&nbsp;&nbsp;
                                     <button id="openMessageFieldButton" onclick="openMessageField(this);" class="dark-btn">Отправить сообщение</button>&nbsp;&nbsp;&nbsp;
-                                    <img alt="msg" height="22" src="public/images/msg-r.svg" />
+                                    <img alt="msg" height="22" src="public/images/msg-r.svg">
                                 </div>
                                 <div class="m-box-line"></div>
                                 <div id="messageField" class="message-box-center">
                                     <p>Внимание! Можно отправить только одно сообщение <br>не длиннее 200 символов.<br><a href="#dataObjects">[информация об использовании]</a></p>
-                                    <textarea id="messageText" placeholder="Введите сообщение" class="message-text" oninput="checkInputLength(this, 200);"></textarea>
+                                    <textarea name="text" id="messageText" placeholder="Введите сообщение" class="message-text" oninput="textValidation(this, 200);"></textarea>
+                                    <br>
+                                    <div class="username-box">
+                                        <label>Никнейм:</label>
+                                        <input id="userNickname" placeholder="введите никнейм" name="name" value="system-user" oninput="usernameValidation(this, 40);">
+                                    </div>
                                     <div class="ajax-loader">
                                         <div id="lamp1"></div>
                                         <div id="lamp2"></div>
@@ -202,7 +207,7 @@ if (empty($errors['system'])) {
                                     </td>
                                     <td>
                                         <div class="switcher">
-                                            <input onchange="switchAnimation(this);" type="checkbox" id="lamps" />
+                                            <input onchange="switchAnimation(this);" type="checkbox" id="lamps">
                                             <div class="handle-box">
                                                 <div class="handle"></div>
                                             </div>
@@ -382,9 +387,9 @@ if (empty($errors['system'])) {
                             <div id="square2"></div>
                             <div id="square3"></div>
                         </div>
-                        <img class="demo-guy" alt="demo-guy" src="/public/images/demo-guy.png" />
+                        <img class="demo-guy" alt="demo-guy" src="/public/images/demo-guy.png">
                         <br>
-                        <img id="demoGuyWater" class="demo-guy-water" alt="demo-guy-water" src="/public/images/demo-guy-water.png" />
+                        <img id="demoGuyWater" class="demo-guy-water" alt="demo-guy-water" src="/public/images/demo-guy-water.png">
                     </div>
                     <span>© Kartoshkin "DEMO"</span>
                     <br>
@@ -396,7 +401,7 @@ if (empty($errors['system'])) {
                 <?php foreach ($messages['sysinfo'] as $message) { ?>
                     <div class="message"><?php echo $message; ?></div>
                 <?php } ?>
-                <img class="q-triangle" alt="quadrat-triangle" src="/public/images/q-triangle.png" />
+                <img class="q-triangle" alt="quadrat-triangle" src="/public/images/q-triangle.png">
             </footer>
         </div>
     </body>

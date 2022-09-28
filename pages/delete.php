@@ -36,7 +36,7 @@ if ($id === 0) {
 <html lang="ru">
     <head>
         <title><?= $appTitle ?></title>
-        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
         <link rel="stylesheet" href="/public/main.css">
         <script src="/public/main.js"></script>
     </head>
@@ -93,9 +93,9 @@ if ($id === 0) {
                             <div id="square2"></div>
                             <div id="square3"></div>
                         </div>
-                        <img class="demo-guy" alt="demo-guy" src="/public/images/demo-guy.png" />
+                        <img class="demo-guy" alt="demo-guy" src="/public/images/demo-guy.png">
                         <br>
-                        <img id="demoGuyWater" class="demo-guy-water" alt="demo-guy-water" src="/public/images/demo-guy-water.png" />
+                        <img id="demoGuyWater" class="demo-guy-water" alt="demo-guy-water" src="/public/images/demo-guy-water.png">
                     </div>
                     <span>© Kartoshkin "DEMO"</span>
                     <br>
@@ -107,7 +107,7 @@ if ($id === 0) {
                 <?php foreach ($messages['sysinfo'] as $message) { ?>
                     <div class="message"><?php echo $message; ?></div>
                 <?php } ?>
-                <img class="q-triangle" alt="quadrat-triangle" src="/public/images/q-triangle.png" />
+                <img class="q-triangle" alt="quadrat-triangle" src="/public/images/q-triangle.png">
             </footer>
         </div>
     </body>

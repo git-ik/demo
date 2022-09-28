@@ -5,7 +5,7 @@ header('HTTP/1.0 403 Forbidden', true, 403);
 <html lang="ru">
     <head>
         <title><?= $appTitle ?></title>
-        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
         <link rel="stylesheet" href="/public/main.css">
         <script src="/public/main.js"></script>
     </head>
@@ -50,7 +50,7 @@ header('HTTP/1.0 403 Forbidden', true, 403);
             </div>
             <footer>
                 <div>
-                    <img alt="demo" src="/public/images/demo-guy.png" />
+                    <img alt="demo" src="/public/images/demo-guy.png">
                     <br>
                     <span>© Kartoshkin "DEMO"</span>
                 </div>
@@ -60,7 +60,7 @@ header('HTTP/1.0 403 Forbidden', true, 403);
                 <?php foreach ($messages['sysinfo'] as $message) { ?>
                     <div class="message"><?php echo $message; ?></div>
                 <?php } ?>
-                <img class="q-triangle" alt="quadrat-triangle" src="/public/images/q-triangle.png" />
+                <img class="q-triangle" alt="quadrat-triangle" src="/public/images/q-triangle.png">
             </footer>
         </div>
     </body>
