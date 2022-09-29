@@ -240,13 +240,23 @@ if (empty($errors['system'])) {
                     <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - представление реализации кода PHP на примере реализации паттерна ООП: <a href="#codeExample">перейти</a>
                     <br>&nbsp;&nbsp;&nbsp;&nbsp;2) Страница ошибки 403 <a href="/403">перейти</a>
                     <br>&nbsp;&nbsp;&nbsp;&nbsp;3) Страница ошибки 404 <a href="/404">перейти</a>
+                    <br>
+                    <div class="gallery">
+                        <a data-fslightbox="gallery1" href="/public/images/gallery/image-1-1.jpg"><img alt="Главная страница проекта" height="50" src="/public/images/gallery/image-1-1.jpg"></a>
+                        <a data-fslightbox="gallery1" href="/public/images/gallery/image-1-2.jpg"><img alt="Страница ошибки 403" height="50" src="/public/images/gallery/image-1-2.jpg"></a>
+                        <a data-fslightbox="gallery1" href="/public/images/gallery/image-1-3.jpg"><img alt="Страница ошибки 404" height="50" src="/public/images/gallery/image-1-3.jpg"></a>
+                    </div>
                     <h4>&nbsp;&nbsp;&nbsp;&nbsp;Для авторизованных пользователей:</h4>
                     &nbsp;&nbsp;&nbsp;&nbsp;1) Панель редактирования списка объектов: <a href="./admin">открыть</a>
                     <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Страница редактирования объекта древовидной структуры: <a href="./edit?id=0">открыть</a>
                     <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Страница добавления объекта древовидной структуры: <a href="./add">открыть</a>
                     <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Страница удаления объекта древовидной структуры: <a href="./delete?id=0">открыть</a>
-                    <br>
-                    <br>
+                    <div class="gallery">
+                        <a data-fslightbox="gallery2" href="/public/images/gallery/image-2-1.jpg"><img alt="Страница списка объектов" height="50" src="/public/images/gallery/image-2-1.jpg"></a>
+                        <a data-fslightbox="gallery2" href="/public/images/gallery/image-2-2.jpg"><img alt="Страница добавления объектов" height="50" src="/public/images/gallery/image-2-2.jpg"></a>
+                        <a data-fslightbox="gallery2" href="/public/images/gallery/image-2-3.jpg"><img alt="Страница редактирования объектов" height="50" src="/public/images/gallery/image-2-3.jpg"></a>
+                        <a data-fslightbox="gallery2" href="/public/images/gallery/image-2-4.jpg"><img alt="Страница удаления объектов" height="50" src="/public/images/gallery/image-2-4.jpg"></a>
+                    </div>
                     <h3>Дополнительная информация:</h3>
                     <br>&nbsp;&nbsp;&nbsp;&nbsp;- приложение осуществляет формирование и вывод данных при помощи PHP8
                     <br>&nbsp;&nbsp;&nbsp;&nbsp;- представлен код в функциональном и ООП виде, присутствуют рекурсивные функции и др.
@@ -404,5 +414,6 @@ if (empty($errors['system'])) {
                 <img class="q-triangle" alt="quadrat-triangle" src="/public/images/q-triangle.png">
             </footer>
         </div>
+        <script src="/public/fslightbox.js"></script>
     </body>
 </html>

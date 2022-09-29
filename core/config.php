@@ -3,11 +3,11 @@
 // Параметры БД mysql //
 ////////////////////////
 
-$dbserver   = "127.0.0.1";      // адрес сервера mysql
-$dbname     = "test";           // название базы данных
-$dbuser     = "test";           // имя пользователя mysql
-$dbpassword = "test";           // пароль пользователя mysql
-$dbcharset  = "utf8mb4";        // кодировка БД
+$dbserver   = "127.0.0.1";        // адрес сервера mysql
+$dbname     = "demo";             // название базы данных
+$dbuser     = "demo_user";        // имя пользователя mysql
+$dbpassword = "demo_db_password"; // пароль пользователя mysql
+$dbcharset  = "utf8mb4";          // кодировка БД
 
 /////////////////////////
 ////// Настройки ////////

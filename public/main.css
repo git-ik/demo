@@ -178,6 +178,10 @@ button.save {
     border: 2px solid #f2f2f2;
 }
 
+.gallery {
+    margin: 20px;
+}
+
 #messageBox {
     width: 700px;
     margin: 0 auto;
