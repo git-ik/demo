@@ -50,9 +50,17 @@ header('HTTP/1.0 403 Forbidden', true, 403);
             </div>
             <footer>
                 <div>
-                    <img alt="demo" src="/public/images/demo-guy.png">
-                    <br>
-                    <span>© Kartoshkin "DEMO"</span>
+                    <div class="footer-icon">
+                        <div class="squares">
+                            <div id="square1"></div>
+                            <div id="square2"></div>
+                            <div id="square3"></div>
+                        </div>
+                        <img class="demo-guy" alt="demo-guy" src="/public/images/kartoshkin.png">
+                        <br>
+                        <img id="demoGuyWater" class="demo-guy-water" alt="demo-guy-water" src="/public/images/demo-guy-water.png">
+                    </div>
+                    <a href="mailto:iksoc@vk.com">iksoc@vk.com</a>
                 </div>
                 <?php foreach ($errors['system'] as $error) { ?>
                     <div class="message error"><?php echo $error; ?></div>

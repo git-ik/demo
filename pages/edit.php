@@ -17,6 +17,7 @@ $dbq->execute();
 $object = $dbq->fetch();
 
 if ($_REQUEST['id'] == '0') {
+    $object = [];
     $object['title'] = '';
     $object['description'] = '';
     $object['parent_id'] = 0;
@@ -189,12 +190,10 @@ $objectsList = $dbq->fetchAll();
                             <div id="square2"></div>
                             <div id="square3"></div>
                         </div>
-                        <img class="demo-guy" alt="demo-guy" src="/public/images/demo-guy.png">
+                        <img class="demo-guy" alt="demo-guy" src="/public/images/kartoshkin.png">
                         <br>
                         <img id="demoGuyWater" class="demo-guy-water" alt="demo-guy-water" src="/public/images/demo-guy-water.png">
                     </div>
-                    <span>© Kartoshkin "DEMO"</span>
-                    <br>
                     <a href="mailto:iksoc@vk.com">iksoc@vk.com</a>
                 </div>
                 <?php foreach ($errors['system'] as $error) { ?>
