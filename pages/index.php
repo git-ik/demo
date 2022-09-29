@@ -137,8 +137,8 @@ if (empty($errors['system'])) {
                                                 </div>
                                                 <div class="user-identity">
                                                     <div>
-                                                        <p>Пользователь: <?=$users['admin']['login']?></p>
-                                                        <p>Пароль: <?=$users['admin']['password']?></p>
+                                                        <p>Пользователь: <?=$users['system-user']['login']?></p>
+                                                        <p>Пароль: <?=$users['system-user']['password']?></p>
                                                     </div>
                                                 </div>
                                             </div>

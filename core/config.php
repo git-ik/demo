@@ -9,26 +9,39 @@ $dbuser     = "demo_user";        // имя пользователя mysql
 $dbpassword = "demo_db_password"; // пароль пользователя mysql
 $dbcharset  = "utf8mb4";          // кодировка БД
 
-/////////////////////////
-////// Настройки ////////
-/////////////////////////
+///////////////////////////////
+////// Общие настройки ////////
+///////////////////////////////
 
-$appName = '他看了使用说明 DEMO 他看了使用说明';  // название приложения
+$appName = 'DEMO';  // название приложения
 $appTitle = 'DEMO';                             // заголовок приложения (title)
 
-//Пользователи
+////////////////////
+/// Пользователи ///
+////////////////////
 $users = [];
-$users['admin']['id'] = 1;                        // id
-$users['admin']['login'] = 'system-user';         // логин
-$users['admin']['name'] = 'Пользователь системы'; // имя
-$users['admin']['m_name'] = '';                   // отчество
-$users['admin']['l_name'] = '';                   // фамилия
-$users['admin']['password'] = '12345678';         // пароль
+$users['admin']['id'] = 1;                              // id
+$users['admin']['login'] = 'admin';                     // логин
+$users['admin']['name'] = 'Администратор системы';      // имя
+$users['admin']['m_name'] = '';                         // отчество
+$users['admin']['l_name'] = '';                         // фамилия
+$users['admin']['password'] = '12345678';               // пароль
 
-//Сервисы
+$users['system-user']['id'] = 2;                        // id
+$users['system-user']['login'] = 'system-user';         // логин
+$users['system-user']['name'] = 'Пользователь системы'; // имя
+$users['system-user']['m_name'] = '';                   // отчество
+$users['system-user']['l_name'] = '';                   // фамилия
+$users['system-user']['password'] = '12345678';         // пароль
+
+///////////////
+/// Сервисы ///
+///////////////
 $serviceMsgUrl = "http://j92506e7.beget.tech/"; // сервис доставки сообщений
 
-//Страницы
+////////////////
+/// Страницы ///
+////////////////
 $pagesList = [
     '/' => './pages/index.php',
     '/admin' => './pages/admin.php',

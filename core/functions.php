@@ -9,27 +9,33 @@
  */
 function install($db, $users)
 {
-    //create admin user
+    //check admin user
     $dba = $db->prepare('SELECT * FROM demo_users WHERE id = :id AND login = :login');
     $dba->bindValue(':id', $users['admin']['id']);
     $dba->bindValue(':login', $users['admin']['login']);
     $dba->execute();
     $user = $dba->fetch();
     if (empty($user)) {
-        $dba = $db->prepare('DELETE FROM demo_users WHERE id = :id OR login = :login');
-        $dba->bindValue(':id', $users['admin']['id']);
-        $dba->bindValue(':login', $users['admin']['login']);
-        $dba->execute();
+        //insert users list if admin user is not exists
+        foreach($users as $user) {
+            $dba = $db->prepare('DELETE FROM demo_users WHERE id = :id OR login = :login');
+            $dba->bindValue(':id', $user['id']);
+            $dba->bindValue(':login', $user['login']);
+            $dba->execute();
+    
+            $dba = $db->prepare('INSERT INTO demo_users SET id = :id, login = :login, password = :password, name = :name, m_name = :m_name, l_name = :l_name');
+            $dba->bindValue(':id', $user['id']);
+            $dba->bindValue(':login', $user['login']);
+            $dba->bindValue(':name', $user['name']);
+            $dba->bindValue(':m_name', $user['m_name']);
+            $dba->bindValue(':l_name', $user['l_name']);
+            $dba->bindValue(':password', password_hash($user['password'], PASSWORD_BCRYPT));
+            $dba->execute();
+        }
 
-        $dba = $db->prepare('INSERT INTO demo_users SET id = 1, login = :login, password = :password, name = :name, m_name = :m_name, l_name = :l_name');
-        $dba->bindValue(':login', $users['admin']['login']);
-        $dba->bindValue(':name', $users['admin']['name']);
-        $dba->bindValue(':m_name', $users['admin']['m_name']);
-        $dba->bindValue(':l_name', $users['admin']['l_name']);
-        $dba->bindValue(':password', password_hash($users['admin']['password'], PASSWORD_BCRYPT));
-        $dba->execute();
-
-        //create system key
+        //create new system key
+        $dbb = $db->prepare('DELETE FROM demo_settings WHERE name = \'key\'');
+        $dbb->execute();
         $dbb = $db->prepare('INSERT INTO demo_settings SET name = \'key\', value = \'' . md5(date('Y-m-d H:i:s') . rand(0, 10000)) . '\'');
         $dbb->execute();
     }
@@ -52,33 +58,44 @@ function getSystemKey($db)
  */
 function checkConfig($users)
 {
+    //config admin check
     if (empty($users['admin'])) {
-        echo 'Ошибка конфига 1';
+        echo 'Ошибка конфига, отсутствует пользователь admin';
         die;
     }
-    if (empty($users['admin']['id'])) {
-        echo 'Ошибка конфига 2';
+
+    //config system user check
+    if (empty($users['system-user'])) {
+        echo 'Ошибка конфига, отсутствует пользователь system-user';
         die;
     }
-    if (empty($users['admin']['login'])) {
-        echo 'Ошибка конфига 3';
-        die;
-    }
-    if (empty($users['admin']['password'])) {
-        echo 'Ошибка конфига 4';
-        die;
-    }
-    if (!isset($users['admin']['name'])) {
-        echo 'Ошибка конфига 5';
-        die;
-    }
-    if (!isset($users['admin']['m_name'])) {
-        echo 'Ошибка конфига 6';
-        die;
-    }
-    if (!isset($users['admin']['l_name'])) {
-        echo 'Ошибка конфига 7';
-        die;
+
+    //check users required parameters
+    foreach($users as $key => $user) {
+        if (empty($user['id'])) {
+            echo 'Ошибка конфига, отсутствует параметр id пользователя' . $key;
+            die;
+        }
+        if (empty($user['login'])) {
+            echo 'Ошибка конфига, отсутствует параметр login пользователя' . $key;
+            die;
+        }
+        if (empty($user['password'])) {
+            echo 'Ошибка конфига, отсутствует параметр password пользователя' . $key;
+            die;
+        }
+        if (!isset($user['name'])) {
+            echo 'Ошибка конфига, отсутствует параметр name пользователя' . $key;
+            die;
+        }
+        if (!isset($user['m_name'])) {
+            echo 'Ошибка конфига, отсутствует параметр m_name пользователя' . $key;
+            die;
+        }
+        if (!isset($user['l_name'])) {
+            echo 'Ошибка конфига, отсутствует параметр l_name пользователя' . $key;
+            die;
+        }
     }
 }
 
