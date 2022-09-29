@@ -42,7 +42,7 @@ $objects = $dbq->fetchAll();
                 </div>
             </header>
             <div class="text-animated-box">
-                <span id="t1">the [system]</span>
+                <span id="t1">system</span>
                 <span id="t2">power</span>
                 <span id="t3">is off</span>
                 <span id="t4">now</span>
