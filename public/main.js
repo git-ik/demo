@@ -78,6 +78,9 @@ function animateOpacity(el, min, max) {
 var bgPosX = 0;
 function animateBgPosition() {
     let elBg = document.getElementById('animatedDisplay');
+    if (elBg == undefined) {
+        return;
+    }
     setTimeout(function () {
         elBg.style.backgroundPosition = bgPosX + 'px 0px';
         bgPosX = bgPosX + 1;
