@@ -199,6 +199,16 @@ button.save {
     text-align: center;
     background-color: rgba(20, 20, 20, 0.8);
     background: repeating-linear-gradient(transparent, #000000 3px), repeating-linear-gradient(0.99turn, transparent, #000000 2px);
+    background: url(/public/images/mbox-bg.png);
+    border-left: 3px solid #000;
+    border-right: 3px solid #000;
+}
+
+#messageBox .buttons-container {
+    width: fit-content;
+    padding: 2px; 
+    background-color: #000;
+    margin: 0 auto;
 }
 
 #messageBox .message-box-bottom {
