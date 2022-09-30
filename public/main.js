@@ -74,6 +74,20 @@ function animateOpacity(el, min, max) {
     el.style.opacity = animateOpacityElements[el.id];
 }
 
+//Animate background position
+var bgPosX = 0;
+function animateBgPosition() {
+    let elBg = document.getElementById('authTable');
+    setTimeout(function () {
+        elBg.style.backgroundPosition = bgPosX + 'px 0px';
+        bgPosX = bgPosX + 1;
+        animateBgPosition();
+    }, 50);
+}
+document.addEventListener('DOMContentLoaded', function () {
+    animateBgPosition();
+});
+
 // Animate color (rgb)
 var animateColorElements = [];
 var animateColorDirection = [];

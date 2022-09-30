@@ -73,7 +73,7 @@ if (empty($errors['system'])) {
                     <div id="authorization" class="container dots">
                         <div>
                             <form method="POST">
-                                <table class="<?= empty($messages['form']['auth']) ? '' : 'error' ?>">
+                                <table id="authTable" class="<?= empty($messages['form']['auth']) ? '' : 'error' ?>">
                                     <tr>
                                         <td colspan="2" class="auth-form-header">
                                             <div>
