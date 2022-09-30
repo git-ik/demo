@@ -731,8 +731,12 @@ table.list-table .btn {
 }
 
 #authorization table {
-    background: url('/public/images/hlines.png');
+    background-color: rgba(65, 65, 65, 0.3);
     box-shadow: 0px 0px 10px 0px rgba(255, 255, 255, 0.5);
+}
+
+#animatedDisplay {
+    background: url('/public/images/hlines.png');
 }
 
 #authorization table.error {

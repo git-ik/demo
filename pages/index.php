@@ -73,7 +73,7 @@ if (empty($errors['system'])) {
                     <div id="authorization" class="container dots">
                         <div>
                             <form method="POST">
-                                <table id="authTable" class="<?= empty($messages['form']['auth']) ? '' : 'error' ?>">
+                                <table class="<?= empty($messages['form']['auth']) ? '' : 'error' ?>">
                                     <tr>
                                         <td colspan="2" class="auth-form-header">
                                             <div>
@@ -120,7 +120,7 @@ if (empty($errors['system'])) {
                             </form>
                             <?php if (empty($errors['system'])) { ?>
                                 <?php if (empty($_SESSION['auth'])) { ?>
-                                    <div class="auth-req">
+                                    <div class="auth-req" id="animatedDisplay">
                                         <div>
                                             <?php foreach ($messages['form']['auth'] as $message) { ?>
                                                 <div class="auth-form-submit-area">

@@ -77,7 +77,7 @@ function animateOpacity(el, min, max) {
 //Animate background position
 var bgPosX = 0;
 function animateBgPosition() {
-    let elBg = document.getElementById('authTable');
+    let elBg = document.getElementById('animatedDisplay');
     setTimeout(function () {
         elBg.style.backgroundPosition = bgPosX + 'px 0px';
         bgPosX = bgPosX + 1;
