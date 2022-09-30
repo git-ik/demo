@@ -151,7 +151,6 @@ function animateColorRgb(el, minColor, maxColor, color, colorChangeSpeed) {
 }
 
 //footer icon animation
-var animationCounter = 0;
 function animateFooterSquares() {
     let square1 = document.getElementById('square1');
     let square2 = document.getElementById('square2');
@@ -163,17 +162,6 @@ function animateFooterSquares() {
     let square2ml = parseInt(window.getComputedStyle(square2).getPropertyValue("margin-left"));
     let square3mt = parseInt(window.getComputedStyle(square3).getPropertyValue("margin-top"));
     let square3ml = parseInt(window.getComputedStyle(square3).getPropertyValue("margin-left"));
-    let demoGuyWaterml = parseInt(window.getComputedStyle(demoGuyWater).getPropertyValue("margin-left"));
-
-    if (animationCounter == 5) {
-        if (demoGuyWaterml > -62) {
-            demoGuyWater.style.marginLeft = demoGuyWaterml - 1 + 'px';
-        } else {
-            demoGuyWater.style.marginLeft = demoGuyWaterml + 1 + 'px';
-        }
-        animationCounter = 0;
-    }
-    animationCounter = animationCounter + 1;
 
     if (square1mt < 0) {
         square1.style.marginTop = '4px';

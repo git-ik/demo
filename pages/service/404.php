@@ -56,9 +56,8 @@ header("HTTP/1.0 404 Not Found", true, 404);
                             <div id="square2"></div>
                             <div id="square3"></div>
                         </div>
-                        <img class="demo-guy" alt="demo-guy" src="/public/images/kartoshkin.png">
-                        <br>
-                        <img id="demoGuyWater" class="demo-guy-water" alt="demo-guy-water" src="/public/images/demo-guy-water.png">
+                        <img alt="kartoshkin" src="/public/images/kartoshkin.png">
+                        
                     </div>
                     <a href="mailto:iksoc@vk.com">iksoc@vk.com</a>
                 </div>

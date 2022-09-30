@@ -453,9 +453,8 @@ footer>div p {
 }
 
 footer img {
-    width: 125px;
+    width: 87px;
     margin-top: 20px;
-    margin-bottom: 20px;
 }
 
 footer .q-triangle {
@@ -470,7 +469,7 @@ footer span {
 }
 
 footer .footer-icon .squares {
-    margin-left: 51%;
+    margin-left: 50%;
 }
 
 footer .footer-icon #square1 {
@@ -500,11 +499,8 @@ footer .footer-icon #square3 {
     background-color: #a2a2a2;
 }
 
-footer .demo-guy-water {
-    margin-left: -62px;
-    margin-top: -37px;
-    position: absolute;
-    opacity: 0.5;
+footer a {
+    color: #383838;
 }
 
 #player {
