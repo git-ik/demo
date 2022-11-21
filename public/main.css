@@ -1105,6 +1105,11 @@ table.list-table .btn {
     background: linear-gradient(180deg, rgba(0, 175, 0, 1) 15%, rgba(18, 117, 0, 0.72) 80%, rgba(0, 175, 0, 1) 100%);
 }
 
+table .number {
+    background-color: #343434;
+    color: white;
+}
+
 @media (min-width: 1400px) {
     body>div {
         background: url('./images/bg-main-4k.png');

@@ -232,8 +232,9 @@ var xOffsetRight;
 var xOffset = [];
 var rCount;
 var movingDirection = [];
+var canvasCoords = [];
 var timeLapse;
-function draw(cid) {
+function drawRackLights(cid, canvasCoords) {
     setTimeout(function () {
         if (xOffset[cid] >= xOffsetRight) {
             movingDirection[cid] = 'left';
@@ -247,39 +248,52 @@ function draw(cid) {
             xOffset[cid] = xOffset[cid] - 15;
         }
 
-        ctx[cid].clearRect(0, 0, cWidth, cHeight);
-
-        ctx[cid].fillStyle = '#000000';
-        for (i = 0; i <= rCount; i++) {
-            ctx[cid].fillRect(i * 15, 0, 10, 10);
-            ctx[cid].fillRect(i * 15, 15, 10, 10);
-            ctx[cid].fillRect(i * 15, 30, 10, 10);
-            ctx[cid].fillRect(i * 15, 45, 10, 10);
-            ctx[cid].fillRect(i * 15, 60, 10, 10);
-            ctx[cid].fillRect(i * 15, 75, 10, 10);
-        }
-
-        ctx[cid].fillStyle = '#343434';
-        for (i = 0; i <= rCount; i++) {
-            ctx[cid].fillRect(i * 15 + 10, 0, 1, 10);
-            ctx[cid].fillRect(i * 15 + 10, 15, 1, 10);
-            ctx[cid].fillRect(i * 15 + 10, 30, 1, 10);
-            ctx[cid].fillRect(i * 15 + 10, 45, 1, 10);
-            ctx[cid].fillRect(i * 15 + 10, 60, 1, 10);
-            ctx[cid].fillRect(i * 15 + 10, 75, 1, 10);
-        }
-
-        for (i = 0; i <= rCount; i++) {
-            ctx[cid].fillRect(i * 15, 10, 10, 1);
-            ctx[cid].fillRect(i * 15, 25, 10, 1);
-            ctx[cid].fillRect(i * 15, 40, 10, 1);
-            ctx[cid].fillRect(i * 15, 55, 10, 1);
-            ctx[cid].fillRect(i * 15, 70, 10, 1);
-            ctx[cid].fillRect(i * 15, 85, 10, 1);
-        }
-
         if (animate == 'on') {
-            let randY = Math.round(Math.random() * 6);
+
+            //turn off lights
+            ctx[cid].fillStyle = '#000000';
+            if (canvasCoords[0] != undefined) {
+                ctx[cid].fillRect(canvasCoords[0], 0, 9, 9);
+            }
+            if (canvasCoords[1] != undefined) {
+                ctx[cid].fillRect(canvasCoords[1], 15, 9, 9);
+            }
+            if (canvasCoords[2] != undefined) {
+                ctx[cid].fillRect(canvasCoords[2], 30, 9, 9);
+            }
+            if (canvasCoords[3] != undefined) {
+                ctx[cid].fillRect(canvasCoords[3], 45, 9, 9);
+            }
+            if (canvasCoords[4] != undefined) {
+                ctx[cid].fillRect(canvasCoords[4], 60, 9, 9);
+            }
+            if (canvasCoords[5] != undefined) {
+                ctx[cid].fillRect(canvasCoords[5], 75, 9, 9);
+            }
+
+            //turn off random lights
+            if (canvasCoords[100] != undefined) {
+                ctx[cid].fillRect(canvasCoords[100], 0, 9, 9);
+            }
+            if (canvasCoords[101] != undefined) {
+                ctx[cid].fillRect(canvasCoords[101], 15, 9, 9);
+            }
+            if (canvasCoords[102] != undefined) {
+                ctx[cid].fillRect(canvasCoords[102], 30, 9, 9);
+            }
+            if (canvasCoords[103] != undefined) {
+                ctx[cid].fillRect(canvasCoords[103], 45, 9, 9);
+            }
+            if (canvasCoords[104] != undefined) {
+                ctx[cid].fillRect(canvasCoords[104], 60, 9, 9);
+            }
+            if (canvasCoords[105] != undefined) {
+                ctx[cid].fillRect(canvasCoords[105], 75, 9, 9);
+            }
+
+            canvasCoords = [];
+
+            //turn on lights
             let randC = Math.round(Math.random() * 10);
             if (randC == 1) {
                 ctx[cid].fillStyle = '#2A6D1D';
@@ -288,34 +302,108 @@ function draw(cid) {
             } else {
                 ctx[cid].fillStyle = '#64FF4B';
             }
-            if (randY > 4) {
+
+            let randY = Math.round(Math.random() * 5);
+            if (randY == 0) {
                 ctx[cid].fillRect(xOffset[cid], 0, 9, 9);
                 ctx[cid].fillStyle = '#64FF4B';
+                canvasCoords[0] = xOffset[cid];
             }
-            if (randY == 5) {
+            if (randY == 1) {
                 ctx[cid].fillRect(xOffset[cid], 15, 9, 9);
                 ctx[cid].fillStyle = '#64FF4B';
+                canvasCoords[1] = xOffset[cid];
             }
-            if (randY < 2) {
+            if (randY == 2) {
                 ctx[cid].fillRect(xOffset[cid], 30, 9, 9);
                 ctx[cid].fillStyle = '#64FF4B';
+                canvasCoords[2] = xOffset[cid];
             }
             if (randY == 3) {
                 ctx[cid].fillRect(xOffset[cid], 45, 9, 9);
                 ctx[cid].fillStyle = '#64FF4B';
+                canvasCoords[3] = xOffset[cid];
             }
-            if (randY == 0) {
+            if (randY == 4) {
                 ctx[cid].fillRect(xOffset[cid], 60, 9, 9);
                 ctx[cid].fillStyle = '#64FF4B';
+                canvasCoords[4] = xOffset[cid];
             }
-            if (randY == 6) {
+            if (randY == 5) {
                 ctx[cid].fillRect(xOffset[cid], 75, 9, 9);
                 ctx[cid].fillStyle = '#64FF4B';
+                canvasCoords[5] = xOffset[cid];
             }
+
+            //turn on random lights
+            randC = Math.round(Math.random() * 2);
+            if (randC == 1) {
+                ctx[cid].fillStyle = '#171717';
+            } else {
+                ctx[cid].fillStyle = '#232323';
+            }
+
+            coordXRand = Math.round(Math.random() * rCount) * 15;
+            ctx[cid].fillRect(coordXRand, 0, 9, 9);
+            canvasCoords[100] = coordXRand;
+
+            coordXRand = Math.round(Math.random() * rCount) * 15;
+            ctx[cid].fillRect(coordXRand, 15, 9, 9);
+            canvasCoords[101] = coordXRand;
+
+            coordXRand = Math.round(Math.random() * rCount) * 15;
+            ctx[cid].fillRect(coordXRand, 30, 9, 9);
+            canvasCoords[102] = coordXRand;
+
+            coordXRand = Math.round(Math.random() * rCount) * 15;
+            ctx[cid].fillRect(coordXRand, 45, 9, 9);
+            canvasCoords[103] = coordXRand;
+
+            coordXRand = Math.round(Math.random() * rCount) * 15;
+            ctx[cid].fillRect(coordXRand, 60, 9, 9);
+            canvasCoords[104] = coordXRand;
+            
+            coordXRand = Math.round(Math.random() * rCount) * 15;
+            ctx[cid].fillRect(coordXRand, 75, 9, 9);
+            canvasCoords[105] = coordXRand;
+            
         }
 
-        draw(cid);
+        drawRackLights(cid, canvasCoords);
     }, 50);
+}
+
+function drawRackBackground(cid) {
+    ctx[cid].clearRect(0, 0, cWidth, cHeight);
+
+    ctx[cid].fillStyle = '#000000';
+    for (i = 0; i <= rCount; i++) {
+        ctx[cid].fillRect(i * 15, 0, 10, 10);
+        ctx[cid].fillRect(i * 15, 15, 10, 10);
+        ctx[cid].fillRect(i * 15, 30, 10, 10);
+        ctx[cid].fillRect(i * 15, 45, 10, 10);
+        ctx[cid].fillRect(i * 15, 60, 10, 10);
+        ctx[cid].fillRect(i * 15, 75, 10, 10);
+    }
+
+    ctx[cid].fillStyle = '#343434';
+    for (i = 0; i <= rCount; i++) {
+        ctx[cid].fillRect(i * 15 + 10, 0, 1, 10);
+        ctx[cid].fillRect(i * 15 + 10, 15, 1, 10);
+        ctx[cid].fillRect(i * 15 + 10, 30, 1, 10);
+        ctx[cid].fillRect(i * 15 + 10, 45, 1, 10);
+        ctx[cid].fillRect(i * 15 + 10, 60, 1, 10);
+        ctx[cid].fillRect(i * 15 + 10, 75, 1, 10);
+    }
+
+    for (i = 0; i <= rCount; i++) {
+        ctx[cid].fillRect(i * 15, 10, 10, 1);
+        ctx[cid].fillRect(i * 15, 25, 10, 1);
+        ctx[cid].fillRect(i * 15, 40, 10, 1);
+        ctx[cid].fillRect(i * 15, 55, 10, 1);
+        ctx[cid].fillRect(i * 15, 70, 10, 1);
+        ctx[cid].fillRect(i * 15, 85, 10, 1);
+    }
 }
 
 // Racks animation init
@@ -335,26 +423,28 @@ function racksInit(cid, isStarted) {
     xOffset[cid] = 0;
     xOffsetLeft = 0;
     rCount = Math.floor(cWidth / 15);
-    xOffsetRight = rCount * 15;
+    xOffsetRight = Math.floor(cWidth / 15) * 15;
 
     if (!isStarted) {
         movingDirection[cid] = 'right';
         ctx[cid] = canvas[cid].getContext('2d');
-        draw(cid);
+        drawRackLights(cid, canvasCoords);
     }
+
+    drawRackBackground(cid);
 }
 
 document.addEventListener('DOMContentLoaded', function () {
     racksInit('rack1', false);
     setTimeout(function () {
         racksInit('rack2', false);
-    }, Math.round(Math.random() * 2000));
+    }, Math.round(Math.random() * 5000));
     setTimeout(function () {
         racksInit('rack3', false);
-    }, Math.round(Math.random() * (4000 - 2000) + 2000));
+    }, Math.round(Math.random() * 10000));
     setTimeout(function () {
         racksInit('rack4', false);
-    }, Math.round(Math.random() * (6000 - 3000) + 3000));
+    }, Math.round(Math.random() * 15000));
 
     let t1 = document.getElementById('t1');
     let t2 = document.getElementById('t2');

@@ -48,6 +48,7 @@ $pagesList = [
     '/add' => './pages/add.php',
     '/edit' => './pages/edit.php',
     '/delete' => './pages/delete.php',
+    '/examples' => './pages/examples.php',
 
     '/404' => './pages/service/404.php',
     '/403' => './pages/service/403.php',
