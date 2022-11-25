@@ -352,7 +352,7 @@ button.dark-btn:disabled {
 }
 
 .message-text {
-    opacity: 0.8;
+    opacity: 0.98;
     background-color: #202020;
     color: #ffffff;
 }
