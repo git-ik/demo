@@ -36,7 +36,6 @@ if (empty($errors['system'])) {
         <link rel="stylesheet" href="/public/main.css">
         <script src="/public/main.js"></script>
     </head>
-
     <body>
         <div class="overlay">
             <video autoplay="" muted="" loop="">
@@ -159,63 +158,45 @@ if (empty($errors['system'])) {
                     </div>
                 <?php } ?>
                 <?php if (!empty($_SESSION['auth']) && empty($errors['system'])) { ?>
-                    <div class="container dots">
-                        <div class="switch-panel">
-                            <div id="messageBox">
-                                <input type="hidden" id="sysIKey" value="<?=getSystemKey($db)?>">
-                                <input type="hidden" id="messageServiceUrl" value="<?=$serviceMsgUrl?>">
-                                <div class="message-box-top">
-                                    <img alt="msg" height="22" src="public/images/msg-l.svg">&nbsp;&nbsp;&nbsp;
-                                    <button id="openMessageFieldButton" onclick="openMessageField(this);" class="dark-btn">Отправить сообщение</button>&nbsp;&nbsp;&nbsp;
-                                    <img alt="msg" height="22" src="public/images/msg-r.svg">
-                                </div>
-                                <div class="m-box-line"></div>
-                                <div id="messageField" class="message-box-center">
-                                    <p>Внимание! Можно отправить только одно сообщение <br>не длиннее 200 символов.<br><a href="#dataObjects">[информация об использовании]</a></p>
-                                    <textarea name="text" id="messageText" placeholder="Введите сообщение" class="message-text" oninput="textValidation(this, 200);"></textarea>
-                                    <br>
-                                    <div class="username-box">
-                                        <label>Никнейм:</label>
-                                        <input id="userNickname" placeholder="введите никнейм" name="name" value="system-user" oninput="usernameValidation(this, 40);">
-                                    </div>
-                                    <div class="ajax-loader">
-                                        <div id="lamp1"></div>
-                                        <div id="lamp2"></div>
-                                        <div id="lamp3"></div>
-                                    </div>
-                                    <div class="buttons-container">
-                                        <button id="messageCancelButton" onclick="cancelMessage(this);" class="dark-btn">Отмена</button>
-                                        <button id="messageSendButton" onclick="sendMessage(this);" class="dark-btn">Отправить</button>
-                                        <button id="messageRecieveButton" onclick="getMessage(this);" class="dark-btn">Получить сообщение</button>
-                                    </div>
-                                    <br>
-                                    <div class="counter-window">Отправлено <span id="sendMessagesCounter"><?=$messagesSendCounter?></span></div> <div class="counter-window">Получено <span id="recievedMessagesCounter"><?=$messagesRecievedCounter?></span></div>
-                                </div>
-                                <div class="m-box-line"></div>
-                                <div class="message-box-bottom">
-                                    <div id="display" onclick="focusDisplay();" tabindex="1">
-                                        <div id="consoleText">
-                                            <p class="user-command">[user@system]:# <span id="consoleUIText"><span id="UICommand"></span><span id="consoleUICursor">█</span></span></p>
-                                        </div>
-                                    </div>
-                                    <span class="version">console version 0.01</span>
+                    <br>
+                    <div id="messageBox">
+                        <input type="hidden" id="sysIKey" value="<?=getSystemKey($db)?>">
+                        <input type="hidden" id="messageServiceUrl" value="<?=$serviceMsgUrl?>">
+                        <div class="message-box-top">
+                            <img alt="msg" height="22" src="public/images/msg-l.svg">&nbsp;&nbsp;&nbsp;
+                            <button id="openMessageFieldButton" onclick="openMessageField(this);" class="dark-btn">Отправить сообщение</button>&nbsp;&nbsp;&nbsp;
+                            <img alt="msg" height="22" src="public/images/msg-r.svg">
+                        </div>
+                        <div class="m-box-line"></div>
+                        <div id="messageField" class="message-box-center">
+                            <p>Внимание! Можно отправить только одно сообщение <br>не длиннее 200 символов.<br><a href="#dataObjects">[информация об использовании]</a></p>
+                            <textarea name="text" id="messageText" placeholder="Введите сообщение" class="message-text" oninput="textValidation(this, 200);"></textarea>
+                            <br>
+                            <div class="username-box">
+                                <label>Никнейм:</label>
+                                <input id="userNickname" placeholder="введите никнейм" name="name" value="system-user" oninput="usernameValidation(this, 40);">
+                            </div>
+                            <div class="ajax-loader">
+                                <div id="lamp1"></div>
+                                <div id="lamp2"></div>
+                                <div id="lamp3"></div>
+                            </div>
+                            <div class="buttons-container">
+                                <button id="messageCancelButton" onclick="cancelMessage(this);" class="dark-btn">Отмена</button>
+                                <button id="messageSendButton" onclick="sendMessage(this);" class="dark-btn">Отправить</button>
+                                <button id="messageRecieveButton" onclick="getMessage(this);" class="dark-btn">Получить сообщение</button>
+                            </div>
+                            <br>
+                            <div class="counter-window">Отправлено <span id="sendMessagesCounter"><?=$messagesSendCounter?></span></div> <div class="counter-window">Получено <span id="recievedMessagesCounter"><?=$messagesRecievedCounter?></span></div>
+                        </div>
+                        <div class="m-box-line"></div>
+                        <div class="message-box-bottom">
+                            <div id="display" onclick="focusDisplay();" tabindex="1">
+                                <div id="consoleText">
+                                    <p class="user-command">[user@system]:# <span id="consoleUIText"><span id="UICommand"></span><span id="consoleUICursor">█</span></span></p>
                                 </div>
                             </div>
-                            <table class="r-table">
-                                <tr>
-                                    <td>
-                                        Включить\выключить анимацию
-                                    </td>
-                                    <td>
-                                        <div class="switcher">
-                                            <input onchange="switchAnimation(this);" type="checkbox" id="lamps">
-                                            <div class="handle-box">
-                                                <div class="handle"></div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </table>
+                            <span class="version">console version 0.01</span>
                         </div>
                     </div>
                     <div class="container canvas-container">
@@ -391,6 +372,22 @@ if (empty($errors['system'])) {
             </div>
             <canvas id="fbg"></canvas>
             <footer>
+                <table class="r-table">
+                    <tr>
+                        <td>
+                            Включить\выключить анимацию
+                        </td>
+                        <td>
+                            <div class="switcher">
+                                <input onchange="switchAnimation(this);" type="checkbox" id="lamps">
+                                <div class="handle-box">
+                                    <div class="handle"></div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+                <br>
                 <div>
                     <div class="footer-icon">
                         <div class="squares">
@@ -399,7 +396,6 @@ if (empty($errors['system'])) {
                             <div id="square3"></div>
                         </div>
                         <img alt="kartoshkin" src="/public/images/kartoshkin.png">
-                        
                     </div>
                     <a href="mailto:iksoc@vk.com">iksoc@vk.com</a>
                 </div>

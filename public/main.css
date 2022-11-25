@@ -192,6 +192,7 @@ button.save {
 #messageBox .message-box-top {
     padding: 20px 20px 20px 20px;
     text-align: center;
+    background: linear-gradient(to bottom, #3a3a3a 0%, #2e2e2e 10%, #282828 50%, #242424 90%, #ff0000 100%);
 }
 
 #messageBox .message-box-center {
@@ -211,7 +212,7 @@ button.save {
 
 #messageBox .message-box-bottom {
     padding: 10px 20px 10px 20px;
-    background-color: rgba(15, 10, 0, 1);
+    background-color: rgba(16, 16, 16, 1);
 }
 
 #messageField textarea {
@@ -669,8 +670,10 @@ footer a {
 }
 
 table {
-    border-top: 5px solid #171717;
-    border-bottom: 5px solid #171717;
+    border-top: 5px solid #707070;
+    border-left: 2px solid #202020;
+    border-right: 2px solid #202020;
+    border-bottom: 5px solid #505050;
     box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2) inset;
     border-radius: 3px;
     background-color: rgba(255, 255, 255, 0.8);
@@ -718,7 +721,7 @@ table.list-table .btn {
 }
 
 .r-table {
-    background: rgba(0, 0, 0, 0.9);
+    background: rgba(0, 0, 0, 0.4);
 }
 
 .r-table td {
