@@ -154,16 +154,14 @@ $objectsList = $dbq->fetchAll();
                 </div>
             </div>
             <footer>
-                <div>
-                    <div class="footer-icon">
-                        <div class="squares">
-                            <div id="square1"></div>
-                            <div id="square2"></div>
-                            <div id="square3"></div>
-                        </div>
-                        <img alt="kartoshkin" src="/public/images/kartoshkin.png">
-                        
+                <div class="footer-icon">
+                    <div class="squares">
+                        <div id="square1"></div>
+                        <div id="square2"></div>
+                        <div id="square3"></div>
                     </div>
+                    <img alt="kartoshkin" src="/public/images/kartoshkin.png">
+                    <br>
                     <a href="mailto:iksoc@vk.com">iksoc@vk.com</a>
                 </div>
                 <?php foreach ($errors['system'] as $error) { ?>

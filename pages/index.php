@@ -372,31 +372,33 @@ if (empty($errors['system'])) {
             </div>
             <canvas id="fbg"></canvas>
             <footer>
-                <table class="r-table">
-                    <tr>
-                        <td>
-                            Включить\выключить анимацию
-                        </td>
-                        <td>
-                            <div class="switcher">
-                                <input onchange="switchAnimation(this);" type="checkbox" id="lamps">
-                                <div class="handle-box">
-                                    <div class="handle"></div>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                </table>
-                <br>
-                <div>
-                    <div class="footer-icon">
-                        <div class="squares">
-                            <div id="square1"></div>
-                            <div id="square2"></div>
-                            <div id="square3"></div>
-                        </div>
-                        <img alt="kartoshkin" src="/public/images/kartoshkin.png">
+                <div class="dshadow-box">
+                    <div class="dshadow-box-inner">
+                        <table class="r-table">
+                            <tr>
+                                <td>
+                                    Включить\выключить анимацию
+                                </td>
+                                <td>
+                                    <div class="switcher">
+                                        <input onchange="switchAnimation(this);" type="checkbox" id="lamps">
+                                        <div class="handle-box">
+                                            <div class="handle"></div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
                     </div>
+                </div>
+                <div class="footer-icon">
+                    <div class="squares">
+                        <div id="square1"></div>
+                        <div id="square2"></div>
+                        <div id="square3"></div>
+                    </div>
+                    <img alt="kartoshkin" src="/public/images/kartoshkin.png">
+                    <br>
                     <a href="mailto:iksoc@vk.com">iksoc@vk.com</a>
                 </div>
                 <?php foreach ($errors['system'] as $error) { ?>

@@ -390,7 +390,7 @@ header .logout button {
     padding: 13px 7px;
     transition: 300ms;
     opacity: 0.85;
-    background: linear-gradient(to bottom, #9d9d9d 0%, #646464 10%, #747474 50%, #565656 90%, #818181 100%);
+    background: linear-gradient(to bottom, #9d9d9d 0%, #646464 10%, #EFEFEF 50%, #565656 90%, #818181 100%);
 }
 
 header .logout button:hover {
@@ -437,20 +437,9 @@ header>.header-box>.app-title {
 }
 
 footer {
-    padding: 30px 0px;
+    padding: 20px 0px 20px 0px;
     width: 100%;
     min-height: 20px;
-}
-
-footer>div {
-    padding: 0px 20px;
-    text-align: center;
-}
-
-footer>div p {
-    margin-top: 20px;
-    font-size: 9px;
-    text-align: justify;
 }
 
 footer img {
@@ -465,8 +454,52 @@ footer .q-triangle {
     position: absolute;
 }
 
+footer .dshadow-box {
+    padding: 4px 0px;
+    border-top: 1px solid rgba(0, 0, 0, 1);
+    border-bottom: 1px solid rgba(0, 0, 0, 1);
+    background-color: #000;
+    background: repeating-linear-gradient(45deg, #4aa63f, #000000 15%, #f69d3c 20%);
+}
+
+footer .dshadow-box-inner {
+    padding: 7px;
+    border-top: 1px solid rgba(255, 255, 255, 0.17);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.95), rgba(48, 48, 48, 0.95), rgba(18, 18, 18, 0.95));
+}
+
+footer .dshadow-box-inner .r-table {
+    border-top: 5px solid #8b7640;
+    box-shadow: 0px 0px 8px 0px rgba(88, 181, 49, 0.5);
+}
+
+footer .dshadow-box-inner .r-table td {
+    color: #424242;
+    border-bottom: 1px solid #000;
+    text-shadow: 1px 1px 1px white;
+}
+
+footer a {
+    padding-top: 1px;
+    background: linear-gradient(to right, transparent, transparent), linear-gradient(to right, rgba(255,0,0,0.75), rgba(255,255,255,0.75), rgba(0,0,0,0.75));
+    background-size: 0 1px;
+    transition: all 205.5ms;
+    background-repeat: no-repeat;
+    text-decoration: none;
+}
+
+footer a:hover {
+    background-size: 100% 1px;
+}
+
 footer span {
     color: white;
+}
+
+footer .footer-icon {
+    text-align: center;
+    padding: 25px 0px 15px 0px;
 }
 
 footer .footer-icon .squares {
