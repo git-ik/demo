@@ -51,7 +51,7 @@
                                 if (!isset($summString[$i])) {
                                     $summString[$i] = 0;
                                 }
-                                $html.=  '<tr>';
+                                $html.= '<tr>';
                                 for ($y = 0; $y <= 6; $y++) {
                                     if (!isset($summColumn[$y])) {
                                         $summColumn[$y] = 0;
@@ -65,9 +65,9 @@
                                 $html.= '<td>' . $summString[$i] . '</td>';
                                 $html.= '</tr>';
                             }
-                            $html.=  '<tr>';
+                            $html.= '<tr>';
                             for ($y = 0; $y <= 6; $y++) {
-                                $html.=  '<td>' . $summColumn[$y] . '</td>';
+                                $html.= '<td>' . $summColumn[$y] . '</td>';
                             }
                             $html.= '<td></td></tr>';
                             $html.= '<tr><td colspan="8"><b>Сумма:</b> ' . $summOveral . '</td></tr></table>';
@@ -179,14 +179,14 @@
                         <p>Задача: создать таблицу 5*5 ячеек, заполнить её случайными нулями и единицами и посчитать сколько ячеек с нулями имеют более двух соседних ячеек с единицами. Соседними ячейками считать ячейки сверху, снизу, слева и справа.</p>
                         <?php
                             $html = '';
-                            for($i = 0; $i < 5; $i++) {
-                                $html.='<tr>';
+                            for ($i = 0; $i < 5; $i++) {
+                                $html.= '<tr>';
                                 for($k = 0; $k < 5; $k++) {
-                                    $html.='<td class="cell row-' . $i . ' col-' . $k . '">';
+                                    $html.= '<td class="cell row-' . $i . ' col-' . $k . '">';
                                     $html.= rand(0, 1);
-                                    $html.='</td>';
+                                    $html.= '</td>';
                                 }
-                                $html.='</tr>';
+                                $html.= '</tr>';
                             }
                         ?>
                         <table>
@@ -211,29 +211,29 @@
                                         if (cell[0].innerHTML == '0') {
                                             let cellCounter = 0;
                                             if (i > 0) {
-                                                let checkFirstRuleElement = document.getElementsByClassName("row-" + (i - 1) + " col-" + k);
-                                                if (checkFirstRuleElement[0].innerHTML == '1') {
+                                                let firstRuleElement = document.getElementsByClassName("row-" + (i - 1) + " col-" + k);
+                                                if (firstRuleElement[0].innerHTML == '1') {
                                                     //console.log("row-" + (i - 1) + " col-" + k);
                                                     cellCounter = cellCounter + 1;
                                                 }
                                             }
                                             if (k > 0) {
-                                                let checkSecondRuleElement = document.getElementsByClassName("row-" + i + " col-" + (k - 1));
-                                                if (checkSecondRuleElement[0].innerHTML == '1') {
+                                                let secondRuleElement = document.getElementsByClassName("row-" + i + " col-" + (k - 1));
+                                                if (secondRuleElement[0].innerHTML == '1') {
                                                     //console.log("row-" + i + " col-" + (k - 1));
                                                     cellCounter = cellCounter + 1;
                                                 }
                                             }
                                             if (i < 4) {
-                                                let checkThirdRuleElement = document.getElementsByClassName("row-" + (i + 1) + " col-" + k);
-                                                if (checkThirdRuleElement[0].innerHTML == '1') {
+                                                let thirdRuleElement = document.getElementsByClassName("row-" + (i + 1) + " col-" + k);
+                                                if (thirdRuleElement[0].innerHTML == '1') {
                                                     //console.log("row-" + (i + 1) + " col-" + k);
                                                     cellCounter = cellCounter + 1;
                                                 }
                                             }
                                             if (k < 4) {
-                                                let checkFourthRuleElement = document.getElementsByClassName("row-" + i + " col-" + (k + 1));
-                                                if (checkFourthRuleElement[0].innerHTML == '1') {
+                                                let fourthRuleElement = document.getElementsByClassName("row-" + i + " col-" + (k + 1));
+                                                if (fourthRuleElement[0].innerHTML == '1') {
                                                     //console.log("row-" + i + " col-" + (k + 1));
                                                     cellCounter = cellCounter + 1;
                                                 }
