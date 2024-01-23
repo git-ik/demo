@@ -175,6 +175,84 @@
                         </i>
                     </div>
                     <div class="container dots">
+                        <h2>Подсчет ячеек таблицы</h2>
+                        <p>Задача: создать таблицу 5*5 ячеек, заполнить её случайными нулями и единицами и посчитать сколько ячеек с нулями имеют более двух соседних ячеек с единицами. Соседними ячейками считать ячейки сверху, снизу, слева и справа.</p>
+                        <?php
+                            $html = '';
+                            for($i = 0; $i < 5; $i++) {
+                                $html.='<tr>';
+                                for($k = 0; $k < 5; $k++) {
+                                    $html.='<td class="cell row-' . $i . ' col-' . $k . '">';
+                                    $html.= rand(0, 1);
+                                    $html.='</td>';
+                                }
+                                $html.='</tr>';
+                            }
+                        ?>
+                        <table>
+                            <?=$html?>
+                        </table>
+                        <br>
+                        <div class="align-center" id="cellsTableResults"></div>
+                        <br>
+                        <div class="align-center">
+                            <button onclick="collectInfoByCells();" title="Посчитать ячейки">Посчитать ячейки</button>
+                        </div>
+                        <script>
+                            /**
+                             * Подсчет ячеек
+                             */
+                            function collectInfoByCells() {
+                                let counter = 0;
+                                for (i = 0; i < 5; i++) {
+                                    for (k = 0; k < 5; k++) {
+                                        let cell = document.getElementsByClassName("row-" + i + " col-" + k);
+                                        
+                                        if (cell[0].innerHTML == '0') {
+                                            let cellCounter = 0;
+                                            if (i > 0) {
+                                                let checkFirstRuleElement = document.getElementsByClassName("row-" + (i - 1) + " col-" + k);
+                                                if (checkFirstRuleElement[0].innerHTML == '1') {
+                                                    //console.log("row-" + (i - 1) + " col-" + k);
+                                                    cellCounter = cellCounter + 1;
+                                                }
+                                            }
+                                            if (k > 0) {
+                                                let checkSecondRuleElement = document.getElementsByClassName("row-" + i + " col-" + (k - 1));
+                                                if (checkSecondRuleElement[0].innerHTML == '1') {
+                                                    //console.log("row-" + i + " col-" + (k - 1));
+                                                    cellCounter = cellCounter + 1;
+                                                }
+                                            }
+                                            if (i < 4) {
+                                                let checkThirdRuleElement = document.getElementsByClassName("row-" + (i + 1) + " col-" + k);
+                                                if (checkThirdRuleElement[0].innerHTML == '1') {
+                                                    //console.log("row-" + (i + 1) + " col-" + k);
+                                                    cellCounter = cellCounter + 1;
+                                                }
+                                            }
+                                            if (k < 4) {
+                                                let checkFourthRuleElement = document.getElementsByClassName("row-" + i + " col-" + (k + 1));
+                                                if (checkFourthRuleElement[0].innerHTML == '1') {
+                                                    //console.log("row-" + i + " col-" + (k + 1));
+                                                    cellCounter = cellCounter + 1;
+                                                }
+                                            }
+
+                                            if (cellCounter > 2) {
+                                                //console.log("cell row-" + i + " col-" + k);
+                                                cell[0].style.color = 'green';
+                                                cell[0].style.fontWeight = 800;
+                                                counter = counter + 1;
+                                            }
+                                        }
+                                    }
+                                }
+                                let cellsTableResults = document.getElementById('cellsTableResults');
+                                cellsTableResults.innerHTML = '<p>' + counter + ' ячеек с нулями имеют рядом с собой больше двух ячеек с единицей</p>';                          }
+                        </script>
+                    </div>
+                    <div class="container dots">
                         <?php
                             /**
                              * Read string part
