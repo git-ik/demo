@@ -5,7 +5,7 @@
 
 $dbserver   = "127.0.0.1";        // адрес сервера mysql
 $dbname     = "demo";             // название базы данных
-$dbuser     = "demo_user";        // имя пользователя mysql
+$dbuser     = "demo_db_user";        // имя пользователя mysql
 $dbpassword = "demo_db_password"; // пароль пользователя mysql
 $dbcharset  = "utf8mb4";          // кодировка БД
 
@@ -37,7 +37,7 @@ $users['system-user']['password'] = '12345678';         // пароль
 ///////////////
 /// Сервисы ///
 ///////////////
-$serviceMsgUrl = "http://j92506e7.beget.tech/"; // сервис доставки сообщений
+$serviceMsgUrl = "http://j92506e7.beget.tech/api.php"; // сервис доставки сообщений
 
 ////////////////
 /// Страницы ///
