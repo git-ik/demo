@@ -869,7 +869,7 @@ function commandLineMoveCarrett(lineCounter, method) {
 
     if (method == undefined) {
         let consoleText = document.getElementById("consoleText");
-        consoleText.style.marginTop = parseInt(getComputedStyle(consoleText).marginTop) - 20 * lineCounter + 'px';
+        consoleText.style.marginTop = parseInt(getComputedStyle(consoleText).marginTop) - 18 * lineCounter + 'px';
         consoleLineCounter = consoleLineCounter - lineCounter;
     }
 
@@ -883,7 +883,7 @@ function commandLineMoveCarrett(lineCounter, method) {
             }, 400 * consoleLineCounter);
 
             let consoleText = document.getElementById("consoleText");
-            consoleText.style.marginTop = parseInt(getComputedStyle(consoleText).marginTop) - 20 * (consoleLineCounter - 2) + 'px';
+            consoleText.style.marginTop = parseInt(getComputedStyle(consoleText).marginTop) - 18 * (consoleLineCounter - 2) + 'px';
             consoleLineCounter = 2;
         }
     }
