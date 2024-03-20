@@ -361,6 +361,74 @@ if (empty($errors['system'])) {
                         ?>
                     </div>
                 <?php } ?>
+                <div id="projectDescription" class="container">
+                    <h2>Пример Rest API:</h2>
+                    <br>
+                    Звездочкой * указаны обязательные поля
+                    <br>
+                    <br>&nbsp;&nbsp;&nbsp;&nbsp;1) GET /api/v1/objects/?page=1
+                    <br>&nbsp;&nbsp;&nbsp;&nbsp;Входные параметры:
+                    <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - page (int)
+                    <br>&nbsp;&nbsp;&nbsp;&nbsp;Выходные параметры:
+                    <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - success (успешно или не успешно отработал запрос)
+                    <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - errors (ошибки)
+                    <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - max-page (максимально возможное значение входного параметра page)
+                    <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - list (список объектов)
+                    <br>&nbsp;&nbsp;&nbsp;&nbsp;Описание:
+                    <br>&nbsp;&nbsp;&nbsp;&nbsp;Получение списка объектов с пагинацией. Параметр page передаётся в GET параметрах, возвращаемый параметр max-page указывает максимально возможное значение параметра page.
+                    <br>
+                    <br>
+                    <hr>
+                    <br>&nbsp;&nbsp;&nbsp;&nbsp;2) POST /api/v1/objects/
+                    <br>&nbsp;&nbsp;&nbsp;&nbsp;Входные параметры:
+                    <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - title* (str)
+                    <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - description* (str)
+                    <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - parent_id* (int)
+                    <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - created_at (str)
+                    <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - image (file)
+                    <br>&nbsp;&nbsp;&nbsp;&nbsp;Выходные параметры:
+                    <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - success (успешно или не успешно отработал запрос)
+                    <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - errors (ошибки)
+                    <br>&nbsp;&nbsp;&nbsp;&nbsp;Описание:
+                    <br>&nbsp;&nbsp;&nbsp;&nbsp;Добавление нового объекта, поле parent_id можно указывать 0. 
+                    <br>
+                    <br>
+                    <hr>
+                    <br>&nbsp;&nbsp;&nbsp;&nbsp;3) GET /api/v1/objects/&lt;id&gt;/
+                    <br>&nbsp;&nbsp;&nbsp;&nbsp;Выходные параметры:
+                    <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - success (успешно или не успешно отработал запрос)
+                    <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - errors (ошибки)
+                    <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - object (объект)
+                    <br>&nbsp;&nbsp;&nbsp;&nbsp;Описание:
+                    <br>&nbsp;&nbsp;&nbsp;&nbsp;Получение данных объекта. 
+                    <br>
+                    <br>
+                    <hr>
+                    <br>&nbsp;&nbsp;&nbsp;&nbsp;4) POST /api/v1/objects/&lt;id&gt;/
+                    <br>&nbsp;&nbsp;&nbsp;&nbsp;Входные параметры:
+                    <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - title* (str)
+                    <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - description* (str)
+                    <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - parent_id* (int)
+                    <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - created_at (str)
+                    <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - image (file)
+                    <br>&nbsp;&nbsp;&nbsp;&nbsp;Выходные параметры:
+                    <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - success (успешно или не успешно отработал запрос)
+                    <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - errors (ошибки)
+                    <br>&nbsp;&nbsp;&nbsp;&nbsp;Описание:
+                    <br>&nbsp;&nbsp;&nbsp;&nbsp;Обновление данных объекта.
+                    <br>
+                    <br>
+                    <hr>
+                    <br>&nbsp;&nbsp;&nbsp;&nbsp;5) DELETE /api/v1/objects/&lt;id&gt;/
+                    <br>&nbsp;&nbsp;&nbsp;&nbsp;Выходные параметры:
+                    <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - success (успешно или не успешно отработал запрос)
+                    <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - errors (ошибки)
+                    <br>&nbsp;&nbsp;&nbsp;&nbsp;Описание:
+                    <br>&nbsp;&nbsp;&nbsp;&nbsp;Удаление объекта. 
+                    <br>
+                    <br>
+                    <br>
+                </div>
                 <div class="container canvas-container">
                     <img class="rack-left" alt="" src="/public/images/rack-left.png">
                     <img class="rack-right" alt="" src="/public/images/rack-right.png">

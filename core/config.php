@@ -53,5 +53,13 @@ $pagesList = [
     '/404' => './pages/service/404.php',
     '/403' => './pages/service/403.php',
 
-    '/api/data' => './api/api.php'
+    '/api/data' => './api/api.php',
+    
+];
+
+$pathsList = [
+    0 => [
+        'page' => './api/api-v1.php',
+        'regex' => '/^\/api\/v1\/objects\/([0-9]+)?/u'
+    ]
 ];

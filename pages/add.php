@@ -19,18 +19,24 @@ if (!empty($_POST['save'])) {
     $values['form']['parent_id'] = $_POST['parent_id'];
 
     //validation
-    if (!is_string($_POST['title']) || mb_strlen($_POST['title']) > 250) {
+    if (!is_string($_POST['title'])) {
+        $errors['form']['fields']['title'][] = 'Ошибка значения';
+    }
+    if (mb_strlen($_POST['title']) > 250) {
         $errors['form']['fields']['title'][] = 'Слишком длинное название объекта';
     }
     if (!is_string($_POST['description'])) {
         $errors['form']['fields']['description'][] = 'Ошибка значения';
+    }
+    if (mb_strlen($_POST['description']) > 65535) {
+        $errors['form']['fields']['description'][] = 'Слишком длинное описание объекта';
     }
     if (!is_numeric($_POST['parent_id'])) {
         $errors['form']['fields']['parent_id'][] = 'Ошибка значения';
     }
 
     if ((int)$_POST['parent_id'] !== 0) {
-        $dbq = $db->prepare('SELECT * FROM demo_objects WHERE id = :parent_id LIMIT 1');
+        $dbq = $db->prepare('SELECT * FROM demo_objects WHERE id = :parent_id');
         $dbq->bindValue(':parent_id', (int)$_POST['parent_id']);
         $dbq->execute();
         $checkObject = $dbq->fetch();

@@ -69,7 +69,16 @@ if (!empty($_REQUEST['unauthorize'])) {
     die;
 }
 
-if (in_array($path, array_keys($pagesList))) {
+$findPath = false;
+foreach($pathsList as $regexPathKey => $regexPathValue) {
+    if (preg_match($regexPathValue['regex'], $path)) {
+        $findPath = $regexPathKey;
+    }
+}
+
+if (!($findPath === false)) {
+    require_once($pathsList[$findPath]['page']);
+} elseif (in_array($path, array_keys($pagesList))) {
     require_once($pagesList[$path]);
 } else {
     header("HTTP/1.0 404 Not Found");
